@@ -20,4 +20,5 @@ in
 
   gama = callPackage ./pkgs/gama.nix { };
   gocovsh = callPackage ./pkgs/gocovsh.nix { };
+  gtrash = callPackage ./pkgs/gtrash.nix { };
 }
