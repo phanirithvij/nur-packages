@@ -1,0 +1,13 @@
+diff --git a/pyproject.toml b/pyproject.toml
+index c7683a1..de8fc6d 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -28,7 +28,7 @@ dynamic = ["readme"]
+ dependencies = [
+     "qbittorrent-api",
+     "urwid ==2.6.15",
+-    "blinker-alt ==1.5",
++    "blinker ==1.8.2",
+     "panwid ==0.3.5",
+ ]
+ 
