@@ -19,4 +19,5 @@ in
   overlays = import ./overlays; # nixpkgs overlays
 
   gama = callPackage ./pkgs/gama.nix { };
+  gocovsh = callPackage ./pkgs/gocovsh.nix { };
 }
