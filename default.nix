@@ -7,11 +7,14 @@
 #     nix-build -A mypackage
 
 { pkgs ? import <nixpkgs> { } }:
-
+let
+  inherit (pkgs) callPackage;
+in
 {
   # The `lib`, `modules`, and `overlays` names are special
   lib = import ./lib { inherit pkgs; }; # functions
   modules = import ./modules; # NixOS modules
   overlays = import ./overlays; # nixpkgs overlays
 
+  gama = callPackage ./pkgs/gama.nix { };
 }
