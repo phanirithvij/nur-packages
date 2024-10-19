@@ -18,6 +18,7 @@ in
   modules = import ./modules; # NixOS modules
   overlays = import ./overlays; # nixpkgs overlays
 
+  diffnav = callPackage ./pkgs/diffnav.nix { };
   gama = callPackage ./pkgs/gama.nix { };
   gocovsh = callPackage ./pkgs/gocovsh.nix { };
   gtrash = callPackage ./pkgs/gtrash.nix { };
