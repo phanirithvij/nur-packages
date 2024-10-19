@@ -18,4 +18,5 @@ in
   modules = import ./modules; # NixOS modules
   overlays = import ./overlays; # nixpkgs overlays
 
+  gama = callPackage ./pkgs/gama.nix { };
 }
