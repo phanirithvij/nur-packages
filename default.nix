@@ -23,5 +23,6 @@ in
   gocovsh = callPackage ./pkgs/gocovsh.nix { };
   gtrash = callPackage ./pkgs/gtrash.nix { };
   pik = callPackage ./pkgs/pik.nix { };
+  qbittorrentui = import ./pkgs/qbittorrentui { inherit pkgs; };
   tcount = callPackage ./pkgs/tcount.nix { };
 }
