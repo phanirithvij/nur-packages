@@ -20,6 +20,7 @@ in
 
   diffnav = callPackage ./pkgs/diffnav.nix { };
   gama = callPackage ./pkgs/gama.nix { };
+  goagen_1 = callPackage ./pkgs/goagen_1 { };
   gocovsh = callPackage ./pkgs/gocovsh.nix { };
   gtrash = callPackage ./pkgs/gtrash.nix { };
   pik = callPackage ./pkgs/pik.nix { };
