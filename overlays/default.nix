@@ -1,5 +1,13 @@
 {
-  # Add your overlays here
-  #
-  # my-overlay = import ./my-overlay;
+  navi-overlay = import ./navi-master.nix;
+  pr-tracker-overlay = import ./pr-tracker-overlay.nix;
+  git-bug-overlay = import ./git-bug-master.nix;
+
+  # TODO remove later once I get sync working?
+  # minimal client build, no server
+  atuin-overlay = _: p: {
+    atuin = p.atuin.overrideAttrs (_: {
+      buildFeatures = [ "client" ];
+    });
+  };
 }
