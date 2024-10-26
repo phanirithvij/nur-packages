@@ -7,17 +7,15 @@
 
 python3.pkgs.buildPythonApplication rec {
   pname = "qbittorrentui";
-  version = "0.3.5-unstable-2024-10-01";
+  version = "0.3.6";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "rmartin16";
     repo = "qbittorrentui";
-    rev = "490091725a5959bb6373060252320f8dfb12e820";
-    hash = "sha256-Hq5yNAEuqZYQOsBDR0A427IXaeg8Ow57zoyHrIfb2nc=";
+    rev = "refs/tags/v${version}";
+    hash = "sha256-6XGouxmaDkURADGxm/7Ys5MqbX49uy7NrcRPHS/5In4=";
   };
-
-  patches = [ ./blinker-alt-replace.patch ];
 
   build-system = [
     python3.pkgs.setuptools
@@ -38,7 +36,7 @@ python3.pkgs.buildPythonApplication rec {
     ];
   };
 
-  #pythonRelaxDeps = [ "urwid" ];
+  pythonRelaxDeps = [ "urwid" ];
 
   pythonImportsCheck = [
     "qbittorrentui"
