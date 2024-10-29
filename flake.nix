@@ -22,7 +22,10 @@
       );
       devShells = forAllSystems (system: {
         default = pkgs.${system}.mkShellNoCC {
-          packages = [ pkgs.${system}.nixfmt-rfc-style ];
+          packages = with pkgs.${system}; [
+            nixfmt-rfc-style
+            dprint
+          ];
         };
       });
     };
