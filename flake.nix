@@ -1,8 +1,16 @@
 {
   description = "My personal NUR repository";
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nix-update.url = "github:Mic92/nix-update";
+    nix-update.inputs.nixpkgs.follows = "nixpkgs";
+  };
   outputs =
-    { self, nixpkgs }:
+    {
+      self,
+      nixpkgs,
+      nix-update,
+    }:
     let
       systems = [
         "x86_64-linux"
@@ -20,11 +28,13 @@
       packages = forAllSystems (
         system: nixpkgs.lib.filterAttrs (_: v: nixpkgs.lib.isDerivation v) self.legacyPackages.${system}
       );
-      devShells = forAllSystems (system: {
-        default = pkgs.${system}.mkShellNoCC {
-          packages = with pkgs.${system}; [
+      devShells = forAllSystems (system: rec {
+        pkgs' = pkgs.${system};
+        default = pkgs'.mkShellNoCC {
+          packages = with pkgs'; [
             nixfmt-rfc-style
             dprint
+            nix-update.packages.${system}.default
           ];
         };
       });
