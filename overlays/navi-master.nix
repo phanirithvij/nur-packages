@@ -5,7 +5,7 @@ _: p: {
     src = p.fetchFromGitHub {
       owner = "denisidoro";
       repo = "navi";
-      rev = version;
+      rev = "refs/heads/${version}";
       hash = "sha256-/pVE5C9c9R+1CANnCVJddc0kFJlREBl9ULET773edJo=";
     };
     cargoDeps = old.cargoDeps.overrideAttrs (
