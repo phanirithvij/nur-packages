@@ -6,6 +6,7 @@
 #    | xargs -n1 echo nix-update
 
 nix-update --commit diffnav
+nix-update --commit distrobox-tui --version=branch=dev
 nix-update --commit feedpushr --version=branch
 nix-update --commit gama --version=branch
 #nix-update --commit goagen_1

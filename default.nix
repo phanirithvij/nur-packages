@@ -19,6 +19,7 @@ in
   overlays = import ./overlays; # nixpkgs overlays
 
   diffnav = callPackage ./pkgs/diffnav.nix { };
+  distrobox-tui = callPackage ./pkgs/distrobox-tui.nix { };
   feedpushr = callPackage ./pkgs/feedpushr { inherit pkgs; };
   gama = callPackage ./pkgs/gama.nix { };
   goagen_1 = callPackage ./pkgs/goagen_1 { };
