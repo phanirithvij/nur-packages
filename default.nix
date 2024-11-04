@@ -18,7 +18,6 @@ in
   modules = import ./modules; # NixOS modules
   overlays = import ./overlays; # nixpkgs overlays
 
-  diffnav = callPackage ./pkgs/diffnav.nix { };
   distrobox-tui = callPackage ./pkgs/distrobox-tui.nix { };
   feedpushr = callPackage ./pkgs/feedpushr { inherit pkgs; };
   gama = callPackage ./pkgs/gama.nix { };

@@ -4,7 +4,6 @@
 
 | package       | version                    | source                                        | reason                                                                                                           |
 | ------------- | -------------------------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| diffnav       | 0.2.8                      | https://github.com/dlvhdr/diffnav/releases    | might upstream                                                                                                   |
 | feedpushr     | 3.4-unstable-2024-07-08    | https://github.com/ncarlier/feedpushr         | rss notify via scripts                                                                                           |
 | gama          | 1.1.4-unstable-2024-09-05  | https://github.com/termkit/gama               | might upstream                                                                                                   |
 | goagen_1      | 1.4.3                      | https://github.com/goadesign/goa/tree/v1      | oudated goadesign command, for feedpushr, can be deprecated once https://github.com/ncarlier/feedpushr/issues/93 |
@@ -15,6 +14,10 @@
 | pik           | 0.9.0                      | https://github.com/jacek-kurlit/pik           | ps fzf                                                                                                           |
 | qbittorrentui | 0.3.6                      | https://github.com/rmartin16/qbittorrentui    | use it in servers, lightweight webui client                                                                      |
 | tcount        | 0-unstable-2023-04-20      | https://github.com/rrethy/tcount              | loc count                                                                                                        |
+
+| package | url                                        | nixpkgs pr (by anyone)                       |
+| ------- | ------------------------------------------ | -------------------------------------------- |
+| diffnav | https://github.com/dlvhdr/diffnav/releases | https://github.com/nixos/nixpkgs/pull/345587 |
 
 ### NOTES
 
