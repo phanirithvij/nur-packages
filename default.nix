@@ -29,5 +29,6 @@ in
   pik = callPackage ./pkgs/pik.nix { };
   pkgsite = callPackage ./pkgs/pkgsite.nix { };
   qbittorrentui = import ./pkgs/qbittorrentui { inherit pkgs; };
+  rsshub = callPackage ./pkgs/rsshub { };
   tcount = callPackage ./pkgs/tcount.nix { };
 }

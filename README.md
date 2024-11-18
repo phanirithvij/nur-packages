@@ -13,7 +13,8 @@
 | jampack       | 0.30.0-unstable-2024-10-11 | https://github.com/divriots/jampack           | can be used from inside node but packaged just in case                                                           |
 | pik           | 0.9.0                      | https://github.com/jacek-kurlit/pik           | ps fzf                                                                                                           |
 | qbittorrentui | 0.3.6                      | https://github.com/rmartin16/qbittorrentui    | use it in servers, lightweight webui client                                                                      |
-| tcount        | 0-unstable-2023-04-20      | https://github.com/rrethy/tcount              | loc count                                                                                                        |
+| rsshub        | 0-unstable-2024-11-18      | https://github.com/DIYgod/RSSHub              | pr-tracker custom route (failed to upstream custom route) (nixpkgs upstream nixos module)                        |
+| tcount        | 0-unstable-2023-04-20      | https://github.com/rrethy/tcount              | (upstreamable)                                                                                                   |
 
 | package | url                                        | nixpkgs pr (by anyone)                       |
 | ------- | ------------------------------------------ | -------------------------------------------- |

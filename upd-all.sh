@@ -16,4 +16,5 @@ nix-update --commit jampack --version=branch
 nix-update --commit pkgsite --version=branch
 nix-update --commit pik
 nix-update --commit qbittorrentui
+nix-update --commit rsshub --version=branch
 nix-update --commit tcount --version=branch
