@@ -15,7 +15,7 @@
       systems = [
         "x86_64-linux"
       ];
-      forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f system);
+      forAllSystems = f: nixpkgs.lib.genAttrs systems f;
       pkgs = forAllSystems (system: import nixpkgs { inherit system; });
     in
     {
