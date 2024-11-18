@@ -6,13 +6,13 @@
 
 buildGoModule rec {
   pname = "golds";
-  version = "0.6.9";
+  version = "0.7.1";
 
   src = fetchFromGitHub {
     owner = "go101";
     repo = "golds";
     rev = "v${version}";
-    hash = "sha256-PLunRsTaC2A4J58dNOZwkvr8OIAdHE/1fLhek0veQOs=";
+    hash = "sha256-6YkyKJtSAFFYidMlZXSjNpjyIIaTlibg/QMMin/NbU0=";
   };
 
   patches = [ ./info_module-gover.patch ];
