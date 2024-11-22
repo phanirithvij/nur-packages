@@ -7,7 +7,7 @@
 
 nix-update --commit distrobox-tui --version=branch=dev
 nix-update --commit feedpushr --version=branch
-nix-update --commit gama --version=branch
+nix-update --commit gama-tui --version=branch
 #nix-update --commit goagen_1
 nix-update --commit gocovsh
 nix-update --commit golds

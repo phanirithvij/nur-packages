@@ -1,4 +1,3 @@
-# nix-init, beautiful
 {
   lib,
   buildGoModule,
@@ -6,7 +5,7 @@
 }:
 
 buildGoModule rec {
-  pname = "gama";
+  pname = "gama-tui";
   version = "1.1.4-unstable-2024-09-05";
 
   src = fetchFromGitHub {
@@ -20,17 +19,18 @@ buildGoModule rec {
 
   ldflags = [
     "-s"
-    "-w"
     "-X main.Version=v${version}-nix"
   ];
 
-  # TODO only sus out network tests
+  # requires network access
   doCheck = false;
 
   meta = {
     description = "Manage your GitHub Actions from Terminal with great UI";
     homepage = "https://github.com/termkit/gama";
+    changelog = "https://github.com/termkit/gama/releases";
     license = lib.licenses.gpl3Only;
+    maintainers = with lib.maintainers; [ phanirithvij ];
     mainProgram = "gama";
   };
 }

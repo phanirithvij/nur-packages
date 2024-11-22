@@ -7,7 +7,7 @@
 | package       | version                    | source                                        | reason                                                                                                           |
 | ------------- | -------------------------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | feedpushr     | 3.4-unstable-2024-07-08    | https://github.com/ncarlier/feedpushr         | rss notify via scripts                                                                                           |
-| gama          | 1.1.4-unstable-2024-09-05  | https://github.com/termkit/gama               | (upstreamable) gama-tui                                                                                          |
+| gama-tui      | 1.1.4-unstable-2024-09-05  | https://github.com/termkit/gama               | (upstreamable)                                                                                                   |
 | goagen_1      | 1.4.3                      | https://github.com/goadesign/goa/tree/v1      | oudated goadesign command, for feedpushr, can be deprecated once https://github.com/ncarlier/feedpushr/issues/93 |
 | gocovsh       | 0.6.1                      | https://github.com/orlangure/gocovsh/releases | contrib once (upstreamable)                                                                                      |
 | golds         | 0.7.1                      | https://github.com/go101/golds                | godoc alternative (upstreamable)                                                                                 |

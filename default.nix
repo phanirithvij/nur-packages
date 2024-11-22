@@ -20,7 +20,7 @@ in
 
   distrobox-tui = callPackage ./pkgs/distrobox-tui.nix { };
   feedpushr = callPackage ./pkgs/feedpushr { inherit pkgs; };
-  gama = callPackage ./pkgs/gama.nix { };
+  gama-tui = callPackage ./pkgs/gama-tui.nix { };
   goagen_1 = callPackage ./pkgs/goagen_1 { };
   gocovsh = callPackage ./pkgs/gocovsh.nix { };
   golds = callPackage ./pkgs/golds { };
