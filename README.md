@@ -12,6 +12,7 @@
 | gocovsh       | 0.6.1                      | https://github.com/orlangure/gocovsh/releases | contrib once (upstreamable)                                                                                      |
 | golds         | 0.7.1                      | https://github.com/go101/golds                | godoc alternative (upstreamable)                                                                                 |
 | jampack       | 0.30.0-unstable-2024-10-11 | https://github.com/divriots/jampack           | can be used from inside node but packaged just in case                                                           |
+| pkgsite       | 0-unstable-2024-11-13      | https://github.com/golang/pkgsite             | (upstreamable)                                                                                                   |
 | qbittorrentui | 0.3.6                      | https://github.com/rmartin16/qbittorrentui    | use it in servers, lightweight webui client                                                                      |
 | rsshub        | 0-unstable-2024-11-18      | https://github.com/DIYgod/RSSHub              | (failed to source upstream pr-tracker custom route) (nixpkgs upstream nixos module)                              |
 | tcount        | 0-unstable-2023-04-20      | https://github.com/rrethy/tcount              | (upstreamable)                                                                                                   |
