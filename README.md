@@ -12,7 +12,6 @@
 | gocovsh       | 0.6.1                      | https://github.com/orlangure/gocovsh/releases | contrib once (upstreamable)                                                                                      |
 | golds         | 0.7.1                      | https://github.com/go101/golds                | godoc alternative (upstreamable)                                                                                 |
 | jampack       | 0.30.0-unstable-2024-10-11 | https://github.com/divriots/jampack           | can be used from inside node but packaged just in case                                                           |
-| pik           | 0.9.0                      | https://github.com/jacek-kurlit/pik           | ps fzf                                                                                                           |
 | qbittorrentui | 0.3.6                      | https://github.com/rmartin16/qbittorrentui    | use it in servers, lightweight webui client                                                                      |
 | rsshub        | 0-unstable-2024-11-18      | https://github.com/DIYgod/RSSHub              | (failed to source upstream pr-tracker custom route) (nixpkgs upstream nixos module)                              |
 | tcount        | 0-unstable-2023-04-20      | https://github.com/rrethy/tcount              | (upstreamable)                                                                                                   |
@@ -23,6 +22,8 @@
 | package | url                                          | nixpkgs pr (by anyone)                       |
 | ------- | -------------------------------------------- | -------------------------------------------- |
 | diffnav | https://github.com/dlvhdr/diffnav/releases   | https://github.com/nixos/nixpkgs/pull/345587 |
+| gtrash  | https://github.com/umlx5h/gtrash/releases    | https://github.com/NixOS/nixpkgs/pull/281705 |
+| pik     | https://github.com/jacek-kurlit/pik/releases | https://github.com/NixOS/nixpkgs/pull/350269 |
 
 ### I maintain
 

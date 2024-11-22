@@ -24,9 +24,7 @@ in
   goagen_1 = callPackage ./pkgs/goagen_1 { };
   gocovsh = callPackage ./pkgs/gocovsh.nix { };
   golds = callPackage ./pkgs/golds { };
-  gtrash = callPackage ./pkgs/gtrash.nix { };
   jampack = callPackage ./pkgs/jampack.nix { };
-  pik = callPackage ./pkgs/pik.nix { };
   pkgsite = callPackage ./pkgs/pkgsite.nix { };
   qbittorrentui = import ./pkgs/qbittorrentui { inherit pkgs; };
   rsshub = callPackage ./pkgs/rsshub { };
