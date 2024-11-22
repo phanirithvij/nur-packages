@@ -9,16 +9,16 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "pik";
-  version = "0.10.0";
+  version = "0.11.0";
 
   src = fetchFromGitHub {
     owner = "jacek-kurlit";
     repo = "pik";
     rev = version;
-    hash = "sha256-q1nNQC9qGa7nUNIaDdqW3wIrfzH7JKS/yZAe9KNmX3k=";
+    hash = "sha256-EeBu8AArbBnoUIrs8Sb1BnjR3fjE7XzXBnPITRsqMFc=";
   };
 
-  cargoHash = "sha256-gqzt3cFOS4uzIstIvmPS0n18aFUt0YnoTRz7EVTV7sA=";
+  cargoHash = "sha256-rZKn0HxFKOKaKMLdWEqsAva+H0gFcCBuJNjZh/uWNMM=";
 
   buildInputs = lib.optionals stdenv.isDarwin [
     darwin.apple_sdk.frameworks.IOKit
