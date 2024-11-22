@@ -18,3 +18,4 @@ nix-update --commit pik
 nix-update --commit qbittorrentui
 nix-update --commit rsshub --version=branch
 nix-update --commit tcount --version=branch
+nix-update --commit ufetch
