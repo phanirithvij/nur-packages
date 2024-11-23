@@ -7,12 +7,7 @@
 
 nix-update --commit distrobox-tui --version=branch=dev
 nix-update --commit feedpushr --version=branch
-nix-update --commit gama-tui --version=branch
 #nix-update --commit goagen_1
-nix-update --commit gocovsh
-nix-update --commit golds
 nix-update --commit jampack --version=branch
-nix-update --commit pkgsite --version=branch
 nix-update --commit qbittorrentui
 nix-update --commit rsshub --version=branch
-nix-update --commit tcount --version=branch

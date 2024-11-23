@@ -7,24 +7,24 @@
 | package       | version                    | source                                        | reason                                                                                                           |
 | ------------- | -------------------------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | feedpushr     | 3.4-unstable-2024-07-08    | https://github.com/ncarlier/feedpushr         | rss notify via scripts                                                                                           |
-| gama-tui      | 1.1.4-unstable-2024-09-05  | https://github.com/termkit/gama               | (upstreamable)                                                                                                   |
 | goagen_1      | 1.4.3                      | https://github.com/goadesign/goa/tree/v1      | oudated goadesign command, for feedpushr, can be deprecated once https://github.com/ncarlier/feedpushr/issues/93 |
-| gocovsh       | 0.6.1                      | https://github.com/orlangure/gocovsh/releases | contrib once (upstreamable)                                                                                      |
-| golds         | 0.7.1                      | https://github.com/go101/golds                | godoc alternative (upstreamable)                                                                                 |
 | jampack       | 0.30.0-unstable-2024-10-11 | https://github.com/divriots/jampack           | can be used from inside node but packaged just in case                                                           |
-| pkgsite       | 0-unstable-2024-11-13      | https://github.com/golang/pkgsite             | (upstreamable)                                                                                                   |
 | qbittorrentui | 0.3.6                      | https://github.com/rmartin16/qbittorrentui    | use it in servers, lightweight webui client                                                                      |
 | rsshub        | 0-unstable-2024-11-18      | https://github.com/DIYgod/RSSHub              | (failed to source upstream pr-tracker custom route) (nixpkgs upstream nixos module)                              |
-| tcount        | 0-unstable-2023-04-20      | https://github.com/rrethy/tcount              | (upstreamable)                                                                                                   |
 
 ### in nixpkgs
 
-| package | url                                          | nixpkgs pr (by anyone)                       |
-| ------- | -------------------------------------------- | -------------------------------------------- |
-| diffnav | https://github.com/dlvhdr/diffnav/releases   | https://github.com/nixos/nixpkgs/pull/345587 |
-| gtrash  | https://github.com/umlx5h/gtrash/releases    | https://github.com/NixOS/nixpkgs/pull/281705 |
-| pik     | https://github.com/jacek-kurlit/pik/releases | https://github.com/NixOS/nixpkgs/pull/350269 |
-| ufetch  | https://gitlab.com/jschx/ufetch              | https://github.com/NixOS/nixpkgs/pull/266274 |
+| package  | url                                           | nixpkgs pr (by anyone)                       |
+| -------- | --------------------------------------------- | -------------------------------------------- |
+| diffnav  | https://github.com/dlvhdr/diffnav/releases    | https://github.com/nixos/nixpkgs/pull/345587 |
+| gtrash   | https://github.com/umlx5h/gtrash/releases     | https://github.com/NixOS/nixpkgs/pull/281705 |
+| pik      | https://github.com/jacek-kurlit/pik/releases  | https://github.com/NixOS/nixpkgs/pull/350269 |
+| ufetch   | https://gitlab.com/jschx/ufetch               | https://github.com/NixOS/nixpkgs/pull/266274 |
+| gama-tui | https://github.com/termkit/gama               | https://github.com/NixOS/nixpkgs/pull/358316 |
+| gocovsh  | https://github.com/orlangure/gocovsh/releases | https://github.com/NixOS/nixpkgs/pull/358316 |
+| golds    | https://github.com/go101/golds                | https://github.com/NixOS/nixpkgs/pull/358316 |
+| pkgsite  | https://github.com/golang/pkgsite             | https://github.com/NixOS/nixpkgs/pull/358316 |
+| tcount   | https://github.com/rrethy/tcount              | https://github.com/NixOS/nixpkgs/pull/358316 |
 
 ### I maintain
 

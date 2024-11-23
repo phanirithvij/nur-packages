@@ -20,13 +20,8 @@ in
 
   distrobox-tui = callPackage ./pkgs/distrobox-tui.nix { };
   feedpushr = callPackage ./pkgs/feedpushr { inherit pkgs; };
-  gama-tui = callPackage ./pkgs/gama-tui.nix { };
   goagen_1 = callPackage ./pkgs/goagen_1 { };
-  gocovsh = callPackage ./pkgs/gocovsh.nix { };
-  golds = callPackage ./pkgs/golds { };
   jampack = callPackage ./pkgs/jampack.nix { };
-  pkgsite = callPackage ./pkgs/pkgsite.nix { };
   qbittorrentui = import ./pkgs/qbittorrentui { inherit pkgs; };
   rsshub = callPackage ./pkgs/rsshub { };
-  tcount = callPackage ./pkgs/tcount.nix { };
 }
