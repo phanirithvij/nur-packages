@@ -20,7 +20,7 @@ buildGoModule rec {
   vendorHash = "sha256-mhZWmE8R9ss391PVzHElxz5Kp0zoT1nv+Zrlh3PThWE=";
   proxyVendor = true; # ??
 
-  subPackages = [ "goagen" ]; # ?? fails at runtime
+  subPackages = [ "goagen" ];
 
   doCheck = false; # fails
 
