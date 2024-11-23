@@ -1,4 +1,3 @@
-# nix-init, 42
 {
   lib,
   buildGoModule,
@@ -18,15 +17,21 @@ buildGoModule rec {
 
   vendorHash = "sha256-Fb7BIWojOSUIlBdjIt57CSvF1a+x33sB45Z0a86JMUg=";
 
+  # check pdfcpu drv if really need these
+  # or write an update script
   ldflags = [
     "-s"
-    "-w"
+    "-X main.version=${version}"
+    "-X main.commit=v${version}"
+    "-X main.date=19700101T000000Z"
   ];
 
   meta = {
     description = "Go Coverage in your terminal: a tool for exploring Go Coverage reports from the command line";
     homepage = "https://github.com/orlangure/gocovsh";
+    changelog = "https://github.com/orlangure/gocovsh/releases";
     license = lib.licenses.gpl3Only;
+    maintainers = with lib.maintainers; [ phanirithvij ];
     mainProgram = "gocovsh";
   };
 }

@@ -2,6 +2,7 @@
   lib,
   buildGoModule,
   fetchFromGitHub,
+  unstableGitUpdater,
 }:
 
 buildGoModule rec {
@@ -24,6 +25,8 @@ buildGoModule rec {
 
   # requires network access
   doCheck = false;
+
+  passthru.updateScript = unstableGitUpdater { };
 
   meta = {
     description = "Manage your GitHub Actions from Terminal with great UI";

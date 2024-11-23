@@ -22,10 +22,10 @@ buildGo123Module rec {
   ldflags = [ "-s" ];
 
   meta = {
-    description = "Mirror] Home of the pkg.go.dev website";
+    description = "Official tool to extract and generate documentation for Go projects like pkg.go.dev";
     homepage = "https://github.com/golang/pkgsite";
     license = lib.licenses.bsd3;
-    maintainers = with lib.maintainers; [ ];
+    maintainers = with lib.maintainers; [ phanirithvij ];
     mainProgram = "pkgsite";
   };
 }

@@ -25,6 +25,7 @@ buildGoModule rec {
     description = "An experimental Go local docs server/generator and code reader implemented with some fresh ideas";
     homepage = "https://github.com/go101/golds";
     license = lib.licenses.mit;
+    maintainers = with lib.maintainers; [ phanirithvij ];
     mainProgram = "golds";
   };
 }
