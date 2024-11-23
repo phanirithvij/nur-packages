@@ -4,13 +4,13 @@
 
 ### packages
 
-| package       | version                    | source                                        | reason                                                                                                           |
-| ------------- | -------------------------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| feedpushr     | 3.4-unstable-2024-07-08    | https://github.com/ncarlier/feedpushr         | rss notify via scripts                                                                                           |
-| goagen_1      | 1.4.3                      | https://github.com/goadesign/goa/tree/v1      | oudated goadesign command, for feedpushr, can be deprecated once https://github.com/ncarlier/feedpushr/issues/93 |
-| jampack       | 0.30.0-unstable-2024-10-11 | https://github.com/divriots/jampack           | can be used from inside node but packaged just in case                                                           |
-| qbittorrentui | 0.3.6                      | https://github.com/rmartin16/qbittorrentui    | use it in servers, lightweight webui client                                                                      |
-| rsshub        | 0-unstable-2024-11-18      | https://github.com/DIYgod/RSSHub              | (failed to source upstream pr-tracker custom route) (nixpkgs upstream nixos module)                              |
+| package       | version                    | source                                     | reason                                                                                                           |
+| ------------- | -------------------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| feedpushr     | 3.4-unstable-2024-07-08    | https://github.com/ncarlier/feedpushr      | rss notify via scripts                                                                                           |
+| goagen_1      | 1.4.3                      | https://github.com/goadesign/goa/tree/v1   | oudated goadesign command, for feedpushr, can be deprecated once https://github.com/ncarlier/feedpushr/issues/93 |
+| jampack       | 0.30.0-unstable-2024-10-11 | https://github.com/divriots/jampack        | can be used from inside node but packaged just in case                                                           |
+| qbittorrentui | 0.3.6                      | https://github.com/rmartin16/qbittorrentui | use it in servers, lightweight webui client                                                                      |
+| rsshub        | 0-unstable-2024-11-18      | https://github.com/DIYgod/RSSHub           | (failed to source upstream pr-tracker custom route) (nixpkgs upstream nixos module)                              |
 
 ### in nixpkgs
 
