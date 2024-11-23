@@ -29,5 +29,4 @@ in
   qbittorrentui = import ./pkgs/qbittorrentui { inherit pkgs; };
   rsshub = callPackage ./pkgs/rsshub { };
   tcount = callPackage ./pkgs/tcount.nix { };
-  ufetch = (callPackage ./pkgs/ufetch { }).override { full = false; };
 }

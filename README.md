@@ -16,7 +16,6 @@
 | qbittorrentui | 0.3.6                      | https://github.com/rmartin16/qbittorrentui    | use it in servers, lightweight webui client                                                                      |
 | rsshub        | 0-unstable-2024-11-18      | https://github.com/DIYgod/RSSHub              | (failed to source upstream pr-tracker custom route) (nixpkgs upstream nixos module)                              |
 | tcount        | 0-unstable-2023-04-20      | https://github.com/rrethy/tcount              | (upstreamable)                                                                                                   |
-| ufetch        | 0.3                        | https://gitlab.com/jschx/ufetch               | minimal bash fetch + custom patch see https://github.com/mrtnvgr/nixpkgs/pull/1                                  |
 
 ### in nixpkgs
 
@@ -25,6 +24,7 @@
 | diffnav | https://github.com/dlvhdr/diffnav/releases   | https://github.com/nixos/nixpkgs/pull/345587 |
 | gtrash  | https://github.com/umlx5h/gtrash/releases    | https://github.com/NixOS/nixpkgs/pull/281705 |
 | pik     | https://github.com/jacek-kurlit/pik/releases | https://github.com/NixOS/nixpkgs/pull/350269 |
+| ufetch  | https://gitlab.com/jschx/ufetch              | https://github.com/NixOS/nixpkgs/pull/266274 |
 
 ### I maintain
 
