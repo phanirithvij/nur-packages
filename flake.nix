@@ -16,7 +16,8 @@
         "x86_64-linux"
       ];
       forAllSystems = f: nixpkgs.lib.genAttrs systems f;
-      pkgs = forAllSystems (system: import nixpkgs { inherit system; });
+      # https://github.com/nix-community/nur-packages-template/issues/89
+      pkgs = forAllSystems (system: nixpkgs.legacyPackages."${system}");
     in
     {
       legacyPackages = forAllSystems (
