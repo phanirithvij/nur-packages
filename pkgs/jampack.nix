@@ -9,13 +9,13 @@
 
 stdenv.mkDerivation rec {
   pname = "jampack";
-  version = "0-unstable-2024-10-11";
+  version = "0-unstable-2024-12-01";
 
   src = fetchFromGitHub {
     owner = "divriots";
     repo = "jampack";
-    rev = "08438debb7c253a7dc238a669d13161328608e1d";
-    hash = "sha256-CtgQA+sQdN3P6uZyJ0NLW+D5vmLmY68kF4A9xLjCVZo=";
+    rev = "06db1f5c48e5cb1329217a96b59e0bc68271df12";
+    hash = "sha256-aXLguFlsUcT0t6as8D0r+yD5r/4mKP6u6PZ3C7UJwUU=";
   };
 
   pnpmDeps = pnpm.fetchDeps {
