@@ -9,18 +9,18 @@
 
 stdenv.mkDerivation rec {
   pname = "jampack";
-  version = "0-unstable-2024-10-11";
+  version = "0-unstable-2024-12-11";
 
   src = fetchFromGitHub {
     owner = "divriots";
     repo = "jampack";
-    rev = "08438debb7c253a7dc238a669d13161328608e1d";
-    hash = "sha256-CtgQA+sQdN3P6uZyJ0NLW+D5vmLmY68kF4A9xLjCVZo=";
+    rev = "5c138398fa7e0f3b03b48d55613861a1d16bb0a7";
+    hash = "sha256-my0Xw2B+auuRidWwtxV3jYOuWUnp9OeWDRBmy2eGawI=";
   };
 
   pnpmDeps = pnpm.fetchDeps {
     inherit pname version src;
-    hash = "sha256-Z7bq2C+VdG1gbPTCjhIGNot4KIXiar1eeYVsXZteFk8=";
+    hash = "sha256-19/2KJDqnRYu9PI62tu2fVwtOdY1nklFcVj/4qa5wu4=";
   };
 
   nativeBuildInputs = [
