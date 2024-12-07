@@ -10,13 +10,13 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "rsshub";
-  version = "0-unstable-2024-12-02";
+  version = "0-unstable-2024-12-06";
 
   src = fetchFromGitHub {
     owner = "DIYgod";
     repo = "RSSHub";
-    rev = "44e0622b5bfe2c65784b9c518755f3406bdcd1cb";
-    hash = "sha256-MTSBY7Uy5oc66AvHgWm2lSZTsYxCrZgCCkIDK6bisMI=";
+    rev = "0d07768955d577e1df7ffb2a34ad2c34f03c758d";
+    hash = "sha256-Yz6eKsoOv8gz+23srbCYriJSve8e7A9mPefeY7pMMWk=";
   };
 
   patches = [
@@ -31,7 +31,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   pnpmDeps = pnpm.fetchDeps {
     inherit (finalAttrs) pname version src;
-    hash = "sha256-zYf0eR3dm2SlTc6ahw29jrYLrpcCWGTYAv8mETEIdQM=";
+    hash = "sha256-rg1CNq2X0oFYVD3eUSE3sdYXSq2x57aD7d44RuiYMpI=";
   };
 
   nativeBuildInputs = [
