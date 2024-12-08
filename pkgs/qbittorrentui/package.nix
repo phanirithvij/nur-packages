@@ -13,7 +13,7 @@ python3.pkgs.buildPythonApplication rec {
   src = fetchFromGitHub {
     owner = "rmartin16";
     repo = "qbittorrentui";
-    rev = "refs/tags/v${version}";
+    tag = "v${version}";
     hash = "sha256-6XGouxmaDkURADGxm/7Ys5MqbX49uy7NrcRPHS/5In4=";
   };
 
