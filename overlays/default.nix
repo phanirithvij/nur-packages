@@ -10,4 +10,8 @@
       buildFeatures = [ "client" ];
     });
   };
+
+  nix-schema-overlay = _: _: {
+    nix-schema = import ../pkgs/nix-schema.nix;
+  };
 }

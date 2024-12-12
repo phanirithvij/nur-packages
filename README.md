@@ -49,6 +49,7 @@
 
 ### TODO
 
+- [x] nix-schema, pushed to cachix!
 - [ ] distrobox-tui-dev upd isnt working properly
 - [ ] some check that ensures readme and upd-all.sh are updated along with pkgs/
 - [ ] overlays

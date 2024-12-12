@@ -1,3 +1,4 @@
+#shellcheck shell=bash
 #  generated and modified
 #
 #  nix eval --impure --json --expr \
@@ -11,3 +12,7 @@ nix-update --commit feedpushr --version=branch
 nix-update --commit jampack --version=branch
 nix-update --commit qbittorrentui
 nix-update --commit rsshub --version=branch
+
+# nix-schema
+rev="$(nix eval --expr '(builtins.getFlake "github:DeterminateSystems/nix-src/flake-schemas").rev' --refresh --impure --raw)"
+sed -r "s/nix-src\/\b[0-9a-f]{5,40}\b/nix-src\/$rev/g" -i pkgs/nix-schema.nix

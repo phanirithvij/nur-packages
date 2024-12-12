@@ -24,4 +24,5 @@ in
   jampack = callPackage ./pkgs/jampack.nix { };
   qbittorrentui = import ./pkgs/qbittorrentui { inherit pkgs; };
   rsshub = callPackage ./pkgs/rsshub { };
+  nix-schema = import ./pkgs/nix-schema.nix;
 }
