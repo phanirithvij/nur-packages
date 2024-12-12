@@ -49,6 +49,7 @@
 
 ### TODO
 
+- [ ] distrobox-tui-dev upd isnt working properly
 - [ ] some check that ensures readme and upd-all.sh are updated along with pkgs/
 - [ ] overlays
   - navi-master (needed it once, good to have + interested)
