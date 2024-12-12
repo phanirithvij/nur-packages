@@ -1,23 +1,22 @@
 {
   description = "My personal NUR repository";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nix-update.url = "github:Mic92/nix-update";
     nix-update.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs =
     {
       self,
-      nixpkgs,
-      nix-update,
-    }:
+      ...
+    }@inputs:
     let
       systems = [
         "x86_64-linux"
       ];
-      forAllSystems = f: nixpkgs.lib.genAttrs systems f;
+      forAllSystems = f: inputs.nixpkgs.lib.genAttrs systems f;
       # https://github.com/nix-community/nur-packages-template/issues/89
-      pkgs = forAllSystems (system: nixpkgs.legacyPackages."${system}");
+      pkgs = forAllSystems (system: inputs.nixpkgs.legacyPackages."${system}");
     in
     {
       legacyPackages = forAllSystems (
@@ -27,15 +26,17 @@
         }
       );
       packages = forAllSystems (
-        system: nixpkgs.lib.filterAttrs (_: v: nixpkgs.lib.isDerivation v) self.legacyPackages.${system}
+        system:
+        inputs.nixpkgs.lib.filterAttrs (
+          _: v: inputs.nixpkgs.lib.isDerivation v
+        ) self.legacyPackages.${system}
       );
-      devShells = forAllSystems (system: rec {
-        pkgs' = pkgs.${system};
-        default = pkgs'.mkShellNoCC {
-          packages = with pkgs'; [
+      devShells = forAllSystems (system: {
+        default = pkgs.${system}.mkShellNoCC {
+          packages = with pkgs.${system}; [
             nixfmt-rfc-style
             dprint
-            nix-update.packages.${system}.default
+            inputs.nix-update.packages.${system}.default
           ];
         };
       });
