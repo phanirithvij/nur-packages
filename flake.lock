@@ -30,11 +30,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1733662989,
-        "narHash": "sha256-HO6R7Tt1qZOw4K9KK0/i29AQTOP2G2Gg6oDh/mVzhFw=",
+        "lastModified": 1734089939,
+        "narHash": "sha256-u1AK0sGJuhVkyog6usSYjGsDV7FMcubKkRM3SuHpK00=",
         "owner": "Mic92",
         "repo": "nix-update",
-        "rev": "6f05a35ec671fa6a794c40d79cb8ca6847b598cc",
+        "rev": "e3f3d83df8f5b3a90217e97310543ccdd497a53b",
         "type": "github"
       },
       "original": {
@@ -45,16 +45,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1733749988,
-        "narHash": "sha256-+5qdtgXceqhK5ZR1YbP1fAUsweBIrhL38726oIEAtDs=",
+        "lastModified": 1734119587,
+        "narHash": "sha256-AKU6qqskl0yf2+JdRdD0cfxX4b9x3KKV5RqA6wijmPM=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "bc27f0fde01ce4e1bfec1ab122d72b7380278e68",
+        "rev": "3566ab7246670a43abd2ffa913cc62dad9cdf7d5",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixpkgs-unstable",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
