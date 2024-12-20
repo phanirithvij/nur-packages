@@ -14,28 +14,28 @@
 
 ### in nixpkgs
 
-| package  | url                                           | nixpkgs pr (by anyone)                       |
-| -------- | --------------------------------------------- | -------------------------------------------- |
-| diffnav  | https://github.com/dlvhdr/diffnav/releases    | https://github.com/nixos/nixpkgs/pull/345587 |
-| gtrash   | https://github.com/umlx5h/gtrash/releases     | https://github.com/NixOS/nixpkgs/pull/281705 |
-| pik      | https://github.com/jacek-kurlit/pik/releases  | https://github.com/NixOS/nixpkgs/pull/350269 |
-| ufetch   | https://gitlab.com/jschx/ufetch               | https://github.com/NixOS/nixpkgs/pull/266274 |
-| gama-tui | https://github.com/termkit/gama               | https://github.com/NixOS/nixpkgs/pull/358316 |
-| gocovsh  | https://github.com/orlangure/gocovsh/releases | https://github.com/NixOS/nixpkgs/pull/358316 |
-| golds    | https://github.com/go101/golds                | https://github.com/NixOS/nixpkgs/pull/358316 |
-| pkgsite  | https://github.com/golang/pkgsite             | https://github.com/NixOS/nixpkgs/pull/358316 |
-| tcount   | https://github.com/rrethy/tcount              | https://github.com/NixOS/nixpkgs/pull/358316 |
+| package | url                                          | nixpkgs pr (by anyone)                       |
+| ------- | -------------------------------------------- | -------------------------------------------- |
+| diffnav | https://github.com/dlvhdr/diffnav/releases   | https://github.com/nixos/nixpkgs/pull/345587 |
+| gtrash  | https://github.com/umlx5h/gtrash/releases    | https://github.com/NixOS/nixpkgs/pull/281705 |
+| pik     | https://github.com/jacek-kurlit/pik/releases | https://github.com/NixOS/nixpkgs/pull/350269 |
+| ufetch  | https://gitlab.com/jschx/ufetch              | https://github.com/NixOS/nixpkgs/pull/266274 |
 
 ### I maintain
 
 | package       | url                                                | nixpkgs location                                                                       | pr                                           |
 | ------------- | -------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------- |
 | distrobox-tui | https://github.com/phanirithvij/distrobox-tui/tags | https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/di/distrobox-tui/package.nix | https://github.com/NixOS/nixpkgs/pull/332765 |
+| gama-tui      | https://github.com/termkit/gama/releases           | https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/ga/gama-tui/package.nix      | https://github.com/NixOS/nixpkgs/pull/358316 |
 | gh-i          | https://github.com/gennaro-tedesco/gh-i/releases   | https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/gh/gh-i/package.nix          | https://github.com/NixOS/nixpkgs/pull/332765 |
 | gitcs         | https://github.com/knbr13/gitcs/releases           | https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/gi/gitcs/package.nix         | https://github.com/NixOS/nixpkgs/pull/332765 |
+| gocovsh       | https://github.com/orlangure/gocovsh/releases      | https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/go/gocovsh/package.nix       | https://github.com/NixOS/nixpkgs/pull/358316 |
 | gogup         | https://github.com/nao1215/gup/releases            | https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/go/gogup/package.nix         | https://github.com/NixOS/nixpkgs/pull/332765 |
-| go-mtree      | https://github.com/vbatts/go-mtree/releases        | https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/go/gomtree/package.nix       | https://github.com/NixOS/nixpkgs/pull/332765 |
+| golds         | https://github.com/go101/golds/tags                | https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/go/golds/package.nix         | https://github.com/NixOS/nixpkgs/pull/358316 |
+| gomtree       | https://github.com/vbatts/go-mtree/releases        | https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/go/gomtree/package.nix       | https://github.com/NixOS/nixpkgs/pull/332765 |
 | opengist      | https://github.com/thomiceli/opengist/releases     | https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/op/opengist/package.nix      | https://github.com/NixOS/nixpkgs/pull/349718 |
+| pkgsite       | https://github.com/golang/pkgsite                  | https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/pk/pkgsite/package.nix       | https://github.com/NixOS/nixpkgs/pull/358316 |
+| tcount        | https://github.com/rrethy/tcount/releases          | https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/tc/tcount/package.nix        | https://github.com/NixOS/nixpkgs/pull/358316 |
 | viddy         | https://github.com/sachaos/viddy/releases          | https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/vi/viddy/package.nix         | https://github.com/NixOS/nixpkgs/pull/336100 |
 
 ### NOTES
@@ -46,33 +46,3 @@
 - found something in the repo horrendous? (>.<)
   - send a message in github issues and help me learn nix (please?)
 - I don't have access to a mac, and thus I don't care about mac builds unless the need arises. (eg. upstreaming something in nixpkgs)
-
-### TODO
-
-- [x] nix-schema, pushed to cachix!
-- [ ] distrobox-tui-dev upd isnt working properly
-- [ ] some check that ensures readme and upd-all.sh are updated along with pkgs/
-- [ ] overlays
-  - navi-master (needed it once, good to have + interested)
-  - git-bug-master (one day github -> git-bug local first)
-  - pr-tracker-patched (follow pr-tracker init pr nixpkgs and rm)
-- [ ] nixos modules
-  - opengist (inprog out of tree)
-  - rsshub (very simple, next)
-  - snips.sh
-  - teldrive (immich is a good one for inspiration) (onhold)
-  - cloudflared ??
-- [ ] hm modules
-  - espanso wayland+x11 overlay?
-- [ ] lib
-  - funcs that might be useful
-  - as of now use it as a bookmark/snippet/learnings wiki for useful nixpkgs funcs
-    - patchShebangs w/ chmod +x
-    - substituteInplace --replace-{fail,...}
-    - override
-    - overrideAttrs
-    - overrideModAttrs (find a discourse thread for this as an example)
-    - packageOverrides ??
-    - extensible (packagesWith)
-  - create a real wiki article and remove here?
-    - under nixpkgs contrib > good to know (tent.)
