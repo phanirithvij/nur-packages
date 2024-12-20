@@ -1,0 +1,40 @@
+### TODO
+
+- [x] nix-schema, pushed to cachix!
+- [ ] distrobox-tui-dev upd isnt working properly
+- [ ] some check that ensures readme and upd-all.sh are updated along with pkgs/
+- [ ] overlays
+  - navi-master (needed it once, good to have + interested)
+  - git-bug-master (one day github -> git-bug local first)
+  - pr-tracker-patched (follow pr-tracker init pr nixpkgs and rm)
+- [ ] nixos modules
+  - opengist (inprog out of tree)
+  - rsshub (very simple, next)
+  - snips.sh
+  - teldrive (immich is a good one for inspiration) (onhold)
+  - cloudflared ??
+- [ ] hm modules
+  - espanso wayland+x11 overlay?
+- [ ] lib
+  - funcs that might be useful
+  - as of now use it as a bookmark/snippet/learnings wiki for useful nixpkgs funcs
+    - patchShebangs w/ chmod +x
+    - substituteInplace --replace-{fail,...}
+    - override
+    - overrideAttrs
+    - overrideModAttrs (find a discourse thread for this as an example)
+    - packageOverrides ??
+    - extensible (packagesWith)
+  - create a real wiki article and remove here?
+    - under nixpkgs contrib > good to know (tent.)
+- [ ] nix-vm-test for system-manager, nixostests for
+  - unstable pkgs
+    - I maintain
+      - search repology my email
+      - if nixostest in nixpkgs run it with unstable pkg
+    - I am interested in
+      - pagefind
+      - rsshub
+      - etc.
+- [ ] nixostest, nix-vm-test (arch,ubuntu,debian), derivations for simkl2plex
+- [ ] nixostest, nix-vm-test + sysm, derivations for teldrive + rclone
