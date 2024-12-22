@@ -10,12 +10,12 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "rsshub";
-  version = "0-unstable-2024-12-17";
+  version = "0-unstable-2024-12-22";
 
   src = fetchFromGitHub {
     owner = "DIYgod";
     repo = "RSSHub";
-    rev = "4bec9ed52f146750418a7c5c777cbd898332611a";
+    rev = "dc32d68fc380c538d94e410cb0057bd322772675";
     hash = "sha256-abf56sfsFaBZ9HZM3TK+OHvfeu9PMz4/H4LBGsDwgcQ=";
   };
 
