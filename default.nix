@@ -10,7 +10,7 @@
   pkgs ? import <nixpkgs> { },
 }:
 let
-  inherit (pkgs) callPackage;
+  inherit (pkgs) lib callPackage;
 in
 {
   # The `lib`, `modules`, and `overlays` names are special
@@ -18,7 +18,6 @@ in
   modules = import ./modules; # NixOS modules
   overlays = import ./overlays; # nixpkgs overlays
 
-  distrobox-tui = callPackage ./pkgs/distrobox-tui.nix { };
   feedpushr = callPackage ./pkgs/feedpushr { inherit pkgs; };
   goagen_1 = callPackage ./pkgs/goagen_1 { };
   jampack = callPackage ./pkgs/jampack.nix { };
@@ -26,4 +25,11 @@ in
   rsshub = callPackage ./pkgs/rsshub { };
   tgrclone = callPackage ./pkgs/tgrclone.nix { };
   nix-schema = import ./pkgs/nix-schema.nix;
+
+  # these are already in nixpkgs, and I track their unstable versions
+  # to detect any early breakages
+  unstablePkgs = lib.packagesFromDirectoryRecursive {
+    inherit callPackage;
+    directory = ./pkgs/unstable;
+  };
 }
