@@ -9,7 +9,7 @@
 nix-update --commit feedpushr --version=branch
 #nix-update --commit goagen_1
 nix-update --commit jampack --version=branch
-nix-update --commit qbittorrentui
+nix-update --commit qbittorrentui --version=branch
 nix-update --commit rsshub --version=branch
 
 # nix-schema
