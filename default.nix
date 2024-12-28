@@ -7,7 +7,9 @@
 #     nix-build -A mypackage
 
 {
-  pkgs ? import <nixpkgs> { },
+  nixpkgs ? <nixpkgs>,
+  pkgs ? import nixpkgs { },
+  system ? builtins.currentSystem,
 }:
 let
   inherit (pkgs) lib callPackage;
@@ -32,4 +34,7 @@ in
     inherit callPackage;
     directory = ./pkgs/unstable;
   };
+
+  # overlayShell, a drv which forces overlays to be built in ci
+  overlayShell = import ./overlays/test-shell.nix { inherit system nixpkgs; };
 }

@@ -23,6 +23,8 @@
         system:
         import ./default.nix {
           pkgs = pkgs.${system};
+          inherit (inputs) nixpkgs;
+          inherit system;
         }
       );
       packages = forAllSystems (
@@ -38,6 +40,10 @@
             dprint
             inputs.nix-update.packages.${system}.default
           ];
+        };
+        overlayShell = import ./overlays/test-shell.nix {
+          inherit (inputs) nixpkgs;
+          inherit system;
         };
       });
     };
