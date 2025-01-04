@@ -13,6 +13,7 @@
     let
       systems = [
         "x86_64-linux"
+        "aarch64-linux"
       ];
       forAllSystems = f: inputs.nixpkgs.lib.genAttrs systems f;
       # https://github.com/nix-community/nur-packages-template/issues/89
