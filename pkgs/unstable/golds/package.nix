@@ -9,9 +9,9 @@ golds.overrideAttrs (
       owner = "go101";
       repo = "golds";
       rev = "refs/heads/${finalAttrs.version}";
-      hash = "sha256-ExvCVGWYAngasnDHVzBLeLmms4cFNcQ/KzuE4t3r36A=";
+      hash = "sha256-kVXr/5qJCTjpfRpz2mDIsMRirp5dT5aGo/BlLR9Qp0M=";
     };
-    vendorHash = "sha256-omjHRZB/4VzPhc6RrFY11s6BRD69+Y4RRZ2XdeKbZf0=";
+    vendorHash = "sha256-Sy9O23iCW8voImPFQkqczPxqGyD5rf0/tKxaRDFgbSs=";
     # version hardcoded in source
     doInstallCheck = false;
   }

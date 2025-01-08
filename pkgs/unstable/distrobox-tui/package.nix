@@ -9,8 +9,8 @@ distrobox-tui.overrideAttrs (
       owner = "phanirithvij";
       repo = "distrobox-tui";
       rev = "refs/heads/${finalAttrs.version}";
-      hash = "sha256-W20sXe85OX3dc5Z/kibTOC1fB71l3elVh6XxydVs+Nc=";
+      hash = "sha256-KAhNK3PpaV8eoXpzo6n4NLS9NgyIp+MX7WY8v/Qih1I=";
     };
-    vendorHash = "sha256-zKJrhR/l2HPQXTVgrxYLGGz0pjA0e81jB6H4YrNfH94=";
+    vendorHash = "sha256-F7X3FBM/F0uPxbM3en0sk9a58O/meKnVsASgIlL7FCo=";
   }
 )
