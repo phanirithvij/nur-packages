@@ -27,6 +27,9 @@ in
   rsshub = callPackage ./pkgs/rsshub { };
   tgrclone = callPackage ./pkgs/tgrclone.nix { };
   nix-schema = import ./pkgs/nix-schema.nix;
+  vliv = callPackage ./pkgs/vliv { };
+  # vliv32 = vliv.override { }; # TODO figure out args, also rec?
+  vliv-bin = callPackage ./pkgs/vliv-bin { };
 
   # these are already in nixpkgs, and I track their unstable versions
   # to detect any early breakages
