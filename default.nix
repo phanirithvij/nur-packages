@@ -8,13 +8,17 @@
 
 {
   nixpkgs ? <nixpkgs>,
-  pkgs ? import nixpkgs { },
+  pkgs' ? import nixpkgs { },
+  pkgs ? import (pkgs'.applyPatches {
+    src = nixpkgs;
+    patches = [ ./tinyexr-nixpkgs.patch ];
+  }) { },
   system ? builtins.currentSystem,
 }:
 let
-  inherit (pkgs) lib callPackage;
+  inherit (pkgs) lib callPackage recurseIntoAttrs;
 in
-{
+rec {
   # The `lib`, `modules`, and `overlays` names are special
   lib = import ./lib { inherit pkgs; }; # functions
   modules = import ./modules; # NixOS modules
@@ -27,9 +31,8 @@ in
   rsshub = callPackage ./pkgs/rsshub { };
   tgrclone = callPackage ./pkgs/tgrclone.nix { };
   nix-schema = import ./pkgs/nix-schema.nix;
-  vliv = callPackage ./pkgs/vliv { };
+  vliv = recurseIntoAttrs (callPackage ./pkgs/vliv { vliv = vliv.base; });
   # vliv32 = vliv.override { }; # TODO figure out args, also rec?
-  vliv-bin = callPackage ./pkgs/vliv-bin { };
 
   # these are already in nixpkgs, and I track their unstable versions
   # to detect any early breakages

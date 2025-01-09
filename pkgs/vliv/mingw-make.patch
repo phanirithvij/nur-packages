@@ -1,0 +1,512 @@
+commit 2bd15c5e3dce69db7820e9b3f28089103e506544
+Author: phanirithvij <phanirithvij2000@gmail.com>
+Date:   Mon Jan 13 00:27:32 2025 +0530
+
+    plugins math
+    
+    Signed-off-by: phanirithvij <phanirithvij2000@gmail.com>
+
+diff --git a/src/plugins/lyapunov/lyapunov.c b/src/plugins/lyapunov/lyapunov.c
+index 2dbd425..b58841e 100644
+--- a/src/plugins/lyapunov/lyapunov.c
++++ b/src/plugins/lyapunov/lyapunov.c
+@@ -1,6 +1,7 @@
+ #include <lyapunov.h>
+ 
+ #include <stdio.h>
++#include <math.h>
+ 
+ static BOOL AcceptLYAPUNOVImage(const unsigned char* buffer, long unsigned int size) { 
+   return FALSE; 
+diff --git a/src/plugins/newton/newton.c b/src/plugins/newton/newton.c
+index 5438f54..da2dd6f 100644
+--- a/src/plugins/newton/newton.c
++++ b/src/plugins/newton/newton.c
+@@ -1,6 +1,7 @@
+ #include <newton.h>
+ 
+ #include <stdio.h>
++#include <math.h>
+ 
+ static BOOL AcceptNEWTONImage(const unsigned char* buffer, long unsigned int size) { return FALSE; }
+ const char* GetNEWTONDescription() { return "Newton Images"; }
+
+commit 476628a624d1ab3ed70fe57d52c3e0d673a9ff23
+Author: phanirithvij <phanirithvij2000@gmail.com>
+Date:   Thu Jan 9 14:44:08 2025 +0530
+
+    try extern
+    
+    Signed-off-by: phanirithvij <phanirithvij2000@gmail.com>
+
+diff --git a/src/dialogs.c b/src/dialogs.c
+index 1bffa7d..86c0299 100644
+--- a/src/dialogs.c
++++ b/src/dialogs.c
+@@ -221,6 +221,9 @@ BOOL CenterDialog (HWND hwndChild, HWND hwndParent) {
+    return SetWindowPos (hwndChild, 0, xNew, yNew, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
+ }
+ 
++HWND abortDialog;
++BOOL bPrint;
++
+ INT_PTR AbortDialogProc(HWND hdlg, UINT message, WPARAM wParam, LPARAM lParam) { 
+     switch (message) { 
+     case WM_INITDIALOG: 
+diff --git a/src/dialogs.h b/src/dialogs.h
+index 825a46e..d944b70 100644
+--- a/src/dialogs.h
++++ b/src/dialogs.h
+@@ -14,7 +14,7 @@ void CleanupURLControl();
+ BOOL checkLicense();
+ BOOL CenterDialog (HWND hwndChild, HWND hwndParent);
+ 
+-HWND abortDialog;
+-BOOL bPrint;
++extern HWND abortDialog;
++extern BOOL bPrint;
+ 
+ #endif
+diff --git a/src/vliv.c b/src/vliv.c
+index 89af19f..c5b4769 100644
+--- a/src/vliv.c
++++ b/src/vliv.c
+@@ -244,6 +244,7 @@ static void ClearImage() {
+ }
+ 
+ static TCHAR* SubFileTypeNames[4];
++HMODULE languageInst;
+ 
+ static void InitFileTypeNames() {
+     int readbytes;
+@@ -396,6 +397,7 @@ static BOOL HandleMouseWheel(short zDelta) {
+ }
+ 
+ static BOOL fullscreen = FALSE;
++
+ void
+ SetDirectory(unsigned int which) {
+     FreeTileManager();
+diff --git a/src/vliv.h b/src/vliv.h
+index ec9f93c..573422b 100644
+--- a/src/vliv.h
++++ b/src/vliv.h
+@@ -103,7 +103,7 @@ typedef struct {
+ #define MYFREE(data) HeapFree(GetProcessHeap(), 0, data);
+ #define MYREALLOC(data, size) HeapReAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, data, size);
+ 
+-HMODULE languageInst;
++extern HMODULE languageInst;
+ 
+ VLIV_EXPORT(void) ShowLastError(LPTSTR lpszFunction);
+ 
+
+commit 99083f656bea4167a61c56b58e6da07907bd54ac
+Author: phanirithvij <phanirithvij2000@gmail.com>
+Date:   Thu Jan 9 14:33:54 2025 +0530
+
+    commas
+    
+    Signed-off-by: phanirithvij <phanirithvij2000@gmail.com>
+
+diff --git a/src/resources/vliv.rc b/src/resources/vliv.rc
+index 2e2925b..0474d45 100644
+--- a/src/resources/vliv.rc
++++ b/src/resources/vliv.rc
+@@ -124,13 +124,13 @@ BEGIN
+     END
+     POPUP "&Tools"
+     BEGIN
+-	MENUITEM "Clear Recent File List"       ID_TOOLS_CLEAR
+-	MENUITEM "Fullscreen\tEnter"            ID_TOOLS_FULLSCREEN
++	MENUITEM "Clear Recent File List",      ID_TOOLS_CLEAR
++	MENUITEM "Fullscreen\tEnter",           ID_TOOLS_FULLSCREEN
+         MENUITEM SEPARATOR
+-	MENUITEM "Register..."                  ID_TOOLS_REGISTER
++	MENUITEM "Register...",                 ID_TOOLS_REGISTER
+         MENUITEM SEPARATOR
+-	MENUITEM "Export Current View as BMP..." ID_TOOLS_EXPORTBMP, GRAYED
+-	MENUITEM "Copy Current View to Clipboard\tCtrl+C" ID_TOOLS_CLIPBOARD, GRAYED
++	MENUITEM "Export Current View as BMP...", ID_TOOLS_EXPORTBMP, GRAYED
++	MENUITEM "Copy Current View to Clipboard\tCtrl+C", ID_TOOLS_CLIPBOARD, GRAYED
+     END
+     POPUP "&Help"
+     BEGIN
+@@ -156,4 +156,4 @@ END
+             	VALUE "ProductVersion", "2.6.0\0"
+             END
+       END
+-END
+\ No newline at end of file
++END
+
+commit dbc0615dca9e208058e0a102647b1a3cef33c9d6
+Author: phanirithvij <phanirithvij2000@gmail.com>
+Date:   Thu Jan 9 14:33:47 2025 +0530
+
+    case
+    
+    Signed-off-by: phanirithvij <phanirithvij2000@gmail.com>
+
+diff --git a/src/resources/vliv.rc b/src/resources/vliv.rc
+index 78238f5..2e2925b 100644
+--- a/src/resources/vliv.rc
++++ b/src/resources/vliv.rc
+@@ -2,7 +2,7 @@
+ #include "resource.h"
+ 
+ APPLICATION ICON "Woof.ico"
+-MYINFO ICON "myinfo2.ico"
++MYINFO ICON "MyInfo2.ico"
+ HAND1 CURSOR "hand2.cur"
+ HAND2 CURSOR "hand.cur"
+ IDLE ICON "bullet_green.ico"
+diff --git a/src/vliv.c b/src/vliv.c
+index 2793480..89af19f 100644
+--- a/src/vliv.c
++++ b/src/vliv.c
+@@ -898,7 +898,7 @@ LRESULT CALLBACK VlivWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+ 	return 0;
+ 	break;
+     case WM_MBUTTONDOWN: {
+-	owndInst = LoadLibrary("ownd.dll");
++	owndInst = LoadLibrary("Ownd.dll");
+ 	if(owndInst) {
+ 	    StartPanProc pStartPanning = (StartPanProc)GetProcAddress(owndInst, "StartPanning");
+ 	    if(pStartPanning) {
+
+commit 6f464f6ded862a5b15b68988be5f9dec2fd6ab69
+Author: phanirithvij <phanirithvij2000@gmail.com>
+Date:   Thu Jan 9 14:33:36 2025 +0530
+
+    static
+    
+    Signed-off-by: phanirithvij <phanirithvij2000@gmail.com>
+
+diff --git a/src/vliv.c b/src/vliv.c
+index b5064ab..2793480 100644
+--- a/src/vliv.c
++++ b/src/vliv.c
+@@ -116,7 +116,7 @@ AddTileInfo(int x, int y, int sx, int sy, int sw, int sh, int dx, int dy) {
+     ++ntileinfo;
+ }
+ 
+-void LoadTile(HDC hdc, unsigned int x, unsigned int y);
++static void LoadTile(HDC hdc, unsigned int x, unsigned int y);
+ 
+ static BOOL InitJoystick(HWND hWnd) {
+ 	if (joyGetNumDevs()) {
+@@ -865,7 +865,7 @@ typedef WINUSERAPI BOOL (WINAPI * SetLayeredWindowAttributesF)(HWND, COLORREF,	B
+ #if !defined(LWA_ALPHA)
+ #  define LWA_ALPHA     0x00000002
+ #endif /* LWA_ALPHA */
+-void ScrollWithOffset(HWND hwnd, int dx, int dy);
++static void ScrollWithOffset(HWND hwnd, int dx, int dy);
+ 
+ #define JOYSPEED 5
+ 
+
+commit b535b2ced9ce0a8619da9b2708866641f79b45f8
+Author: phanirithvij <phanirithvij2000@gmail.com>
+Date:   Thu Jan 9 14:33:20 2025 +0530
+
+    long
+    
+    Signed-off-by: phanirithvij <phanirithvij2000@gmail.com>
+    
+    declare
+    
+    Signed-off-by: phanirithvij <phanirithvij2000@gmail.com>
+
+diff --git a/src/handlers.c b/src/handlers.c
+index 74053de..ba477ad 100644
+--- a/src/handlers.c
++++ b/src/handlers.c
+@@ -12,7 +12,7 @@ const TCHAR* GetCustomFilter() {
+ 
+ FormatHandlerPtr GetFormatHandler(const unsigned char* name,
+ 				  const unsigned char* buffer, 
+-				  unsigned int size) {
++				  long unsigned int size) {
+     unsigned int idx;
+     for (idx = 0; idx < numformats; ++idx) {
+ 	FormatHandlerPtr handler = formats[idx];
+@@ -28,7 +28,7 @@ FormatHandlerPtr GetFormatHandler(const unsigned char* name,
+ FormatHandlerPtr GetHandlerFromFile(const TCHAR* name) {
+     FormatHandlerPtr handler = 0;
+     unsigned char buffer[12];
+-    unsigned int size;
++    long unsigned int size;
+     HANDLE handle = CreateFile(name, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 
+ 			       FILE_ATTRIBUTE_NORMAL, NULL);
+     if (handle) {
+diff --git a/src/plugins/debug/debug.c b/src/plugins/debug/debug.c
+index 91b4b3e..7ae8869 100644
+--- a/src/plugins/debug/debug.c
++++ b/src/plugins/debug/debug.c
+@@ -2,7 +2,7 @@
+ 
+ #include <strsafe.h>
+ 
+-static BOOL AcceptDEBUGImage(const unsigned char* buffer, unsigned int size) { return FALSE; }
++static BOOL AcceptDEBUGImage(const unsigned char* buffer, long unsigned int size) { return FALSE; }
+ const char* GetDEBUGDescription() { return "Debug Images"; }
+ const char* GetDEBUGExtension() { return "*.dbg"; }
+ 
+diff --git a/src/plugins/lyapunov/lyapunov.c b/src/plugins/lyapunov/lyapunov.c
+index 5b80c6c..2dbd425 100644
+--- a/src/plugins/lyapunov/lyapunov.c
++++ b/src/plugins/lyapunov/lyapunov.c
+@@ -2,7 +2,7 @@
+ 
+ #include <stdio.h>
+ 
+-static BOOL AcceptLYAPUNOVImage(const unsigned char* buffer, unsigned int size) { 
++static BOOL AcceptLYAPUNOVImage(const unsigned char* buffer, long unsigned int size) { 
+   return FALSE; 
+ }
+ 
+diff --git a/src/plugins/newton/newton.c b/src/plugins/newton/newton.c
+index 379025e..5438f54 100644
+--- a/src/plugins/newton/newton.c
++++ b/src/plugins/newton/newton.c
+@@ -2,7 +2,7 @@
+ 
+ #include <stdio.h>
+ 
+-static BOOL AcceptNEWTONImage(const unsigned char* buffer, unsigned int size) { return FALSE; }
++static BOOL AcceptNEWTONImage(const unsigned char* buffer, long unsigned int size) { return FALSE; }
+ const char* GetNEWTONDescription() { return "Newton Images"; }
+ const char* GetNEWTONExtension() { return "*.new"; }
+ 
+diff --git a/src/vliv.h b/src/vliv.h
+index 1a1c5f9..ec9f93c 100644
+--- a/src/vliv.h
++++ b/src/vliv.h
+@@ -9,7 +9,9 @@
+ #define VLIV_EXPORT(type) type
+ #define VLIV_IMPORT(type) type
+ 
+-typedef BOOL (*ACCEPTF)(const unsigned char* buffer, unsigned int size);
++struct Image;
++
++typedef BOOL (*ACCEPTF)(const unsigned char* buffer, long unsigned int size);
+ typedef const char* (*GETDESCRIPTIONF)();
+ typedef const char* (*GETEXTENSIONF)();
+ typedef BOOL (*OPENF)(struct Image* image, const TCHAR* name);
+
+commit f1942d0cdf3f8dcab3c45c0f67d645e2b26f87f8
+Author: phanirithvij <phanirithvij2000@gmail.com>
+Date:   Thu Jan 9 17:09:41 2025 +0530
+
+    mingw plugins makefiles
+    
+    Signed-off-by: phanirithvij <phanirithvij2000@gmail.com>
+
+diff --git a/src/plugins/debug/debug.mak b/src/plugins/debug/debug.mak
+index 1a3dc3f..bf2bad8 100644
+--- a/src/plugins/debug/debug.mak
++++ b/src/plugins/debug/debug.mak
+@@ -1,21 +1,20 @@
+ CC  = cl
+-LD  = link
+ 
+-VLIVDIR = ..\..
++VLIVDIR = ../..
+ 
+-DEBUG=/Ox 
++DEBUG = -O2
+ 
+-CFLAGS = /nologo /W3 $(DEBUG) /D_CRT_SECURE_NO_DEPRECATE /DWIN32 /DWINDOWS /I. /I$(VLIVDIR)
++CFLAGS = -Wall $(DEBUG) -D_CRT_SECURE_NO_DEPRECATE -DWIN32 -DWINDOWS -I. -I$(VLIVDIR)
+ 
+ SYSLIBS = 
+ 
+ all: debug.dll
+ 
+-debug.obj : debug.c debug.h
+-	$(CC) $(CFLAGS) /c debug.c
++debug.o : debug.c debug.h
++	$(CC) $(CFLAGS) -c debug.c
+ 
+-debug.dll: debug.obj
+-	$(LD) /dll /out:debug.dll debug.obj
++debug.dll: debug.o
++	$(CC) -shared -o $@ debug.o
+ 
+ clean:
+-	del debug.obj debug.dll
++	rm debug.o debug.dll
+diff --git a/src/plugins/lyapunov/lyapunov.mak b/src/plugins/lyapunov/lyapunov.mak
+index 5f23a9c..3fa7671 100644
+--- a/src/plugins/lyapunov/lyapunov.mak
++++ b/src/plugins/lyapunov/lyapunov.mak
+@@ -1,22 +1,21 @@
+ CC  = cl
+-LD  = link
+ 
+-VLIVDIR = ..\..
++VLIVDIR = ../..
+ 
+-DEBUG = /Ox 
++DEBUG = -O2
+ 
+-CFLAGS = /nologo /W3 $(DEBUG) /D_CRT_SECURE_NO_DEPRECATE /DWIN32 /DWINDOWS /I. /I$(VLIVDIR)
++CFLAGS = -Wall $(DEBUG) -D_CRT_SECURE_NO_DEPRECATE -DWIN32 -DWINDOWS -I. -I$(VLIVDIR)
+ 
+-SYSLIBS = wininet.lib user32.lib gdi32.lib kernel32.lib comctl32.lib comdlg32.lib shlwapi.lib \
+-	  shell32.lib advapi32.lib version.lib strsafe.lib
++SYSLIBS = -lwininet -luser32 -lgdi32 -lkernel32 -lcomctl32 -lcomdlg32 -lshlwapi \
++	  -lshell32 -ladvapi32 -lversion
+ 
+ all: lyapunov.dll
+ 
+-lyapunov.obj : lyapunov.c lyapunov.h
+-	$(CC) $(CFLAGS) /c lyapunov.c
++lyapunov.o : lyapunov.c lyapunov.h
++	$(CC) $(CFLAGS) -c lyapunov.c
+ 
+-lyapunov.dll: lyapunov.obj
+-	$(LD) /dll /out:lyapunov.dll lyapunov.obj
++lyapunov.dll: lyapunov.o
++	$(CC) -shared -o $@ lyapunov.o
+ 
+ clean:
+-	del lyapunov.obj lyapunov.dll
++	rm lyapunov.o lyapunov.dll
+diff --git a/src/plugins/newton/newton.mak b/src/plugins/newton/newton.mak
+index 5cc9233..1653d9e 100644
+--- a/src/plugins/newton/newton.mak
++++ b/src/plugins/newton/newton.mak
+@@ -1,22 +1,21 @@
+-CC  = cl
+-LD  = link
++CC = cl
+ 
+-VLIVDIR = ..\..
++VLIVDIR = ../..
+ 
+-DEBUG=/Ox 
++DEBUG = -O2
+ 
+-CFLAGS = /nologo /W3 $(DEBUG) /D_CRT_SECURE_NO_DEPRECATE /DWIN32 /DWINDOWS /I. /I$(VLIVDIR)
++CFLAGS = -Wall $(DEBUG) -D_CRT_SECURE_NO_DEPRECATE -DWIN32 -DWINDOWS -I. -I$(VLIVDIR)
+ 
+-SYSLIBS = wininet.lib user32.lib gdi32.lib kernel32.lib comctl32.lib comdlg32.lib shlwapi.lib \
+-	  shell32.lib advapi32.lib version.lib strsafe.lib
++SYSLIBS = -lwininet -luser32 -lgdi32 -lkernel32 -lcomctl32 -lcomdlg32 -lshlwapi \
++	  -lshell32 -ladvapi32 -lversion
+ 
+ all: newton.dll
+ 
+-newton.obj : newton.c newton.h
+-	$(CC) $(CFLAGS) /c newton.c
++newton.o : newton.c newton.h
++	$(CC) $(CFLAGS) -c newton.c
+ 
+-newton.dll: newton.obj
+-	$(LD) /dll /out:newton.dll newton.obj
++newton.dll: newton.o
++	$(CC) -shared -o $@ newton.o
+ 
+ clean:
+-	del newton.obj newton.dll
++	rm newton.o newton.dll
+
+commit 784892e0624c02bae9da9b3d8b5a78ae70352102
+Author: phanirithvij <phanirithvij2000@gmail.com>
+Date:   Thu Jan 9 14:34:20 2025 +0530
+
+    mingw makefile
+    
+    Signed-off-by: phanirithvij <phanirithvij2000@gmail.com>
+
+diff --git a/src/makefile b/src/makefile
+index 8e5b0a3..0f94e42 100644
+--- a/src/makefile
++++ b/src/makefile
+@@ -1,63 +1,38 @@
+ CC  = cl
+ RC  = rc
+-LD  = link
+ 
+-#DEBUG=/Od /Zi
+-#LDDEBUG=/debug
++#DEBUG = -O0 -g
++#LDDEBUG = -g
++DEBUG = -O2
++VERSION = 2.7
++VERSIONSHORT = 270
+ 
+-DEBUG=/Ox 
++CFLAGS = -Wall $(DEBUG) -D_CRT_SECURE_NO_DEPRECATE -DWIN32 -DWINDOWS -I.
++LDFLAGS = $(LDDEBUG) -mwindows -Wl,--major-image-version,2 -Wl,--minor-image-version,7
++# -Wl,--enable-mingw-full32 -Wl,--large-address-aware ????
+ 
+-VERSION=2.7
+-VERSIONSHORT=270
++# strsafe.h is in mingw64 headers
++SYSLIBS = -lwininet -luser32 -lgdi32 -lkernel32 -lcomctl32 -lcomdlg32 -lshlwapi \
++          -lshell32 -ladvapi32 -lversion -lmsimg32 -lwinmm
+ 
+-CFLAGS = /nologo /W3 $(DEBUG) /D_CRT_SECURE_NO_DEPRECATE /DWIN32 /DWINDOWS /I. 
+-LDFLAGS = $(LDDEBUG) /SUBSYSTEM:WINDOWS /nodefaultlib:libc /VERSION:$(VERSION) /LARGEADDRESSAWARE
+-
+-SYSLIBS = wininet.lib user32.lib gdi32.lib kernel32.lib comctl32.lib comdlg32.lib shlwapi.lib \
+-	  shell32.lib advapi32.lib version.lib strsafe.lib msimg32.lib winmm.lib
+-
+-OBJECTS = vliv.obj urlctrl.obj dialogs.obj handlers.obj bitmap.obj recent.obj window.obj tilemgr.obj rawinput.obj
++OBJECTS = vliv.o urlctrl.o dialogs.o handlers.o bitmap.o recent.o window.o tilemgr.o rawinput.o
+ 
+ all: vliv.exe
+ 
+-vliv.obj : vliv.c vliv.h
+-	$(CC) $(CFLAGS) /c vliv.c
+-
+-urlctrl.obj : urlctrl.c
+-	$(CC) $(CFLAGS) /c urlctrl.c
+-
+-dialogs.obj : dialogs.c
+-	$(CC) $(CFLAGS) /c dialogs.c
+-
+-recent.obj : recent.c
+-	$(CC) $(CFLAGS) /c recent.c
+-
+-bitmap.obj : bitmap.c
+-	$(CC) $(CFLAGS) /c bitmap.c
+-
+-window.obj : window.c
+-	$(CC) $(CFLAGS) /c window.c
+-
+-handlers.obj : handlers.c
+-	$(CC) $(CFLAGS) /c handlers.c
+-
+-tilemgr.obj : tilemgr.c
+-	$(CC) $(CFLAGS) /c tilemgr.c
+-
+-rawinput.obj : rawinput.c
+-	$(CC) $(CFLAGS) /c rawinput.c
++%.o: %.c
++	$(CC) $(CFLAGS) -c $< -o $@
+ 
+-vliv.res : resources\vliv.rc
+-	$(RC) /fo vliv.res resources\vliv.rc
++vliv-res.o: resources/vliv.rc
++	$(RC) -i $< -o $@
+ 
+-vliv.exe : $(OBJECTS) vliv.res
+-	$(LD) /OUT:vliv.exe $(LDFLAGS) $(OBJECTS) vliv.res $(SYSLIBS)
++vliv.exe: $(OBJECTS) vliv-res.o
++	$(CC) -o $@ $(OBJECTS) vliv-res.o $(LDFLAGS) $(SYSLIBS)
+ 
+ languages: fra.dll
+ 
+ fra.dll: resources/fra.rc
+-	$(RC) /fo fra.res resources/fra.rc
+-	$(LD) /dll /machine:x86 /noentry /out:fra.dll fra.res
++	$(RC) -i $< -o fra.o
++	$(CC) -shared -o $@ fra.o -Wl,--subsystem,windows
+ 
+ clean:
+-	del /q *.pdb *.ilk *.obj vliv.exe *~ *.res
++	rm -f *.o *.exe *.dll *.res *~

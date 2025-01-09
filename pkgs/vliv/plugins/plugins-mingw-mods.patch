@@ -1,0 +1,660 @@
+commit 2ccf030ce7da6b8eb0cdcd412ab76caaf5553121
+Author: phanirithvij <phanirithvij2000@gmail.com>
+Date:   Sun Jan 12 23:09:41 2025 +0530
+
+    fix dzhandler.c
+    
+    Signed-off-by: phanirithvij <phanirithvij2000@gmail.com>
+
+diff --git a/deepzoom/dzhandler.c b/deepzoom/dzhandler.c
+index c24cf8f..36949dd 100644
+--- a/deepzoom/dzhandler.c
++++ b/deepzoom/dzhandler.c
+@@ -32,8 +32,8 @@ struct DPZ_internal {
+     HINTERNET session;
+ };
+ 
+-static void ShowLastError(LPWSTR where) [
+-     LPWSTR messageBuffer = NULL;
++static void ShowLastError(LPWSTR where) {
++    LPWSTR messageBuffer = NULL;
+     FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
+                  NULL, GetLastError(), MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPSTR)&messageBuffer, 0, NULL);
+     MessageBox(0, messageBuffer, messageBuffer, MB_OK);
+@@ -133,7 +133,7 @@ LoadDPZTile(ImagePtr img, HDC hdc, unsigned int x, unsigned int y) {
+             DWORD_PTR pArgs[] = {(DWORD_PTR)level, (DWORD_PTR)x, (DWORD_PTR)y}; // FORMAT_MESSAGE_ARGUMENT_ARRAY
+             if (FormatMessage(FORMAT_MESSAGE_FROM_STRING | FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_ARGUMENT_ARRAY, 
+                             DPZ_internal->tile, 0, 0,(LPWSTR)&pBuffer, 0, pArgs) == 0) {
+-                ShowLastError("buildin' URL string");
++                ShowLastError(L"buildin' URL string");
+                 MessageBox(0, pBuffer, "Url", MB_OK);
+             } else {
+                 request = WinHttpOpenRequest(connect, L"GET", DPZ_internal->tile, NULL, WINHTTP_NO_REFERER,
+@@ -175,10 +175,11 @@ LoadDPZTile(ImagePtr img, HDC hdc, unsigned int x, unsigned int y) {
+                 } else {
+                     ShowLastError(L"WinHttpOpenRequest");
+                 }
+-            } else {
+-                ShowLastError("WinHttpConnect");
+             }
++	} else {
++           ShowLastError(L"WinHttpConnect");
+         }
++    }
+         // Close any open handles.
+         if (request)
+             WinHttpCloseHandle(request);
+
+commit 98a2b73a4314f139eac5732d521df924ccb4dd4f
+Author: phanirithvij <phanirithvij2000@gmail.com>
+Date:   Thu Jan 9 23:51:49 2025 +0530
+
+    makef
+    
+    Signed-off-by: phanirithvij <phanirithvij2000@gmail.com>
+    
+    temp
+    
+    Signed-off-by: phanirithvij <phanirithvij2000@gmail.com>
+
+diff --git a/avi/avi.mak b/avi/avi.mak
+index 7a829c7..19ad88a 100644
+--- a/avi/avi.mak
++++ b/avi/avi.mak
+@@ -1,22 +1,19 @@
+-CC  = cl
+-LD  = link
++CC = cl
+ 
+-VLIVDIR = ..\..\vliv\src
++VLIVDIR = ../../vliv/src
+ 
+-DEBUG=/Ox 
++CFLAGS = -Wall $(DEBUG) -D_CRT_SECURE_NO_DEPRECATE -DWIN32 -DWINDOWS -I. -I$(VLIVDIR)
+ 
+-CFLAGS = /nologo /W3 $(DEBUG) /D_CRT_SECURE_NO_DEPRECATE /DWIN32 /DWINDOWS /I. /I$(VLIVDIR)
+-
+-SYSLIBS = wininet.lib user32.lib gdi32.lib kernel32.lib comctl32.lib comdlg32.lib shlwapi.lib \
+-	  shell32.lib advapi32.lib version.lib strsafe.lib vfw32.lib 
++SYSLIBS = -lwininet -luser32 -lgdi32 -lkernel32 -lcomctl32 -lcomdlg32 -lshlwapi \
++	  -lshell32 -ladvapi32 -lversion -lvfw32
+ 
+ all: avi.dll
+ 
+-avi.obj : avi.c avi.h
+-	$(CC) $(CFLAGS) /c avi.c
++avi.o : avi.c avi.h
++	$(CC) $(CFLAGS) -c avi.c
+ 
+-avi.dll: avi.obj
+-	$(LD) /dll /out:avi.dll avi.obj $(SYSLIBS)
++avi.dll: avi.o
++	$(CC) -shared -o $@ avi.o $(SYSLIBS) -Wl,--subsystem,windows
+ 
+ clean:
+-	del avi.obj avi.dll
++	rm avi.o avi.dll
+diff --git a/deepzoom/deepzoom.mak b/deepzoom/deepzoom.mak
+index 7a80ddf..cafebf4 100644
+--- a/deepzoom/deepzoom.mak
++++ b/deepzoom/deepzoom.mak
+@@ -3,24 +3,22 @@
+ # gives very small dll !
+ 
+ 
+-CC  = cl
+-LD  = link
++CC = cl
+ 
+-VLIVDIR = ..\..\vliv\src
++VLIVDIR = ../../vliv/src
+ 
+-DEBUG=/Ox 
+-SYSLIBS = user32.lib winhttp.lib 
++DEBUG = -O2
++SYSLIBS = -luser32 -lwinhttp
+ 
+-CFLAGS = /nologo /W3 $(DEBUG) /MD /D_CRT_SECURE_NO_DEPRECATE /DWIN32 /DWINDOWS /I. /I$(VLIVDIR)
++CFLAGS = -Wall $(DEBUG) -D_CRT_SECURE_NO_DEPRECATE -DWIN32 -DWINDOWS -I. -I$(VLIVDIR)
+ 
+-all: dz.dll
++all: deepzoom.dll
+ 
+-dzhandler.obj : dzhandler.c dzhandler.h
+-	$(CC) $(CFLAGS) /c dzhandler.c
+-
+-dz.dll: dzhandler.obj
+-	$(LD) /dll /map /out:dz.dll dzhandler.obj $(SYSLIBS)
++dzhandler.o : dzhandler.c dzhandler.h
++	$(CC) $(CFLAGS) -c dzhandler.c
+ 
++deepzoom.dll: dzhandler.o
++	$(CC) -shared -o $@ dzhandler.o $(SYSLIBS)
+ 
+ clean:
+-	del dzhandler.obj dzhandler.dll
++	rm dzhandler.o deepzoom.dll
+diff --git a/exr/exr.mak b/exr/exr.mak
+index 484a3f2..76698a0 100644
+--- a/exr/exr.mak
++++ b/exr/exr.mak
+@@ -1,21 +1,20 @@
+-CC  = cl
+-LD  = link
++CXX = cl
+ 
+-VLIVDIR = ..\..\vliv\src
+-STBDIR = ..\..\stb
+-EXRDIR = ..\..\tinyexr
++VLIVDIR = ../../vliv/src
++STBDIR = ../../stb
++EXRDIR = ../../tinyexr
+ 
+-DEBUG=/Od /Zi /W3
++DEBUG = -O2 -Wall
+ 
+-CFLAGS = /EHsc /nologo /W3 $(DEBUG) /MD /D_CRT_SECURE_NO_DEPRECATE /DWIN32 /DWINDOWS /I. /I$(VLIVDIR) /I$(STBDIR) /I$(EXRDIR)
++CFLAGS = -Wall $(DEBUG) -D_CRT_SECURE_NO_DEPRECATE -DWIN32 -DWINDOWS -I. -I$(VLIVDIR) -I$(STBDIR) -I$(EXRDIR)/include
+ 
+ all: exr.dll
+ 
+-exrhandler.obj : exrhandler.cpp exrhandler.h
+-	$(CC) $(CFLAGS) /c exrhandler.cpp
++exrhandler.o : exrhandler.cpp exrhandler.h
++	$(CXX) $(CFLAGS) -c exrhandler.cpp
+ 
+-exr.dll: exrhandler.obj
+-	$(LD) /dll /out:exr.dll exrhandler.obj
++exr.dll: exrhandler.o
++	$(CXX) -shared -o $@ $(EXRDIR)/lib/*.a exrhandler.o
+ 
+ clean:
+-	del exrhandler.obj exr.dll
++	rm exrhandler.o exr.dll
+diff --git a/internal/internal.mak b/internal/internal.mak
+index 4bd0df8..df6fb5e 100644
+--- a/internal/internal.mak
++++ b/internal/internal.mak
+@@ -1,72 +1,79 @@
+ CC  = cl
+-RC  = rc
+-LD  = link
+ 
+-VLIVDIR = ..\..\vliv\src
++VLIVDIR = ../../vliv/src
+ 
+-TIFF = tiff-4.3.0\libtiff	
+-TIFFFLAGS = /I$(TIFF)
+-TIFFLIB = $(TIFF)\libtiff.lib
++TIFF = tiff-4.3.0/libtiff
++# dev out
++TIFFFLAGS = -I$(TIFF)/include
++# out
++TIFFLIB = $(TIFF)/lib/libtiff.dll.a
+ 
+ ZLIB = zlib-1.2.11
+-ZLIBFLAGS = /I$(ZLIB)
+-ZLIBLIB = $(ZLIB)\zlib.lib
++# dev out
++ZLIBFLAGS = -I$(ZLIB)/include
++# out
++# static out has libz.a
++ZLIBLIB = $(ZLIB)/lib/libz.dll.a
+ 
+ JPEG = libjpeg-turbo2.1.2
+-JPEGFLAGS = /I$(JPEG)\include
+-JPEGLIB = $(JPEG)\lib\turbojpeg-static.lib
++# dev out
++JPEGFLAGS = -I$(JPEG)/include
++# out
++JPEGLIB = $(JPEG)/lib/libturbojpeg.dll.a
+ 
+ PNG = lpng1637
+-PNGFLAGS = /I$(PNG)
+-PNGLIB = $(PNG)\libpng.lib
++# dev out
++PNGFLAGS = -I$(PNG)/include
++# out
++PNGLIB = $(PNG)/lib/libpng.dll.a
+ 
+ WEBP = libwebp-0.4.1-windows-x86
+-WEBPFLAGS = /I$(WEBP)\include
+-WEBPLIB = $(WEBP)\lib\libwebp.lib
++# out
++WEBPFLAGS = -I$(WEBP)/include
++# out
++WEBPLIB = $(WEBP)/lib/libwebp.dll.a
+ 
+-ZSTD = zstd-1.5.2
+-ZSTDLIB  = $(ZSTD)\lib\zstd.lib
+-
+-DEBUG=/Ox 
++DEBUG = -O2 
+ LDDEBUG=
+ 
+ #DEBUG=/Od /Zi
+ #LDDEBUG=/debug
+ 
+-CFLAGS = /nologo /W3 $(DEBUG) /MD /D_NO_CRT_STDIO_INLINE /D_CRT_SECURE_NO_DEPRECATE /DWIN32 /DWINDOWS /I. /I$(VLIVDIR)
++# /MD is MSVCRT.DLL but should be available with wine at runtime
++CFLAGS = -Wall -Wextra $(DEBUG) -D_NO_CRT_STDIO_INLINE -D_CRT_SECURE_NO_DEPRECATE -DWIN32 -DWINDOWS -I. -I$(VLIVDIR)
+ LDFLAGS = $(LDDEBUG)
+ 
+-SYSLIBS = wininet.lib user32.lib gdi32.lib kernel32.lib comctl32.lib comdlg32.lib shlwapi.lib \
+-	  shell32.lib advapi32.lib version.lib strsafe.lib
++SYSLIBS = -lwininet -luser32 -lgdi32 -lkernel32 -lcomctl32 -lcomdlg32 -lshlwapi \
++	  -lshell32 -ladvapi32 -lversion -lmsvcrt
+ 
+ CUSTOMLIBS = $(TIFFLIB) $(JPEGLIB) $(PNGLIB) $(ZLIBLIB) $(WEBPLIB)
+-OBJECTS = inthandler.obj jpghandler.obj ppmhandler.obj bmphandler.obj pnghandler.obj tifhandler.obj webphandler.obj
++OBJECTS = inthandler.o jpghandler.o ppmhandler.o bmphandler.o pnghandler.o tifhandler.o webphandler.o
+ 
+ all: vliv.dll 
+ 
+-jpghandler.obj : jpghandler.c jpghandler.h
+-	$(CC) $(CFLAGS) $(JPEGFLAGS) /c jpghandler.c
++jpghandler.o : jpghandler.c jpghandler.h
++	$(CC) $(CFLAGS) $(JPEGFLAGS) -c jpghandler.c
+ 
+-ppmhandler.obj : ppmhandler.c ppmhandler.h
+-	$(CC) $(CFLAGS) /c ppmhandler.c
++ppmhandler.o : ppmhandler.c ppmhandler.h
++	$(CC) $(CFLAGS) -c ppmhandler.c
+ 
+-bmphandler.obj : bmphandler.c bmphandler.h
+-	$(CC) $(CFLAGS) /c bmphandler.c
++bmphandler.o : bmphandler.c bmphandler.h
++	$(CC) $(CFLAGS) -c bmphandler.c
+ 
+-pnghandler.obj : pnghandler.c pnghandler.h
+-	$(CC) $(CFLAGS) $(PNGFLAGS) $(ZLIBFLAGS) /c pnghandler.c
++pnghandler.o : pnghandler.c pnghandler.h
++	$(CC) $(CFLAGS) $(PNGFLAGS) $(ZLIBFLAGS) -c pnghandler.c
+ 
+-tifhandler.obj : tifhandler.c tifhandler.h
+-	$(CC) $(CFLAGS) $(TIFFFLAGS) $(ZLIBFLAGS) /c tifhandler.c
++tifhandler.o : tifhandler.c tifhandler.h
++	$(CC) $(CFLAGS) $(TIFFFLAGS) $(ZLIBFLAGS) -c tifhandler.c
+ 
+-webphandler.obj : webphandler.c webphandler.h
+-	$(CC) $(CFLAGS) $(WEBPFLAGS) /c webphandler.c
++webphandler.o : webphandler.c webphandler.h
++	$(CC) $(CFLAGS) $(WEBPFLAGS) -c webphandler.c
+ 
+-inthandler.obj : inthandler.c inthandler.h
+-	$(CC) $(CFLAGS) /c inthandler.c
++inthandler.o : inthandler.c inthandler.h
++	$(CC) $(CFLAGS) -c inthandler.c
+ 
+ vliv.dll: $(OBJECTS)
+-	$(LD) $(LDFLAGS) /dll /out:vliv.dll $(OBJECTS) $(CUSTOMLIBS) $(SYSLIBS)
++	$(CC) $(LDFLAGS) -shared -o $@ $(OBJECTS) $(CUSTOMLIBS) $(SYSLIBS)
+ 
+ clean:
+-	del *.pdb *.ilk *.obj vliv.dll *~
++	rm *.o vliv.dll *~
+diff --git a/jpeg2000/jpeg2000.mak b/jpeg2000/jpeg2000.mak
+index b2ec849..ab1ff33 100644
+--- a/jpeg2000/jpeg2000.mak
++++ b/jpeg2000/jpeg2000.mak
+@@ -1,26 +1,25 @@
+ CC  = cl
+-LD  = link
+ 
+-VLIVDIR = ..\..\vliv\src
++VLIVDIR = ../../vliv/src
+ 
+-DEBUG=/Ox 
++DEBUG=-O2
+ #DEBUG=/Od /Zi
+ 
+-JASPER = jasper-1.900.1\src\libjasper
+-JASPERLIB = $(JASPER)\build\jasper.lib
+-JASPERFLAGS = /I$(JASPER)\include /DJAS_WIN_MSVC_BUILD
++JASPER = jasper-1.900.1/src/libjasper
++JASPERLIB = $(JASPER)/build/jasper.lib
++JASPERFLAGS = -I$(JASPER)/include -DJAS_WIN_MSVC_BUILD # TODO mingw possible?
+ 
+-CFLAGS = /nologo /W3 $(DEBUG) /MD /D_CRT_SECURE_NO_DEPRECATE /DWIN32 /DWINDOWS /I. /I$(VLIVDIR)
++CFLAGS = -Wall $(DEBUG) -D_CRT_SECURE_NO_DEPRECATE -DWIN32 -DWINDOWS -I. -I$(VLIVDIR)
+ 
+-SYSLIBS = user32.lib
++SYSLIBS = -luser32
+ 
+ all: jpeg2000.dll
+ 
+-jpeg2000.obj : jpeg2000.c jpeg2000.h
+-	$(CC) $(CFLAGS) $(JASPERFLAGS) /c jpeg2000.c
++jpeg2000.o : jpeg2000.c jpeg2000.h
++	$(CC) $(CFLAGS) $(JASPERFLAGS) -c jpeg2000.c
+ 
+-jpeg2000.dll: jpeg2000.obj
+-	$(LD) /dll /out:jpeg2000.dll jpeg2000.obj $(JASPERLIB) $(SYSLIBS)
++jpeg2000.dll: jpeg2000.o
++	$(CC) -shared -o $@ jpeg2000.o $(JASPERLIB) $(SYSLIBS)
+ 
+ clean:
+-	del jpeg2000.obj jpeg2000.dll
++	rm jpeg2000.o jpeg2000.dll
+diff --git a/qoi/qoi.mak b/qoi/qoi.mak
+index 2632333..8cfbe31 100644
+--- a/qoi/qoi.mak
++++ b/qoi/qoi.mak
+@@ -4,22 +4,20 @@
+ 
+ 
+ CC  = cl
+-LD  = link
+ 
+-VLIVDIR = ..\..\vliv\src
++VLIVDIR = ../../vliv/src
+ 
+-DEBUG=/Ox 
++DEBUG=-O2
+ 
+-CFLAGS = /nologo /W3 $(DEBUG) /MD /D_CRT_SECURE_NO_DEPRECATE /DWIN32 /DWINDOWS /I. /I$(VLIVDIR)
++CFLAGS = -Wall $(DEBUG) -D_CRT_SECURE_NO_DEPRECATE -DWIN32 -DWINDOWS -I. -I$(VLIVDIR)
+ 
+ all: qoi.dll
+ 
+ qoihandler.obj : qoihandler.c qoihandler.h qoi.h
+-	$(CC) $(CFLAGS) /c qoihandler.c
+-
+-qoi.dll: qoihandler.obj
+-	$(LD) /dll /map /out:qoi.dll qoihandler.obj
++	$(CC) $(CFLAGS) -c qoihandler.c
+ 
++qoi.dll: qoihandler.o
++	$(CC) -shared -o $@ qoihandler.o
+ 
+ clean:
+-	del qoihandler.obj qoihandler.dll
++	rm qoihandler.o qoihandler.dll
+diff --git a/stb/stb.mak b/stb/stb.mak
+index 767ceb0..ba68870 100644
+--- a/stb/stb.mak
++++ b/stb/stb.mak
+@@ -1,25 +1,23 @@
+ CC  = cl
+-LD  = link
+ 
+-VLIVDIR = ..\..\vliv\src
+-STBDIR = ..\..\stb
++VLIVDIR = ../../vliv/src
++STBDIR = ../../stb
+ 
+-DEBUG=/Ox 
++DEBUG=-O2
+ 
+-CFLAGS = /nologo /W3 $(DEBUG) /MD /D_CRT_SECURE_NO_DEPRECATE /DWIN32 /DWINDOWS /I. /I$(VLIVDIR) /I$(STBDIR)
++CFLAGS = -Wall $(DEBUG) -D_CRT_SECURE_NO_DEPRECATE -DWIN32 -DWINDOWS -I. -I$(VLIVDIR) -I$(STBDIR)
+ 
+ 
+-SYSLIBS = wininet.lib user32.lib gdi32.lib kernel32.lib comctl32.lib comdlg32.lib shlwapi.lib \
+-	  shell32.lib advapi32.lib version.lib strsafe.lib
++SYSLIBS = -lwininet -luser32 -lgdi32 -lkernel32 -lcomctl32 -lcomdlg32 -lshlwapi \
++	  -lshell32 -ladvapi32 -lversion
+ 
+ all: stb.dll
+ 
+-stbhandler.obj : stbhandler.c stbhandler.h
+-	$(CC) $(CFLAGS) /c stbhandler.c
+-
+-stb.dll: stbhandler.obj
+-	$(LD) /dll /map /out:stb.dll stbhandler.obj
++stbhandler.o : stbhandler.c stbhandler.h
++	$(CC) $(CFLAGS) -c stbhandler.c
+ 
++stb.dll: stbhandler.o
++	$(CC) -shared -o $@ stbhandler.o
+ 
+ clean:
+-	del stbhandler.obj stb.dll
++	rm stbhandler.o stb.dll
+diff --git a/wic/wichandler.mak b/wic/wichandler.mak
+index 049ac00..4f0a16e 100644
+--- a/wic/wichandler.mak
++++ b/wic/wichandler.mak
+@@ -1,23 +1,23 @@
+-CC  = cl
+-LD  = link
++CXX = cl
+ 
+-VLIVDIR = ..\..\vliv\src
++VLIVDIR = ../../vliv/src
+ 
++# TODO windowscodecs.lib available in mingw?
+ WINDOWSCODECSDIR="c:\program files\microsoft sdks\windows\v6.0"
+ 
+-DEBUG=/Ox 
++DEBUG=-O2
+ 
+-CFLAGS = /nologo /MD /W3 $(DEBUG) /D_CRT_SECURE_NO_DEPRECATE /DWIN32 /DWINDOWS /I. /I$(VLIVDIR) /I$(WINDOWSCODECSDIR)\include
++CFLAGS = -Wall -Wextra $(DEBUG) -D_CRT_SECURE_NO_DEPRECATE -DWIN32 -DWINDOWS -I. -I$(VLIVDIR) -I$(WINDOWSCODECSDIR)/include
+ 
+-SYSLIBS = ole32.lib $(WINDOWSCODECSDIR)\lib\windowscodecs.lib user32.lib
++SYSLIBS = -lole32 $(WINDOWSCODECSDIR)\lib\windowscodecs.lib -luser32
+ 
+ all: wichandler.dll
+ 
+-wichandler.obj: wichandler.cpp wichandler.h
+-	$(CC) $(CFLAGS) /c wichandler.cpp
++wichandler.o: wichandler.cpp wichandler.h
++	$(CXX) $(CFLAGS) -c wichandler.cpp
+ 
+-wichandler.dll: wichandler.obj
+-	$(LD) $(LDDEBUG) /dll /out:wichandler.dll wichandler.obj $(SYSLIBS)
++wichandler.dll: wichandler.o
++	$(CXX) $(LDDEBUG) -shared -o $@ wichandler.o $(SYSLIBS)
+ 
+ clean:
+-	del wichandler.obj wichandler.dll wichandler.lib
++	rm wichandler.o wichandler.dll wichandler.lib
+
+commit c7ffa5e3671fe84e96b2e68b14cc6b5caf1136b0
+Author: phanirithvij <phanirithvij2000@gmail.com>
+Date:   Thu Jan 9 23:51:40 2025 +0530
+
+    long
+    
+    Signed-off-by: phanirithvij <phanirithvij2000@gmail.com>
+
+diff --git a/avi/avi.c b/avi/avi.c
+index bc9959d..907cf92 100644
+--- a/avi/avi.c
++++ b/avi/avi.c
+@@ -2,7 +2,7 @@
+ 
+ #include <vfw.h>
+ 
+-static BOOL AcceptAVIImage(const unsigned char* buffer, unsigned int size) { 
++static BOOL AcceptAVIImage(const unsigned char* buffer, long unsigned int size) { 
+   return FALSE; 
+ }
+ 
+diff --git a/deepzoom/dzhandler.c b/deepzoom/dzhandler.c
+index c800167..c24cf8f 100644
+--- a/deepzoom/dzhandler.c
++++ b/deepzoom/dzhandler.c
+@@ -14,7 +14,7 @@
+ 
+ #include <winhttp.h>
+ 
+-static BOOL AcceptDPZImage(const unsigned char *buffer, unsigned int size) {
++static BOOL AcceptDPZImage(const unsigned char *buffer, long unsigned int size) {
+     return TRUE;
+ }
+ 
+diff --git a/exr/exrhandler.cpp b/exr/exrhandler.cpp
+index 40ac31f..8eb58a6 100644
+--- a/exr/exrhandler.cpp
++++ b/exr/exrhandler.cpp
+@@ -13,7 +13,7 @@
+ 
+ 
+ // very simple plugin that loads EXR files using tinyexr header only library
+-static BOOL AcceptEXRImage(const unsigned char* buffer, unsigned int size) { 
++static BOOL AcceptEXRImage(const unsigned char* buffer, long unsigned int size) { 
+     return IsEXRFromMemory(buffer, size) == TINYEXR_SUCCESS ? TRUE : FALSE;
+ }
+ 
+diff --git a/internal/bmphandler.c b/internal/bmphandler.c
+index dd5fe3a..8d578af 100644
+--- a/internal/bmphandler.c
++++ b/internal/bmphandler.c
+@@ -1,6 +1,6 @@
+ #include "bmphandler.h"
+ 
+-static BOOL AcceptBMPImage(const unsigned char* buffer, unsigned int size) {
++static BOOL AcceptBMPImage(const unsigned char* buffer, long unsigned int size) {
+     if (size >= 2) {
+ 	if ((buffer[0] == 'B') && (buffer[1] == 'M')) {
+ 	    return TRUE;
+diff --git a/internal/jpghandler.c b/internal/jpghandler.c
+index cf31b3c..bd79e76 100644
+--- a/internal/jpghandler.c
++++ b/internal/jpghandler.c
+@@ -17,7 +17,7 @@ static void error_exit(j_common_ptr cinfo) {
+     longjmp(err_ptr->set_jmp_buffer, 1);
+ }
+ 
+-static BOOL AcceptJPEGImage(const unsigned char* buffer, unsigned int size) {
++static BOOL AcceptJPEGImage(const unsigned char* buffer, long unsigned int size) {
+     if (size >= 3) {
+ 	if ((buffer[0] == 0xff) && (buffer[1] == 0xd8) && (buffer[2] == 0xff))
+ 	    return TRUE;
+diff --git a/internal/pnghandler.c b/internal/pnghandler.c
+index c9cec17..5f66598 100644
+--- a/internal/pnghandler.c
++++ b/internal/pnghandler.c
+@@ -4,7 +4,7 @@
+ static const unsigned int pngtileheight = 256;
+ static const unsigned int pngmindim = 2000;
+ 
+-static BOOL AcceptPNGImage(const unsigned char* buffer, unsigned int size) {
++static BOOL AcceptPNGImage(const unsigned char* buffer, long unsigned int size) {
+     static unsigned char pngsig[] = { 137, 80, 78, 71, 13, 10, 26, 10 };
+     if ((size >= 8) && !memcmp(pngsig, buffer, 8))
+ 	return TRUE;
+diff --git a/internal/ppmhandler.c b/internal/ppmhandler.c
+index a6ec2cd..82dd6ce 100644
+--- a/internal/ppmhandler.c
++++ b/internal/ppmhandler.c
+@@ -46,7 +46,7 @@ static int GetInt(HANDLE handle) {
+   return i;
+ }
+ 
+-static BOOL AcceptPPMImage(const unsigned char* buffer, unsigned int size) {
++static BOOL AcceptPPMImage(const unsigned char* buffer, long unsigned int size) {
+     if (size >= 4) {
+ 	if ((buffer[0] == 'P') && ((buffer[1] == '5' || buffer[1] == '6')))
+ 	    return TRUE;
+diff --git a/internal/tifhandler.c b/internal/tifhandler.c
+index a36690e..e93b22f 100644
+--- a/internal/tifhandler.c
++++ b/internal/tifhandler.c
+@@ -6,7 +6,7 @@ static unsigned char tifsig1[] = { 0x49, 0x49, 0x2a, 0x00 };
+ static unsigned char tifsig2[] = { 0x4d, 0x4d, 0x00, 0x2a };
+ static unsigned char tifsig3[] = { 0x49, 0x49, 0x2b, 0x00 };
+ 
+-static BOOL AcceptTIFFImage(const unsigned char* buffer, unsigned int size) {
++static BOOL AcceptTIFFImage(const unsigned char* buffer, long unsigned int size) {
+     if (size >= 4) {
+ 	if (((buffer[0] == tifsig1[0]) && (buffer[1] == tifsig1[1]) && (buffer[2] == tifsig1[2]) && (buffer[3] == tifsig1[3])) ||
+ 	    ((buffer[0] == tifsig2[0]) && (buffer[1] == tifsig2[1]) && (buffer[2] == tifsig2[2]) && (buffer[3] == tifsig2[3])) ||
+diff --git a/internal/webphandler.c b/internal/webphandler.c
+index 0e595f3..39db353 100644
+--- a/internal/webphandler.c
++++ b/internal/webphandler.c
+@@ -1,7 +1,7 @@
+ #include <webp/decode.h>
+ #include "webphandler.h"
+ 
+-static BOOL AcceptWEBPImage(const unsigned char* buffer, unsigned int size) { 
++static BOOL AcceptWEBPImage(const unsigned char* buffer, long unsigned int size) { 
+ if (size >= 12) { 
+     if ((buffer[0] == 'R') && (buffer[1] == 'I') && (buffer[2] == 'F') && (buffer[3] == 'F') &&
+ 	(buffer[8] == 'W') && (buffer[9] == 'E') && (buffer[10] == 'B') && (buffer[11] == 'P'))
+diff --git a/jpeg2000/jpeg2000.c b/jpeg2000/jpeg2000.c
+index aa49d30..47b8a9e 100644
+--- a/jpeg2000/jpeg2000.c
++++ b/jpeg2000/jpeg2000.c
+@@ -3,7 +3,7 @@
+ #include <jasper/jasper.h>
+ #include <windows.h>
+ 
+-static BOOL AcceptJPEG2000Image(const unsigned char* buffer, unsigned int size) { 
++static BOOL AcceptJPEG2000Image(const unsigned char* buffer, long unsigned int size) { 
+   if (size >= 4) { // JPC
+     if ((buffer[0] == 0xff) && (buffer[1] == 0x4f) && (buffer[2] == 0xff) && (buffer[3] == 0x51))
+       return TRUE;
+diff --git a/qoi/qoihandler.c b/qoi/qoihandler.c
+index aa36aa7..3d33f67 100644
+--- a/qoi/qoihandler.c
++++ b/qoi/qoihandler.c
+@@ -8,7 +8,7 @@
+ 
+ #include <fileapi.h>
+ 
+-static BOOL AcceptQOIImage(const unsigned char* buffer, unsigned int size) { 
++static BOOL AcceptQOIImage(const unsigned char* buffer, long unsigned int size) { 
+      if (size >= 2) {
+         if ((buffer[0] == 'q') && (buffer[1] == 'o') &&
+             (buffer[2] == 'i') && (buffer[1] == 'f'))
+diff --git a/stb/stbhandler.c b/stb/stbhandler.c
+index db3a02f..6aaf58b 100644
+--- a/stb/stbhandler.c
++++ b/stb/stbhandler.c
+@@ -7,7 +7,7 @@
+ 
+ // very simple plugin that loads PSD files using stb_image header only library
+ 
+-static BOOL AcceptSTBImage(const unsigned char* buffer, unsigned int size) { 
++static BOOL AcceptSTBImage(const unsigned char* buffer, long unsigned int size) { 
+     if (size >= 4) {
+ 		if ((buffer[0] == '8') && (buffer[1] == 'B')&& (buffer[2] == 'P') && (buffer[1] == 'S')) {
+ 			return TRUE;
+diff --git a/wic/wichandler.cpp b/wic/wichandler.cpp
+index 55f26ab..d4f2d9f 100644
+--- a/wic/wichandler.cpp
++++ b/wic/wichandler.cpp
+@@ -7,7 +7,7 @@
+ 
+ #define FULLIMAGE
+ 
+-static BOOL AcceptWICImage(const unsigned char* buffer, unsigned int size) {
++static BOOL AcceptWICImage(const unsigned char* buffer, long unsigned int size) {
+     return FALSE;
+ }
+ 
+
+commit 1fd298e1bdc16034bd86d7b1c804661acda03839
+Author: phanirithvij <phanirithvij2000@gmail.com>
+Date:   Thu Jan 9 23:53:51 2025 +0530
+
+    JSAMPARRAY is unsigned
+    
+    Signed-off-by: phanirithvij <phanirithvij2000@gmail.com>
+
+diff --git a/internal/jpghandler.c b/internal/jpghandler.c
+index 2e6ddef..cf31b3c 100644
+--- a/internal/jpghandler.c
++++ b/internal/jpghandler.c
+@@ -110,7 +110,7 @@ LoadJPEGTile(ImagePtr img, HDC hdc, unsigned int x, unsigned int y) {
+ 	jpeg_calc_output_dimensions(&cinfo);
+ 	hbitmap = img->helper.CreateTrueColorDIBSection(hdc, img->twidth, -(int)img->theight, &bits, 24);
+ 	if (bits) {
+-	    char* dstptr = (char*)bits;
++	    unsigned char* dstptr = (unsigned char*)bits;
+ 	    unsigned int idx, idx2;
+ 	    unsigned int starty = y * img->theight;
+ 	    int scanlinesize = img->twidth * 24 / 8;
+@@ -122,7 +122,7 @@ LoadJPEGTile(ImagePtr img, HDC hdc, unsigned int x, unsigned int y) {
+ 		jpeg_read_scanlines(&cinfo, &dstptr, 1);
+ 	    }
+ 	    for (idx = 0; (idx < img->theight) && (cinfo.output_scanline < cinfo.output_height); ++idx) {
+-		char* dstptr = (char*)bits + scanlinesize * idx;
++		unsigned char* dstptr = (unsigned char*)bits + scanlinesize * idx;
+ 		jpeg_read_scanlines(&cinfo, &dstptr, 1);
+ 	    }
+ 	    jpeg_abort_decompress(&cinfo);

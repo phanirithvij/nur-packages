@@ -20,7 +20,6 @@ stdenv.mkDerivation (finalAttrs: {
   };
 
   # TODO goal
-  # build from source, but how to build win32 binary on linux or macos, cross mingw?
   # should run on linux! (confirmed wine with 32bit ver works)
   #   64bit ver doesn't work with wine64 (WORKS with wineWowPackages.stableFull) (stableFull instead of stable because wine-mono comes pre-installed)
   #      maybe just override stable/base/minimal to have embedInstallers = true;
@@ -29,9 +28,9 @@ stdenv.mkDerivation (finalAttrs: {
   # should be able to configure vlivplugins!
   #   so vliv.withPlugins ( pp: with pp; [ tiff ... ] )?
   #   plugins folder
-  # headers folder, so it should be used as a library
+  # headers folder, so it can be used as a library
   #   dev output? not likely just $out/devel?
-  # should run on windows (cross compiled .exe via nix)
+  # should run on windows
   # should run on macos wine (does normally according to author)
   #   on macos it seems wineWowPackages.stableFull.meta.platforms doesn't work
   #   maybe it works with wineWow64Packages.stableFull
