@@ -55,6 +55,9 @@ let
     gitbatch = callPackage ./pkgs/patched/gitbatch { };
     qbittorrent = callPackage ./pkgs/patched/qbittorrent { };
 
+    vliv = lib.recurseIntoAttrs (callPackage ./pkgs/vliv { vliv = self.vliv.base; });
+    # vliv32 = vliv.override { }; # TODO figure out args, also rec?
+
     # cached packages
     # push em to cachix/oranc binary caches
     # ideally: some belong to patched pkgs

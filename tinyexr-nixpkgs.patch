@@ -1,0 +1,95 @@
+commit 0372aced947afcc2a8b2935d9bb62e05b9d29926
+Author: phanirithvij <phanirithvij2000@gmail.com>
+Date:   Sun Jan 12 15:39:43 2025 +0530
+
+    tinyexr: init at 1.0.9
+    
+    Signed-off-by: phanirithvij <phanirithvij2000@gmail.com>
+
+diff --git a/pkgs/development/libraries/tinyexr/default.nix b/pkgs/development/libraries/tinyexr/default.nix
+new file mode 100644
+index 000000000000..b898a3d403bc
+--- /dev/null
++++ b/pkgs/development/libraries/tinyexr/default.nix
+@@ -0,0 +1,39 @@
++{
++  lib,
++  stdenv,
++  fetchFromGitHub,
++  nix-update-script,
++  cmake,
++}:
++
++stdenv.mkDerivation (finalAttrs: {
++  version = "1.0.9";
++  pname = "tinyexr";
++
++  src = fetchFromGitHub {
++    owner = "syoyo";
++    repo = "tinyexr";
++    rev = "v${finalAttrs.version}";
++    hash = "sha256-gV8MNFiRgMjyOfKWEcbHvkUlnc0oRCDhkpGUzXljCak=";
++  };
++
++  installPhase = ''
++    runHook preInstall
++    mkdir -p $out/lib $out/include
++    cp ../*.h $out/include
++    cp ../deps/**/*.h $out/include
++    cp *.a $out/lib
++    runHook postInstall
++  '';
++  nativeBuildInputs = [ cmake ];
++
++  passthru.updateScript = nix-update-script { };
++
++  meta = {
++    description = "Tiny OpenEXR image loader/saver library";
++    homepage = "https://github.com/syoyo/tinyexr";
++    license = lib.licenses.bsd3;
++    maintainers = with lib.maintainers; [ phanirithvij ];
++    platforms = lib.platforms.all;
++  };
++})
+diff --git a/pkgs/top-level/all-packages.nix b/pkgs/top-level/all-packages.nix
+index 10fe58b3f2ff..4c6d80e6edb3 100644
+--- a/pkgs/top-level/all-packages.nix
++++ b/pkgs/top-level/all-packages.nix
+@@ -8766,6 +8766,8 @@ with pkgs;
+   draco = callPackage ../development/libraries/draco { };
+   tinygltf = callPackage ../development/libraries/tinygltf { };
+ 
++  tinyexr = callPackage ../development/libraries/tinyexr { };
++
+   # Multi-arch "drivers" which we want to build for i686.
+   driversi686Linux = recurseIntoAttrs {
+     inherit (pkgsi686Linux)
+
+commit 7481660bc7fc4e4eeabeecef67d3766f746f273c
+Author: phanirithvij <phanirithvij2000@gmail.com>
+Date:   Sun Jan 12 15:39:59 2025 +0530
+
+    tinyglf: relocate
+    
+    Signed-off-by: phanirithvij <phanirithvij2000@gmail.com>
+
+diff --git a/pkgs/development/libraries/draco/tinygltf.nix b/pkgs/development/libraries/tinygltf/default.nix
+similarity index 100%
+rename from pkgs/development/libraries/draco/tinygltf.nix
+rename to pkgs/development/libraries/tinygltf/default.nix
+diff --git a/pkgs/top-level/all-packages.nix b/pkgs/top-level/all-packages.nix
+index 4b421e5b4c70..10fe58b3f2ff 100644
+--- a/pkgs/top-level/all-packages.nix
++++ b/pkgs/top-level/all-packages.nix
+@@ -8763,9 +8763,8 @@ with pkgs;
+     inherit (darwin.apple_sdk.frameworks) AppKit;
+   };
+ 
+-  draco = callPackage ../development/libraries/draco {
+-    tinygltf = callPackage ../development/libraries/draco/tinygltf.nix { };
+-  };
++  draco = callPackage ../development/libraries/draco { };
++  tinygltf = callPackage ../development/libraries/tinygltf { };
+ 
+   # Multi-arch "drivers" which we want to build for i686.
+   driversi686Linux = recurseIntoAttrs {
