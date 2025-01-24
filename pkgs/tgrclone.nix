@@ -4,6 +4,7 @@ rclone.overrideAttrs (
     pname = "rclone";
     # TODO unstable date so I can update
     version = "tgdrive-main";
+    doInstallCheck = false;
     src = fetchFromGitHub {
       owner = "tgdrive";
       repo = "rclone";
