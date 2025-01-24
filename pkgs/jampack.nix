@@ -4,9 +4,11 @@
   fetchFromGitHub,
   makeWrapper,
   nodejs,
-  pnpm,
+  pnpm_9,
 }:
-
+let
+  pnpm = pnpm_9;
+in
 stdenv.mkDerivation rec {
   pname = "jampack";
   version = "0-unstable-2025-01-07";
