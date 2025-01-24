@@ -3,7 +3,7 @@
 {
   system ? "x86_64-linux",
 }:
-(builtins.getFlake "github:DeterminateSystems/nix-src/e1ed2d111bd21724f28ebb80aedd5154d4979fa9")
+(builtins.getFlake "github:DeterminateSystems/nix-src/5ba138e76f42c9f6b470fb6b04323ded4bd9ff05")
 .packages.${system}.nix.overrideAttrs
   (old: {
     doCheck = false;
