@@ -9,7 +9,7 @@ gama-tui.overrideAttrs (
       owner = "termkit";
       repo = "gama";
       rev = "refs/heads/${finalAttrs.version}";
-      hash = "sha256-q3ZAgnrXvn5C/yWuVVGJnBFUoxk7mfDUbCSdVyXLMzg=";
+      hash = "sha256-S9Tzjaz4igJGaeiOfKCuPeM4f9NGEhrgb0fNyc/GUPI=";
     };
     vendorHash = "sha256-PTyrSXLMr244+ZTvjBBUc1gmwYXBAs0bXZS2t3aSWFQ=";
     ldflags = [
