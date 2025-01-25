@@ -9,7 +9,7 @@
     doCheck = false;
     doInstallCheck = false;
     postInstall =
-      old.postInstall
+      (old.postInstall or "")
       + ''
         rm $out/bin/nix-*
         mv $out/bin/nix $out/bin/nix-schema
