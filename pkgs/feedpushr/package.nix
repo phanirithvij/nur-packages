@@ -19,17 +19,17 @@ in
 
 buildGoModule rec {
   pname = "feedpushr";
-  version = "3.4.0-unstable-2024-07-08";
+  version = "3.4.1-unstable-2025-01-27";
 
   src = fetchFromGitHub {
     owner = "ncarlier";
     repo = "feedpushr";
-    rev = "26e7dbf383f42884eee56023dcd2025acbfc2175";
-    hash = "sha256-BUfRAVIoCypHqlvsvoWTmZ0ycy8pIswkmwxjNnzs0zI=";
+    rev = "0898e122482275b0743fd8b370599550a728efd6";
+    hash = "sha256-quiv1Ul06ZKbYl10z4rk64U8m5hl1544p7ccEgmqUNw=";
     fetchSubmodules = true;
   };
 
-  vendorHash = "sha256-P3fc2uDyX1kqwgJbEVkusRyUg5bFdgIS/yoCCRMh5oM=";
+  vendorHash = "";
   proxyVendor = true;
 
   ldflags = [
