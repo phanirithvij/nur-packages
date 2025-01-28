@@ -27,6 +27,7 @@ in
   rsshub = callPackage ./pkgs/rsshub { };
   tgrclone = callPackage ./pkgs/tgrclone.nix { };
   nix-schema = import ./pkgs/nix-schema.nix;
+  neovim-nvf = import ./pkgs/neovim-nvf-flake.nix { inherit pkgs; };
 
   # these are already in nixpkgs, and I track their unstable versions
   # to detect any early breakages
