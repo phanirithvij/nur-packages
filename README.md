@@ -4,13 +4,19 @@
 
 ### packages
 
-| package       | version                    | source                                     | reason                                                                                                           |
-| ------------- | -------------------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
-| feedpushr     | 3.4-unstable-2024-07-08    | https://github.com/ncarlier/feedpushr      | rss notify via scripts                                                                                           |
-| goagen_1      | 1.4.3                      | https://github.com/goadesign/goa/tree/v1   | oudated goadesign command, for feedpushr, can be deprecated once https://github.com/ncarlier/feedpushr/issues/93 |
-| jampack       | 0.30.0-unstable-2024-10-11 | https://github.com/divriots/jampack        | can be used from inside node but packaged just in case                                                           |
-| qbittorrentui | 0.3.6                      | https://github.com/rmartin16/qbittorrentui | use it in servers, lightweight webui client                                                                      |
-| rsshub        | 0-unstable-2024-11-18      | https://github.com/DIYgod/RSSHub           | (failed to source upstream pr-tracker custom route) (nixpkgs upstream nixos module)                              |
+> [!WARNING]
+>
+> The following table is outdated, will update later
+
+| package       | version                    | source                                                           | reason                                                                                                           |
+| ------------- | -------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| feedpushr     | 3.4-unstable-2024-07-08    | https://github.com/ncarlier/feedpushr                            | rss notify via scripts                                                                                           |
+| goagen_1      | 1.4.3                      | https://github.com/goadesign/goa/tree/v1                         | oudated goadesign command, for feedpushr, can be deprecated once https://github.com/ncarlier/feedpushr/issues/93 |
+| jampack       | 0.30.0-unstable-2024-10-11 | https://github.com/divriots/jampack                              | can be used from inside node but packaged just in case                                                           |
+| qbittorrentui | 0.3.6                      | https://github.com/rmartin16/qbittorrentui                       | use it in servers, lightweight webui client                                                                      |
+| rsshub        | 0-unstable-2024-11-18      | https://github.com/DIYgod/RSSHub                                 | (failed to source upstream pr-tracker custom route) (nixpkgs upstream nixos module)                              |
+| neovim-nvf    | -                          | -                                                                | my neovim nvf config, builds from flake, to avoid polluting this flake.nix or system's                           |
+| nix-schema    | -                          | https://github.com/DeterminateSystems/nix-src/tree/flake-schemas | use it sometime, builds from flake, cached to own cachix                                                         |
 
 ### in nixpkgs
 
@@ -37,6 +43,8 @@
 | pkgsite       | https://github.com/golang/pkgsite                  | https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/pk/pkgsite/package.nix       | https://github.com/NixOS/nixpkgs/pull/358316 |
 | tcount        | https://github.com/rrethy/tcount/releases          | https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/tc/tcount/package.nix        | https://github.com/NixOS/nixpkgs/pull/358316 |
 | viddy         | https://github.com/sachaos/viddy/releases          | https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/vi/viddy/package.nix         | https://github.com/NixOS/nixpkgs/pull/336100 |
+
+See https://repology.org/maintainer/phanirithvij2000@gmail.com for a more uptodate list.
 
 ### NOTES
 
