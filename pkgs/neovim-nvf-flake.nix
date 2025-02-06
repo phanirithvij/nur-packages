@@ -21,6 +21,7 @@ in
           enableTreesitter = true;
 
           nix.enable = true;
+          nix.format.type = "nixfmt";
           markdown.enable = true;
           bash.enable = true;
           css.enable = true;
