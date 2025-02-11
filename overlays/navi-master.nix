@@ -6,13 +6,13 @@ _: p: {
       owner = "denisidoro";
       repo = "navi";
       rev = "refs/heads/${version}";
-      hash = "sha256-TaB5opb7al+33qIrK/EPhkNChyr96I+9R1euU4bDj38=";
+      hash = "sha256-zvqxVu147u/m/4B3fhbuQ46txGMrlgQv9d4GGiR8SoQ=";
     };
     cargoDeps = old.cargoDeps.overrideAttrs (
       p.lib.const {
         name = "${pname}-vendor.tar.gz";
         inherit src;
-        outputHash = "sha256-G1HGpx4Df0aAtb4sx3HLI4iyvF5DBEylt2tFMjN1XSc=";
+        outputHash = "sha256-3xUGeoMR/yjZBqKKxCnViISM8mFhLgcfRtDEV7yYXMw=";
       }
     );
   });
