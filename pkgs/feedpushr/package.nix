@@ -64,6 +64,16 @@ buildGoModule rec {
     cp -rT ${goagen_1}/share/src $GOPATH/src/github.com/goadesign/goa
     ln -s $PWD/design $GOPATH/src/github.com/ncarlier/feedpushr/v3/design
     cp -r ${frontend} pkg/assets/content/ui
+    #export GO111MODULE=off
+    #cd $GOPATH/src
+    #go get github.com/dimfeld/httppath
+    #go get github.com/gofrs/uuid
+    #go get github.com/manveru/faker
+    #go get github.com/zach-klippenstein/goregen
+    #go get golang.org/x/tools/go/ast/astutil
+    goagen bootstrap -o autogen -d github.com/ncarlier/feedpushr/v3/design
+
+    #go get github.com/goadesign/goa/goagen/codegen@v1.4.3
     make autogen
   '';
 
@@ -76,5 +86,6 @@ buildGoModule rec {
     homepage = "https://github.com/ncarlier/feedpushr";
     license = lib.licenses.gpl3Only;
     mainProgram = "feedpushr";
+    broken = true;
   };
 }

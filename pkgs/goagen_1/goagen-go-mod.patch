@@ -1,27 +1,20 @@
-From 5c6b06fe2ef008f484abd4571a2602c0abd9c95d Mon Sep 17 00:00:00 2001
-From: phanirithvij <phanirithvij2000@gmail.com>
-Date: Mon, 21 Oct 2024 12:56:52 +0530
-Subject: [PATCH 1/1] gomod
+commit d40919663b52a4ca8166ab0baf710039d6401a4d
+Author: phanirithvij <phanirithvij2000@gmail.com>
+Date:   Mon Oct 21 12:56:52 2024 +0530
 
-Signed-off-by: phanirithvij <phanirithvij2000@gmail.com>
----
- go.mod          |  65 +++++++++++
- go.sum          | 294 ++++++++++++++++++++++++++++++++++++++++++++++++
- metrics.go      |   2 +-
- metrics_test.go |   2 +-
- 4 files changed, 361 insertions(+), 2 deletions(-)
- create mode 100644 go.mod
- create mode 100644 go.sum
+    gomod
+    
+    Signed-off-by: phanirithvij <phanirithvij2000@gmail.com>
 
 diff --git a/go.mod b/go.mod
 new file mode 100644
-index 00000000..94a398bf
+index 00000000..269cb483
 --- /dev/null
 +++ b/go.mod
 @@ -0,0 +1,65 @@
 +module github.com/goadesign/goa
 +
-+go 1.22.2
++go 1.22.0
 +
 +require (
 +	github.com/ajg/form v1.5.1
@@ -410,6 +403,3 @@ index 9990524f..4f2e726d 100644
  )
  
  var _ = Describe("Metrics", func() {
--- 
-2.46.1
-
