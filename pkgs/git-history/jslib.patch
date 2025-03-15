@@ -1,0 +1,44 @@
+diff --git a/src/landing.js b/src/landing.js
+index 630386d..d533407 100644
+--- a/src/landing.js
++++ b/src/landing.js
+@@ -1,6 +1,4 @@
+ import React from "react";
+-import demoMp4 from "./demo.mp4";
+-import demoWebm from "./demo.webm";
+ import smashing from "./avatar.smashing.jpg";
+ import github from "./avatar.github.jpg";
+ import addy from "./avatar.addy.jpg";
+@@ -24,22 +22,6 @@ export default function Landing() {
+           color: "#222",
+         }}
+       >
+-        <video
+-          autoPlay
+-          loop
+-          muted
+-          playsInline
+-          width="560"
+-          height="350"
+-          style={{
+-            borderRadius: "3px",
+-            height: "350",
+-            boxShadow: "0 20px 50px 0 rgba(0,0,0,0.2)",
+-          }}
+-        >
+-          <source src={demoWebm} type="video/webm" />
+-          <source src={demoMp4} type="video/mp4" />
+-        </video>
+         <div className="summary">
+           <h1>Git History</h1>
+           Quickly browse the history of files in any git repo:
+diff --git a/craco.config.js b/craco.config.js
+index 43f7fbc..176b9cb 100644
+--- a/craco.config.js
++++ b/craco.config.js
+@@ -1,4 +1,5 @@
+ module.exports = {
++  productionSourceMap: false,
+   webpack: {
+     configure: {
+       output: {

@@ -21,6 +21,7 @@ in
   overlays = import ./overlays; # nixpkgs overlays
 
   feedpushr = callPackage ./pkgs/feedpushr { inherit pkgs; };
+  git-history = callPackage ./pkgs/git-history { };
   goagen_1 = callPackage ./pkgs/goagen_1 { };
   jampack = callPackage ./pkgs/jampack.nix { };
   qbittorrentui = import ./pkgs/qbittorrentui { inherit pkgs; };

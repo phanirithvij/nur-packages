@@ -1,0 +1,13 @@
+diff --git a/package.json b/package.json
+index f879c73..0e25d51 100644
+--- a/package.json
++++ b/package.json
+@@ -37,7 +37,7 @@
+   },
+   "scripts": {
+     "build-site": "cd .. && cross-env REACT_APP_GIT_PROVIDER=cli yarn build && rm -fr cli/site/ && cp -r build/ cli/site/",
+-    "build": "yarn build-site",
++    "build": "echo noop",
+     "ls-package": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
+     "postinstall": "opencollective-postinstall"
+   },
