@@ -17,6 +17,7 @@
 | rsshub        | 0-unstable-2024-11-18      | https://github.com/DIYgod/RSSHub                                 | (failed to source upstream pr-tracker custom route) (nixpkgs upstream nixos module)                              |
 | neovim-nvf    | -                          | -                                                                | my neovim nvf config, builds from flake, to avoid polluting this flake.nix or system's                           |
 | nix-schema    | -                          | https://github.com/DeterminateSystems/nix-src/tree/flake-schemas | use it sometime, builds from flake, cached to own cachix                                                         |
+| git-history   | 1.0.1-unstable-2024-10-10  | https://github.com/pomber/git-history                            | might be useful for small diffs, just package it for fun                                                         |
 
 ### in nixpkgs
 
@@ -44,13 +45,16 @@
 | tcount        | https://github.com/rrethy/tcount/releases          | https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/tc/tcount/package.nix        | https://github.com/NixOS/nixpkgs/pull/358316 |
 | viddy         | https://github.com/sachaos/viddy/releases          | https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/vi/viddy/package.nix         | https://github.com/NixOS/nixpkgs/pull/336100 |
 
-See https://repology.org/maintainer/phanirithvij2000@gmail.com for a more uptodate list.
+See https://repology.org/maintainer/phanirithvij2000@gmail.com for a more
+uptodate list.
 
 ### NOTES
 
-- To use the above derivations in your setup, copy and adapt, please don't use my repo directly.
+- To use the above derivations in your setup, copy and adapt, please don't use
+  my repo directly.
   - As I will remove them from here if they get be upstreamed to nixpkgs.
   - And for that reason I don't plan to submit my repo to nur-community.
 - found something in the repo horrendous? (>.<)
   - send a message in github issues and help me learn nix (please?)
-- I don't have access to a mac, and thus I don't care about mac builds unless the need arises. (eg. upstreaming something in nixpkgs)
+- I don't have access to a mac, and thus I don't care about mac builds unless
+  the need arises. (eg. upstreaming something in nixpkgs)
