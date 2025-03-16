@@ -4,7 +4,7 @@
   system ? "x86_64-linux",
 }:
 let
-  flake = builtins.getFlake "github:DeterminateSystems/nix-src/9a4502bf3840efb259de3cc1cadaf747cc625d12";
+  flake = builtins.getFlake "github:DeterminateSystems/nix-src/271926aa5997c3120c8ef0962ce1c7f29fee1a05";
   # TODO, withAWS = false;
   pkg = flake.packages.${system}.nix;
 in
