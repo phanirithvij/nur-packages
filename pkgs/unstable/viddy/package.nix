@@ -1,6 +1,6 @@
 {
-  lib,
   fetchFromGitHub,
+  rustPlatform,
   viddy,
 }:
 viddy.overrideAttrs (
@@ -12,11 +12,9 @@ viddy.overrideAttrs (
       rev = "refs/heads/${finalAttrs.version}";
       hash = "sha256-uHI55dwAK9gGfONrJW6tUnyi/PhLYVk22TfQJBCYKzo=";
     };
-    cargoDeps = oldAttrs.cargoDeps.overrideAttrs (
-      lib.const {
-        inherit (finalAttrs) src;
-        outputHash = "sha256-d/wmjvbTITpcGCrMVZrkUcCFPDdas2CDDPlIqoVBl9k=";
-      }
-    );
+    cargoDeps = rustPlatform.fetchCargoVendor {
+      inherit (finalAttrs) src;
+      hash = "sha256-Bp3t/fjaFeouIoKlRvQPVDlc46Ggitfx6HUXE+RZN0A=";
+    };
   }
 )
