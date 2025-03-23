@@ -8,7 +8,7 @@ _: p: {
         owner = "denisidoro";
         repo = "navi";
         rev = "refs/heads/${version}";
-        hash = "sha256-xzlVO6TVdto1keat3mNFpq1h8qr8RqaEd7Tzu3bL7eE=";
+        hash = "sha256-g6Ez9UIKrZGAQa1TSdO9RSWC+TifptOPHrgm/2KOKTc=";
       };
     in
     {
