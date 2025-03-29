@@ -13,13 +13,13 @@ let
 in
 stdenv.mkDerivation (finalAttrs: {
   pname = "rsshub";
-  version = "0-unstable-2025-03-23";
+  version = "0-unstable-2025-03-29";
 
   src = fetchFromGitHub {
     owner = "DIYgod";
     repo = "RSSHub";
-    rev = "e48f05ec0b1705a8bda531ede1e1416fc3f710d7";
-    hash = "sha256-JAVEKt1Euga6DhfFrmVrcfmSxqqD8bKPCfNoaIHxmTY=";
+    rev = "65a7d502850626598d785f58bf6e554b68124c8c";
+    hash = "sha256-EYgEpiTO7z5KhMG8f+4KzZfHsG+OlrHClQJUgIzAANE=";
   };
 
   patches = [
@@ -34,7 +34,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   pnpmDeps = pnpm.fetchDeps {
     inherit (finalAttrs) pname version src;
-    hash = "sha256-OrLWyyK5I9I04N0XjVNu7sehGSShxrx5p/zGHlYgXNc=";
+    hash = "sha256-OgBU6miFBJCMTBrI9kTUOEESZkWUFWzBtT/ZtZ6G12w=";
   };
 
   nativeBuildInputs = [
