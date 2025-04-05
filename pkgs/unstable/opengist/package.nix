@@ -9,7 +9,7 @@ let
     owner = "thomiceli";
     repo = "opengist";
     rev = "refs/heads/${version}";
-    hash = "sha256-VVbTtx6G6q8eqeRTzLU5+l++pVvIihnz+Yl8l+jTJ5A=";
+    hash = "sha256-sHUYmft08bNqyXyTJdZBX4YxpdQXJy3juL0YgfAy7MM=";
   };
   frontend = opengist.frontend.overrideAttrs {
     inherit version src;
