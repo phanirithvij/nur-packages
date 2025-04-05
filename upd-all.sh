@@ -8,9 +8,7 @@
 
 nix-update --commit feedpushr --version=branch
 #nix-update --commit goagen_1
-nix-update --commit jampack --version=branch
 nix-update --commit qbittorrentui --version=branch
-nix-update --commit rsshub --version=branch
 
 # nix-schema
 rev="$(nix eval --expr '(builtins.getFlake "github:DeterminateSystems/nix-src/flake-schemas").rev' --refresh --impure --raw)"

@@ -23,9 +23,7 @@ in
   feedpushr = callPackage ./pkgs/feedpushr { inherit pkgs; };
   git-history = callPackage ./pkgs/git-history { };
   goagen_1 = callPackage ./pkgs/goagen_1 { };
-  jampack = callPackage ./pkgs/jampack.nix { };
   qbittorrentui = import ./pkgs/qbittorrentui { inherit pkgs; };
-  rsshub = callPackage ./pkgs/rsshub { };
   tgrclone = callPackage ./pkgs/tgrclone.nix { };
   nix-schema = import ./pkgs/nix-schema.nix;
   neovim-nvf = import ./pkgs/neovim-nvf-flake.nix { inherit pkgs; };
