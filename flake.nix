@@ -30,9 +30,12 @@
       );
       packages = forAllSystems (
         system:
-        inputs.nixpkgs.lib.filterAttrs (
+        (inputs.nixpkgs.lib.filterAttrs (
           _: v: inputs.nixpkgs.lib.isDerivation v
-        ) self.legacyPackages.${system}
+        ) self.legacyPackages.${system})
+        // {
+          inherit (self.legacyPackages.${system}) unstablePkgs;
+        }
       );
       devShells = forAllSystems (system: {
         default = pkgs.${system}.mkShellNoCC {
