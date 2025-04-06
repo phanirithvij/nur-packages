@@ -1,25 +1,30 @@
 {
   fetchFromGitHub,
+  fetchNpmDeps,
   opengist,
-  lib,
 }:
 let
-  version = "master";
+  pname = "opengist";
+  version = "1.9.1-unstable-2025-04-06";
   src = fetchFromGitHub {
     owner = "thomiceli";
     repo = "opengist";
-    rev = "refs/heads/${version}";
-    hash = "sha256-sHUYmft08bNqyXyTJdZBX4YxpdQXJy3juL0YgfAy7MM=";
+    rev = "b82b3d9e0e3c585089d90b847c36f32144447133";
+    hash = "sha256-qm3pK0TFuNqg2b34n1dBuOt4qh1xrxAMH5ZveSfpbyM=";
   };
   frontend = opengist.frontend.overrideAttrs {
     inherit version src;
-    npmDepsHash = lib.fakeHash;
+    npmDeps = fetchNpmDeps {
+      inherit src;
+      name = "${pname}-frontend-${version}-npm-deps";
+      hash = "sha256-Uh+oXd//G/lPAMXRxijjEOpQNmeXK/XCIU7DJN3ujaY=";
+    };
   };
 in
 opengist.overrideAttrs (
   finalAttrs: _: {
     inherit version src;
-    vendorHash = lib.fakeHash;
+    vendorHash = "sha256-m2f9+PEMjVhlXs7b1neEWO0VY1fQSfe+T1aNEdtML28=";
     ldflags = [
       "-s"
       "-X github.com/thomiceli/opengist/internal/config.OpengistVersion=${finalAttrs.version}"
