@@ -25,7 +25,9 @@ in
   goagen_1 = callPackage ./pkgs/goagen_1 { };
   qbittorrentui = import ./pkgs/qbittorrentui { inherit pkgs; };
   tgrclone = callPackage ./pkgs/tgrclone.nix { };
-  nix-schema = import ./pkgs/nix-schema.nix;
+  # TODO re-enable later
+  # see https://discord.com/channels/568306982717751326/570351733780381697/1358729732241489971
+  # nix-schema = import ./pkgs/nix-schema.nix;
   neovim-nvf = import ./pkgs/neovim-nvf-flake.nix { inherit pkgs; };
 
   # these are already in nixpkgs, and I track their unstable versions
