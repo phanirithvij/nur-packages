@@ -8,7 +8,7 @@ _: p: {
         owner = "denisidoro";
         repo = "navi";
         rev = "refs/heads/${version}";
-        hash = "sha256-2RekEpAYHTqzKqlhl9dxtJU3+9QIGaQpw9H80uuubi0=";
+        hash = "sha256-XmaItLuDlVGJlNwGUPHWLvrfjKTaJP+YUoM5wNLiL7s=";
       };
     in
     {
@@ -16,7 +16,7 @@ _: p: {
       # https://discourse.nixos.org/t/nixpkgs-overlay-for-mpd-discord-rpc-is-no-longer-working/59982/2
       cargoDeps = p.rustPlatform.fetchCargoVendor {
         inherit src;
-        hash = "sha256-tQCm8KMVWo6KiKVOMDitHtDXwYGM7INXcT+7fEEiIiI=";
+        hash = "sha256-DUbCcHNCEMDjiYeghDdj2uJeQoHzjKKNMQ1SotEEyy4=";
       };
     }
   );
