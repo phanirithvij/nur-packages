@@ -11,9 +11,9 @@ _: p: {
             owner = "git-bug";
             repo = "git-bug";
             rev = "refs/heads/${version}";
-            hash = "sha256-DcimoSAY3S6bxuwGdESHevLPvJMG5ewdFE7OBkYvoKg=";
+            hash = "sha256-1TBauRxmDAmqcMZbYYLZaBM+GHcjQGndZuvpPsm73f4=";
           };
-          vendorHash = "sha256-aeFbK9IxqC6LOgEuTrcSPNk3UX7xR1asrrYWyHtLLEc=";
+          vendorHash = "sha256-N4/4u1qc/gIwTGHtbxeVKZEKmbC/nm36v63l8apV0nw=";
           ldflags = [
             "-s"
             "-X github.com/MichaelMure/git-bug/commands.GitCommit=${version}"
