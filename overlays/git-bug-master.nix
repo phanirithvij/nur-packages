@@ -11,7 +11,7 @@ _: p: {
             owner = "git-bug";
             repo = "git-bug";
             rev = "refs/heads/${version}";
-            hash = "sha256-1TBauRxmDAmqcMZbYYLZaBM+GHcjQGndZuvpPsm73f4=";
+            hash = "sha256-dn7fl7LO3t9517+5wmSMki5Ybs+crDfgjQFTe35HUns=";
           };
           vendorHash = "sha256-N4/4u1qc/gIwTGHtbxeVKZEKmbC/nm36v63l8apV0nw=";
           ldflags = [
