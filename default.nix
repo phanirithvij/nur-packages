@@ -29,6 +29,7 @@ in
   # see https://discord.com/channels/568306982717751326/570351733780381697/1358729732241489971
   # nix-schema = import ./pkgs/nix-schema.nix;
   neovim-nvf = import ./pkgs/neovim-nvf-flake.nix { inherit pkgs; };
+  nixpkgs-track = import ./pkgs/nixpkgs-track-flake.nix { inherit system; };
 
   # these are already in nixpkgs, and I track their unstable versions
   # to detect any early breakages
