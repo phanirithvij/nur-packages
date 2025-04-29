@@ -27,9 +27,10 @@ in
   tgrclone = callPackage ./pkgs/tgrclone.nix { };
   # TODO re-enable later
   # see https://discord.com/channels/568306982717751326/570351733780381697/1358729732241489971
-  # nix-schema = import ./pkgs/nix-schema.nix;
-  neovim-nvf = import ./pkgs/neovim-nvf-flake.nix { inherit pkgs; };
-  nixpkgs-track = import ./pkgs/nixpkgs-track-flake.nix { inherit system; };
+  # nix-schema = import ./pkgs/flakePkgs/nix-schema.nix { inherit system; };
+  neovim-nvf = import ./pkgs/flakePkgs/neovim-nvf.nix { inherit pkgs system; };
+  nixpkgs-track = import ./pkgs/flakePkgs/nixpkgs-track.nix { inherit system; };
+  hover-rs = import ./pkgs/flakePkgs/hover-rs.nix { inherit system; };
 
   # these are already in nixpkgs, and I track their unstable versions
   # to detect any early breakages
