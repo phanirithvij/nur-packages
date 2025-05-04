@@ -23,6 +23,7 @@ in
           nix.enable = true;
           nix.format.type = "nixfmt";
           markdown.enable = true;
+          markdown.extensions.render-markdown-nvim.enable = true;
           bash.enable = true;
           css.enable = true;
           html.enable = true;
