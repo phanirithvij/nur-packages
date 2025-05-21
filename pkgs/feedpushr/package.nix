@@ -7,25 +7,15 @@
   goagen_1,
 }:
 
-let
-  markedJsUrl = "https://cdn.jsdelivr.net/npm/marked@3.0.8/marked.min.js";
-  markedJsFile = "marked@3.0.8.min.js";
-  markedJs = fetchurl {
-    url = markedJsUrl;
-    hash = "sha256-ErAhHgL0Tl+XBwYGuvyTC+VF7tLpojj+gdW+FRNk/5c=";
-    name = "marked@3.0.8.min.js";
-  };
-in
-
-buildGoModule rec {
+buildGoModule (finalAttrs: {
   pname = "feedpushr";
-  version = "3.4.1-unstable-2025-01-27";
+  version = "3.4.1-unstable-2025-05-02";
 
   src = fetchFromGitHub {
     owner = "ncarlier";
     repo = "feedpushr";
-    rev = "0898e122482275b0743fd8b370599550a728efd6";
-    hash = "sha256-quiv1Ul06ZKbYl10z4rk64U8m5hl1544p7ccEgmqUNw=";
+    rev = "639fdb39f3b1ee1be240491152441e0fe837e5af";
+    hash = "sha256-L5T7W+ogHY6PNILONqOWDWWNeDejtDBt7owHDEhs8pE=";
     fetchSubmodules = true;
   };
 
@@ -34,21 +24,27 @@ buildGoModule rec {
 
   ldflags = [
     "-s"
-    "-X github.com/ncarlier/feedpushr/v3/pkg/version.Version=v${version}"
-    "-X github.com/ncarlier/feedpushr/v3/pkg/version.GitCommit=${src.rev}"
-    "-X github.com/ncarlier/feedpushr/v3/pkg/version.Built=v${version}"
+    "-X github.com/ncarlier/feedpushr/v3/pkg/version.Version=v${finalAttrs.version}"
+    "-X github.com/ncarlier/feedpushr/v3/pkg/version.GitCommit=${finalAttrs.src.rev}"
+    "-X github.com/ncarlier/feedpushr/v3/pkg/version.Built=v${finalAttrs.version}"
   ];
+
+  markedJs = fetchurl {
+    name = "marked@3.0.8.min.js";
+    url = "https://cdn.jsdelivr.net/npm/marked@3.0.8/marked.min.js";
+    hash = "sha256-ErAhHgL0Tl+XBwYGuvyTC+VF7tLpojj+gdW+FRNk/5c=";
+  };
 
   frontend = buildNpmPackage {
     pname = "feedpushr-frontend";
-    inherit version src;
-    sourceRoot = "${src.name}/ui";
+    inherit (finalAttrs) version src;
+    sourceRoot = "${finalAttrs.src.name}/ui";
     npmBuildScript = "build";
     dontInstall = true;
     postBuild = ''
-      cp ${markedJs} build/static/js
-      substituteInPlace build/index.html \
-        --replace-fail ${markedJsUrl} ./static/js/${markedJsFile}
+      cp ${finalAttrs.markedJs} build/static/js
+      substituteInPlace build/index.html --replace-fail \
+        ${finalAttrs.markedJs.url} ./static/js/${finalAttrs.markedJs.name}
       mv build $out
     '';
     npmFlags = [ "--legacy-peer-deps" ];
@@ -63,7 +59,7 @@ buildGoModule rec {
     mkdir -p $GOPATH/src/github.com/{goadesign/goa,ncarlier/feedpushr/v3}
     cp -rT ${goagen_1}/share/src $GOPATH/src/github.com/goadesign/goa
     ln -s $PWD/design $GOPATH/src/github.com/ncarlier/feedpushr/v3/design
-    cp -r ${frontend} pkg/assets/content/ui
+    cp -r ${finalAttrs.frontend} pkg/assets/content/ui
     #export GO111MODULE=off
     #cd $GOPATH/src
     #go get github.com/dimfeld/httppath
@@ -88,4 +84,4 @@ buildGoModule rec {
     mainProgram = "feedpushr";
     broken = true;
   };
-}
+})
