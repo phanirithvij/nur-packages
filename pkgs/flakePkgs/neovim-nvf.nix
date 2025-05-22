@@ -11,12 +11,12 @@ in
         viAlias = true;
         vimAlias = true;
         lsp = {
+          enable = true;
           formatOnSave = true;
           lightbulb.enable = true;
           trouble.enable = true;
         };
         languages = {
-          enableLSP = true;
           enableFormat = true;
           enableTreesitter = true;
 
