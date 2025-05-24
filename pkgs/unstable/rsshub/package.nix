@@ -26,6 +26,7 @@ stdenv.mkDerivation (finalAttrs: {
     (replaceVars ./0001-fix-git-hash.patch {
       "GIT_HASH" = finalAttrs.src.rev;
     })
+    ./0002-fix-network-call.patch
     (fetchpatch {
       url = "https://github.com/DIYgod/RSSHub/pull/17620.diff";
       hash = "sha256-vaVHw64jyc34BrqWWa0+TGHdPLpQbKZGkzSjr+t8zz8=";
@@ -45,18 +46,14 @@ stdenv.mkDerivation (finalAttrs: {
 
   buildPhase = ''
     runHook preBuild
-
     pnpm build
-
     runHook postBuild
   '';
 
   installPhase = ''
     runHook preInstall
-
     mkdir -p $out/bin $out/lib/rsshub
     cp -r lib node_modules assets api package.json tsconfig.json $out/lib/rsshub
-
     runHook postInstall
   '';
 
