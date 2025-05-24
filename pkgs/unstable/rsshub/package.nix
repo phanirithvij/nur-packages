@@ -43,6 +43,8 @@ stdenv.mkDerivation (finalAttrs: {
     pnpm.configHook
   ];
 
+  env.NODE_ENV = "production";
+
   buildPhase = ''
     runHook preBuild
 
