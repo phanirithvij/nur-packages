@@ -9,9 +9,9 @@ gama-tui.overrideAttrs (
       owner = "termkit";
       repo = "gama";
       rev = "refs/heads/${finalAttrs.version}";
-      hash = "sha256-eTRK2p75ny/Psjq8jLbLMeyYJs1ZfijSt4eeu/0pAxo=";
+      hash = "sha256-h1gzam/eDiKicNgNHwsoMxQxeLnZxkps/GoB9Hwoa1Y=";
     };
-    vendorHash = "sha256-PTyrSXLMr244+ZTvjBBUc1gmwYXBAs0bXZS2t3aSWFQ=";
+    vendorHash = "sha256-L/vi1hDMycpX48QktREdhn8fkVYIqhfu3Cq4kvli0zs=";
     ldflags = [
       "-s"
       # version should not be specified
