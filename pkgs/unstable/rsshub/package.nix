@@ -82,5 +82,6 @@ stdenv.mkDerivation (finalAttrs: {
     maintainers = with lib.maintainers; [ Guanran928 ];
     mainProgram = "rsshub";
     platforms = lib.platforms.all;
+    broken = true;
   };
 })
