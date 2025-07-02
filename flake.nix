@@ -34,7 +34,7 @@
           _: v: inputs.nixpkgs.lib.isDerivation v
         ) self.legacyPackages.${system})
         // {
-          inherit (self.legacyPackages.${system}) unstablePkgs;
+          inherit (self.legacyPackages.${system}) unstablePkgs flakePkgs;
         }
       );
       devShells = forAllSystems (system: {

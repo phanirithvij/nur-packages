@@ -25,12 +25,18 @@ in
   goagen_1 = callPackage ./pkgs/goagen_1 { };
   qbittorrentui = import ./pkgs/qbittorrentui { inherit pkgs; };
   tgrclone = callPackage ./pkgs/tgrclone.nix { };
-  # TODO re-enable later
-  # see https://discord.com/channels/568306982717751326/570351733780381697/1358729732241489971
-  # nix-schema = import ./pkgs/flakePkgs/nix-schema.nix { inherit system; };
-  neovim-nvf = import ./pkgs/flakePkgs/neovim-nvf.nix { inherit pkgs system; };
-  nixpkgs-track = import ./pkgs/flakePkgs/nixpkgs-track.nix { inherit system; };
-  hover-rs = import ./pkgs/flakePkgs/hover-rs.nix { inherit system; };
+
+  # These are flakes, but
+  #   I don't want to pollute my system flake
+  #   don't want to write a lot of inputs.*.follows to avoid 10000 nixpkgs problem
+  #   don't want to break packages by overriding nixpkgs.follows
+  #   utilise cachix cache + gha to avoid building from source
+  # having them here gives a lot of benefits
+  # only downside is not being able to use homeModules, nixosModules if any, this doesn't apply to most packages
+  flakePkgs = lib.packagesFromDirectoryRecursive {
+    inherit callPackage;
+    directory = ./pkgs/flakePkgs;
+  };
 
   # these are already in nixpkgs, and I track their unstable versions
   # to detect any early breakages
