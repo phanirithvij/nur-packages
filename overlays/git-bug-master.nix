@@ -6,11 +6,11 @@ _: p: {
         args
         // rec {
           pname = "git-bug";
-          version = "master";
+          version = "0.10.1-unstable-2025-06-11";
           src = p.fetchFromGitHub {
             owner = "git-bug";
             repo = "git-bug";
-            rev = "refs/heads/${version}";
+            rev = "6a3ca9e5c71550327f4d328f681c3a1ee5f9ea20";
             hash = "sha256-MvohQ95RuUhwdfgoYCppIEG3mq4QhuNDqfLUMlTh7lI=";
           };
           vendorHash = "sha256-sUNOORr5G9gYAh6nIb2YRAgSM2pSEa3FzmkudALqgVI=";

@@ -4,11 +4,11 @@
 }:
 gama-tui.overrideAttrs (
   finalAttrs: _: {
-    version = "main";
+    version = "1.2.1-unstable-2025-05-24";
     src = fetchFromGitHub {
       owner = "termkit";
       repo = "gama";
-      rev = "refs/heads/${finalAttrs.version}";
+      rev = "0830db94f899e25f8aee56443b9dc6e76bdcc6b6";
       hash = "sha256-h1gzam/eDiKicNgNHwsoMxQxeLnZxkps/GoB9Hwoa1Y=";
     };
     vendorHash = "sha256-L/vi1hDMycpX48QktREdhn8fkVYIqhfu3Cq4kvli0zs=";

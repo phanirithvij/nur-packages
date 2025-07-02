@@ -3,11 +3,11 @@ _: p: {
     old:
     let
       pname = "navi";
-      version = "master";
+      version = "2.24.0-unstable-2025-06-30";
       src = p.fetchFromGitHub {
         owner = "denisidoro";
         repo = "navi";
-        rev = "refs/heads/${version}";
+        rev = "c6da2d934d0cf5e528d90567fe466845bc1c9223";
         hash = "sha256-M8rqt7uBVZxtINWsYDEoIe+Mr5mZfCRYpQJTYWCVO6A=";
       };
     in
