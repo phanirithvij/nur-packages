@@ -31,17 +31,25 @@ in
   #   utilise cachix cache + gha to avoid building from source
   # having them here gives a lot of benefits
   # only downside is not being able to use homeModules, nixosModules if any, this doesn't apply to most packages
-  flakePkgs = lib.packagesFromDirectoryRecursive {
-    inherit callPackage;
-    directory = ./pkgs/flakePkgs;
-  };
+  flakePkgs =
+    (lib.packagesFromDirectoryRecursive {
+      inherit callPackage;
+      directory = ./pkgs/flakePkgs;
+    })
+    // {
+      recurseForDerivations = true;
+    };
 
   # these are already in nixpkgs, and I track their unstable versions
   # to detect any early breakages
-  unstablePkgs = lib.packagesFromDirectoryRecursive {
-    inherit callPackage;
-    directory = ./pkgs/unstable;
-  };
+  unstablePkgs =
+    (lib.packagesFromDirectoryRecursive {
+      inherit callPackage;
+      directory = ./pkgs/unstable;
+    })
+    // {
+      recurseForDerivations = true;
+    };
 
   # overlayShell, a drv which forces overlays to be built in ci
   overlayShell = import ./overlays/test-shell.nix { inherit system nixpkgs; };
