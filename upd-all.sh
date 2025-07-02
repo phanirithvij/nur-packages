@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 #shellcheck shell=bash
 #  generated and modified
 #
@@ -6,34 +7,34 @@
 #    | jq '.[]' -r \
 #    | xargs -n1 echo nix-update
 
-nix-update --commit feedpushr --version=branch
+#nix-update --commit feedpushr --version=branch
 #nix-update --commit goagen_1
 nix-update --commit qbittorrentui --version=branch
 
-# nix-schema
-rev="$(nix eval --expr '(builtins.getFlake "github:DeterminateSystems/nix-src/flake-schemas").rev' --refresh --impure --raw)"
-sed -r "s/nix-src\/\b[0-9a-f]{5,40}\b/nix-src\/$rev/g" -i pkgs/flakePkgs/nix-schema.nix
+updateFlakePkg() {
+        owner=$(echo "$1" | cut -d/ -f1)
+        reponame=$(echo "$1" | cut -d/ -f2)
+        branch=$(echo "$1" | cut -d/ -f3)
+        filename=$2
+        if [ -z "$branch" ]; then
+                repo="$owner/$reponame"
+        else
+                repo="$owner/$reponame/$branch"
+        fi
+        if [ -z "$filename" ]; then
+                filename="pkgs/flakePkgs/$reponame.nix"
+        fi
+        rev="$(nix eval --expr "(builtins.getFlake \"github:$repo\").rev" --refresh --impure --raw)"
+        sed -r "s/$reponame\/\b[0-9a-f]{5,40}\b/$reponame\/$rev/g" -i "$filename"
+}
 
-# hover-rs
-rev="$(nix eval --expr '(builtins.getFlake "github:viperML/hover-rs/master").rev' --refresh --impure --raw)"
-sed -r "s/hover-rs\/\b[0-9a-f]{5,40}\b/hover-rs\/$rev/g" -i pkgs/flakePkgs/hover-rs.nix
-
-# nvf
-rev="$(nix eval --expr '(builtins.getFlake "github:NotAShelf/nvf/main").rev' --refresh --impure --raw)"
-sed -r "s/nvf\/\b[0-9a-f]{5,40}\b/nvf\/$rev/g" -i pkgs/flakePkgs/nvf.nix
-
-# nixpkgs-track
-rev="$(nix eval --expr '(builtins.getFlake "github:uncenter/nixpkgs-track/main").rev' --refresh --impure --raw)"
-sed -r "s/nixpkgs-track\/\b[0-9a-f]{5,40}\b/nixpkgs-track\/$rev/g" -i pkgs/flakePkgs/nixpkgs-track.nix
-
-# yaml2nix
-rev="$(nix eval --expr '(builtins.getFlake "github:euank/yaml2nix/main").rev' --refresh --impure --raw)"
-sed -r "s/yaml2nix\/\b[0-9a-f]{5,40}\b/yaml2nix\/$rev/g" -i pkgs/flakePkgs/yaml2nix.nix
-
-# ghostty
-rev="$(nix eval --expr '(builtins.getFlake "github:ghostty-org/ghostty/main").rev' --refresh --impure --raw)"
-sed -r "s/ghostty\/\b[0-9a-f]{5,40}\b/ghostty\/$rev/g" -i pkgs/flakePkgs/ghostty.nix
-
-# bzmenu
-rev="$(nix eval --expr '(builtins.getFlake "github:e-tho/bzmenu/main").rev' --refresh --impure --raw)"
-sed -r "s/bzmenu\/\b[0-9a-f]{5,40}\b/bzmenu\/$rev/g" -i pkgs/flakePkgs/bzmenu.nix
+# TODO for loop over dir
+# need to track branch as a marker somewhere in the file ig
+updateFlakePkg DeterminateSystems/nix-src/flake-schemas pkgs/flakePkgs/nix-schema.nix
+updateFlakePkg hakoerber/git-repo-manager
+updateFlakePkg viperML/hover-rs
+updateFlakePkg NotAShelf/nvf
+updateFlakePkg uncenter/nixpkgs-track
+updateFlakePkg euank/yaml2nix
+updateFlakePkg ghostty-org/ghostty
+updateFlakePkg e-tho/bzmenu
