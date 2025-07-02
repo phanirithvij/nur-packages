@@ -25,3 +25,15 @@ sed -r "s/nixpkgs-track\/\b[0-9a-f]{5,40}\b/nixpkgs-track\/$rev/g" -i pkgs/flake
 # hover-rs
 rev="$(nix eval --expr '(builtins.getFlake "github:viperML/hover-rs/master").rev' --refresh --impure --raw)"
 sed -r "s/hover-rs\/\b[0-9a-f]{5,40}\b/hover-rs\/$rev/g" -i pkgs/flakePkgs/hover-rs.nix
+
+# yaml2nix
+rev="$(nix eval --expr '(builtins.getFlake "github:euank/yaml2nix/main").rev' --refresh --impure --raw)"
+sed -r "s/yaml2nix\/\b[0-9a-f]{5,40}\b/yaml2nix\/$rev/g" -i pkgs/flakePkgs/yaml2nix.nix
+
+# ghostty
+rev="$(nix eval --expr '(builtins.getFlake "github:ghostty-org/ghostty/main").rev' --refresh --impure --raw)"
+sed -r "s/ghostty\/\b[0-9a-f]{5,40}\b/ghostty\/$rev/g" -i pkgs/flakePkgs/ghostty.nix
+
+# bzmenu
+rev="$(nix eval --expr '(builtins.getFlake "github:e-tho/bzmenu/main").rev' --refresh --impure --raw)"
+sed -r "s/bzmenu\/\b[0-9a-f]{5,40}\b/bzmenu\/$rev/g" -i pkgs/flakePkgs/bzmenu.nix
