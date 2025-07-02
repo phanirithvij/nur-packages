@@ -1,9 +1,4 @@
-{
-  pkgs ? import <nixpkgs> { },
-}:
-let
-  inherit (pkgs) callPackage;
-in
+{ callPackage, ... }:
 callPackage ./package.nix {
   panwid = callPackage ./panwid.nix {
     orderedattrdict = callPackage ./orderedattrdict.nix { };

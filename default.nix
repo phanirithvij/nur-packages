@@ -20,11 +20,9 @@ in
   modules = import ./modules; # NixOS modules
   overlays = import ./overlays; # nixpkgs overlays
 
-  feedpushr = callPackage ./pkgs/feedpushr { inherit pkgs; };
-  git-history = callPackage ./pkgs/git-history { };
+  feedpushr = callPackage ./pkgs/feedpushr { };
   goagen_1 = callPackage ./pkgs/goagen_1 { };
-  qbittorrentui = import ./pkgs/qbittorrentui { inherit pkgs; };
-  tgrclone = callPackage ./pkgs/tgrclone.nix { };
+  qbittorrentui = callPackage ./pkgs/qbittorrentui { };
 
   # These are flakes, but
   #   I don't want to pollute my system flake
