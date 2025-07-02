@@ -17,4 +17,7 @@ pkg.overrideAttrs (o: {
       rm $out/bin/nix-*
       mv $out/bin/nix $out/bin/nix-schema
     '';
+  # TODO enable-later
+  # see https://discord.com/channels/568306982717751326/570351733780381697/1358729732241489971
+  meta.broken = true; # Manually marking it broken because it messes up my system nix
 })
