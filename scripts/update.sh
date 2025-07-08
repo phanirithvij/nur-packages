@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#shellcheck shell=bash
+# shellcheck shell=bash
 #  generated and modified
 #
 #  nix eval --impure --json --expr \
@@ -38,3 +38,17 @@ updateFlakePkg uncenter/nixpkgs-track
 updateFlakePkg euank/yaml2nix
 updateFlakePkg ghostty-org/ghostty
 updateFlakePkg e-tho/bzmenu
+
+# unstablePkgs
+
+script=$(nix eval --impure --json --expr \
+        "builtins.attrNames (import ./default.nix { }).unstablePkgs" |
+        jq '.[]' -r |
+        xargs -I{} echo nix-update --version=branch unstablePkgs.{})
+
+eval "$script"
+
+# overlayPkgs
+
+nix-update --version=branch overlayPkgs.git-bug
+nix-update --version=branch overlayPkgs.navi
