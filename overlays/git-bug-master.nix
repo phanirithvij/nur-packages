@@ -6,7 +6,7 @@ _: p: {
         args
         // rec {
           pname = "git-bug";
-          version = "0.10.1-unstable-2025-06-11";
+          version = "0.10.1-unstable-2025-06-10";
           src = p.fetchFromGitHub {
             owner = "git-bug";
             repo = "git-bug";

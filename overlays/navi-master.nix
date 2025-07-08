@@ -3,7 +3,7 @@ _: p: {
     old:
     let
       pname = "navi";
-      version = "2.24.0-unstable-2025-06-30";
+      version = "2.25.0-beta1-unstable-2025-06-30";
       src = p.fetchFromGitHub {
         owner = "denisidoro";
         repo = "navi";
