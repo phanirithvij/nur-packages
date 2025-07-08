@@ -51,6 +51,8 @@ in
       recurseForDerivations = true;
     };
 
-  # overlayShell, a drv which forces overlays to be built in ci
-  overlayShell = import ./overlays/test-shell.nix { inherit system nixpkgs; };
+  # overlayPkgs, force overlays to be built in ci
+  overlayPkgs = (import ./overlays/overlayPkgs.nix { inherit system nixpkgs; }) // {
+    recurseForDerivations = true;
+  };
 }

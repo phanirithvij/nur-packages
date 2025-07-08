@@ -35,6 +35,8 @@
         ) self.legacyPackages.${system})
         // {
           inherit (self.legacyPackages.${system}) unstablePkgs flakePkgs;
+          # inherit ... overlayPkgs;
+          # ci.nix reads from default.nix so no need to expose overlayPkgs in flake
         }
       );
       devShells = forAllSystems (system: {
@@ -44,10 +46,6 @@
             dprint
             inputs.nix-update.packages.${system}.default
           ];
-        };
-        overlayShell = import ./overlays/test-shell.nix {
-          inherit (inputs) nixpkgs;
-          inherit system;
         };
       });
     };
