@@ -38,6 +38,7 @@ updateFlakePkg uncenter/nixpkgs-track
 updateFlakePkg euank/yaml2nix
 updateFlakePkg ghostty-org/ghostty
 updateFlakePkg e-tho/bzmenu
+updateFlakePkg utdemir/nix-tree
 
 # unstablePkgs
 
