@@ -2,6 +2,6 @@
   system ? "x86_64-linux",
 }:
 let
-  f = builtins.getFlake "github:utdemir/nix-tree/d5fe2c2af3aa83577b0dd191ef9de19f27f91b2a";
+  f = builtins.getFlake "github:utdemir/nix-tree/daff532a0b52c7dc13aa5738c9ee0b43b12ac9e0";
 in
 f.packages.${system}.default

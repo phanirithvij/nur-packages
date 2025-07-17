@@ -6,14 +6,14 @@ _: p: {
         args
         // rec {
           pname = "git-bug";
-          version = "0.10.1-unstable-2025-06-10";
+          version = "0.10.1-unstable-2025-07-12";
           src = p.fetchFromGitHub {
             owner = "git-bug";
             repo = "git-bug";
-            rev = "6a3ca9e5c71550327f4d328f681c3a1ee5f9ea20";
-            hash = "sha256-MvohQ95RuUhwdfgoYCppIEG3mq4QhuNDqfLUMlTh7lI=";
+            rev = "95e53ffb8fa2fbc41ccca89a85e320412e5b5733";
+            hash = "sha256-U1AGMV8TTiU99XcDWZzqUkKvxVmePIh94TAyZAGolJw=";
           };
-          vendorHash = "sha256-sUNOORr5G9gYAh6nIb2YRAgSM2pSEa3FzmkudALqgVI=";
+          vendorHash = "sha256-D6hmSPARvMbkfB+rHw/QJLUdDvV5muRqhwLSHIScWcg=";
           ldflags = [
             "-s"
             "-X github.com/MichaelMure/git-bug/commands.GitCommit=${version}"
