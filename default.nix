@@ -23,6 +23,7 @@ in
   feedpushr = callPackage ./pkgs/feedpushr { };
   goagen_1 = callPackage ./pkgs/goagen_1 { };
   qbittorrentui = callPackage ./pkgs/qbittorrentui { };
+  bluetuith = callPackage ./pkgs/patched/bluetuith { };
 
   # These are flakes, but
   #   I don't want to pollute my system flake

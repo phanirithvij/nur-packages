@@ -1,0 +1,41 @@
+diff --git a/ui/functions.go b/ui/functions.go
+--- a/ui/functions.go
++++ b/ui/functions.go
+@@ -104,8 +104,10 @@ func power(set ...string) bool {
+ 	}
+
+ 	if err := UI.Bluez.Power(adapterPath, !powered); err != nil {
+-		ErrorMessage(errors.New("Cannot set adapter power state"))
+-		return false
++		if err = setBluetoothPower(!powered); err != nil {
++			ErrorMessage(errors.New("Cannot set adapter power state"))
++			return false
++		}
+ 	}
+
+ 	if powered {
+diff --git a/ui/helper.go b/ui/helper.go
+new file mode 100644
+--- /dev/null
++++ b/ui/helper.go
+@@ -0,0 +1,20 @@
++package ui
++
++import "os/exec"
++
++func setBluetoothPower(enable bool) (err error) {
++	_, err = exec.LookPath("rfkill")
++	if err != nil {
++		return
++	}
++	action := "block"
++	if enable {
++		action = "unblock"
++	}
++	cmd := exec.Command("sh", "-c", "rfkill "+action+" bluetooth")
++	err = cmd.Run()
++	if err != nil {
++		return
++	}
++	return
++}
