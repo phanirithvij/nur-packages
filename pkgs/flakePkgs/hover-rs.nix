@@ -2,6 +2,6 @@
   system ? "x86_64-linux",
 }:
 let
-  f = builtins.getFlake "github:viperML/hover-rs/7a699b1e8a52c416e6d113a000b500752a6c3371";
+  f = builtins.getFlake "github:viperML/hover-rs/244e08d959867fe70d2a4db7d02be2e86e304843";
 in
 if system == "aarch64-linux" then null else f.packages.${system}.default
