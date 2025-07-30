@@ -14,6 +14,8 @@
       systems = [
         "x86_64-linux"
         "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
       ];
       forAllSystems = f: inputs.nixpkgs.lib.genAttrs systems f;
       # https://github.com/nix-community/nur-packages-template/issues/89
