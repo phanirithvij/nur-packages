@@ -6,12 +6,12 @@ _: p: {
         args
         // rec {
           pname = "git-bug";
-          version = "0.10.1-unstable-2025-07-18";
+          version = "0.10.1-unstable-2025-08-03";
           src = p.fetchFromGitHub {
             owner = "git-bug";
             repo = "git-bug";
-            rev = "846c8ab43507eb0a1890ce74be107439778f7dc0";
-            hash = "sha256-xjpgILc88Avnoyyq3taiAHjkUYITr7tBDkWhkyCSpD4=";
+            rev = "791a80d0fe2ab519372ba472e0e148afc3136b6b";
+            hash = "sha256-hmDlhNeI2k31Nxx0ZbHKho0QxmZCUX+lVNNqjc8JjYg=";
           };
           vendorHash = "sha256-D6hmSPARvMbkfB+rHw/QJLUdDvV5muRqhwLSHIScWcg=";
           ldflags = [
