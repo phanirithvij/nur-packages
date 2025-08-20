@@ -3,12 +3,12 @@ _: p: {
     old:
     let
       pname = "navi";
-      version = "2.25.0-beta1-unstable-2025-06-30";
+      version = "2.25.0-beta1-unstable-2025-08-18";
       src = p.fetchFromGitHub {
         owner = "denisidoro";
         repo = "navi";
-        rev = "c6da2d934d0cf5e528d90567fe466845bc1c9223";
-        hash = "sha256-M8rqt7uBVZxtINWsYDEoIe+Mr5mZfCRYpQJTYWCVO6A=";
+        rev = "b01291e04041ea617de8d9ee7be628e4ac64e241";
+        hash = "sha256-v5f44YmXlBIYe7OiVWxt44BQ3Jejt5AcWn/DhtAAfro=";
       };
     in
     {
