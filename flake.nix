@@ -45,7 +45,7 @@
         default = pkgs.${system}.mkShellNoCC {
           packages = with pkgs.${system}; [
             nixfmt-rfc-style
-            dprint
+            #dprint
             inputs.nix-update.packages.${system}.default
           ];
         };
