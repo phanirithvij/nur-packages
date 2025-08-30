@@ -4,14 +4,14 @@
 }:
 golds.overrideAttrs (
   finalAttrs: _: {
-    version = "0.7.6-unstable-2025-06-23";
+    version = "0.8.1-unstable-2025-08-30";
     src = fetchFromGitHub {
       owner = "go101";
       repo = "golds";
-      rev = "d41899fd1d4138a6dce49c548e3cfb95c6314890";
-      hash = "sha256-3jedSlH22jDxhrpUcb+vCKDunTEX0zRW9SIMDTg5ELs=";
+      rev = "0e74a2d3a28751b9634e9a8a4112ab9b40c0ecb1";
+      hash = "sha256-RM9ltqkOByOg1ZUF7ZXZcWTivlUKrNbZYgcFpwRwNUk=";
     };
-    vendorHash = "sha256-Uj6MDsIMP+dSl1EK1E9DeNbJINngPc4DD9NzbFycuz4=";
+    vendorHash = "sha256-CL9CdLGeMTxXazJUr2+syQYJZXafX6ARzmEOHn7l14I=";
     # version hardcoded in source
     doInstallCheck = false;
   }
