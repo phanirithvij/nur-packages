@@ -1,25 +1,27 @@
-diff --git a/ui/functions.go b/ui/functions.go
---- a/ui/functions.go
-+++ b/ui/functions.go
-@@ -104,8 +104,10 @@ func power(set ...string) bool {
+diff --git a/ui/app/views/viewactions.go b/ui/app/views/viewactions.go
+index 2812791..455c075 100644
+--- a/ui/app/views/viewactions.go
++++ b/ui/app/views/viewactions.go
+@@ -116,8 +116,10 @@ func (v *viewActions) power(set ...string) bool {
  	}
 
- 	if err := UI.Bluez.Power(adapterPath, !powered); err != nil {
--		ErrorMessage(errors.New("Cannot set adapter power state"))
+ 	if err := v.rv.adapter.currentSession().SetPoweredState(!powered); err != nil {
+-		v.rv.status.ErrorMessage(errors.New("cannot set adapter power state"))
 -		return false
 +		if err = setBluetoothPower(!powered); err != nil {
-+			ErrorMessage(errors.New("Cannot set adapter power state"))
++			v.rv.status.ErrorMessage(errors.New("cannot set adapter power state"))
 +			return false
 +		}
  	}
 
  	if powered {
-diff --git a/ui/helper.go b/ui/helper.go
+diff --git a/ui/app/views/viewactionshelper.go b/ui/app/views/viewactionshelper.go
 new file mode 100644
+index 0000000..045ccc0
 --- /dev/null
-+++ b/ui/helper.go
++++ b/ui/app/views/viewactionshelper.go
 @@ -0,0 +1,20 @@
-+package ui
++package views
 +
 +import "os/exec"
 +
