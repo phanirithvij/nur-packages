@@ -57,4 +57,7 @@ in
       };
     })
   ];
-}).neovim
+}).neovim.overrideAttrs
+  (o: {
+    meta = o.meta // pkgs.neovim-unwrapped.meta;
+  })
