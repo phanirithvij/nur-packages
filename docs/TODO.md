@@ -1,5 +1,7 @@
 ### TODO
 
+- [x] Autogenerate a flake.nix with all flakePkgs
+  - this is to be able to use `nix flake metadata` on all of them
 - [x] nix-schema, pushed to cachix!
 - [ ] distrobox-tui-dev upd isnt working properly
 - [ ] some check that ensures readme and upd-all.sh are updated along with pkgs/
@@ -17,7 +19,8 @@
   - espanso wayland+x11 overlay?
 - [ ] lib
   - funcs that might be useful
-  - as of now use it as a bookmark/snippet/learnings wiki for useful nixpkgs funcs
+  - as of now use it as a bookmark/snippet/learnings wiki for useful nixpkgs
+    funcs
     - patchShebangs w/ chmod +x
     - substituteInplace --replace-{fail,...}
     - override
