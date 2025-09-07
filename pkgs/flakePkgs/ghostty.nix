@@ -2,6 +2,6 @@
   system ? "x86_64-linux",
 }:
 let
-  f = builtins.getFlake "github:ghostty-org/ghostty/084ff2de67ff24989999fbd4db5d8200f85a826a";
+  f = builtins.getFlake "github:ghostty-org/ghostty/e1627a80e952afce5144d1f826e2ef35cd224cc3";
 in
 f.packages.${system}.default
