@@ -21,15 +21,6 @@ rustPlatform.buildRustPackage {
 
   cargoHash = "sha256-mRq8Cu9LP4JJbBUEs6iyUX5OP31QLFnPgFYdsCVpdDk=";
 
-  patches = [
-    # temporary breakage
-    # https://github.com/NixOS/nixpkgs/issues/370890
-    (fetchpatch2 {
-      url = "https://github.com/Cretezy/lazyjj/pull/159.patch?full_index=1";
-      hash = "sha256-HUyZzIaG7hR50zhY9t53Tzt+gMgJJYwLEQL3bpj/eKM=";
-    })
-  ];
-
   cargoPatches = [
     # TODO patch should be in nixpkgs, will not be merged upstream
     # https://github.com/Cretezy/lazyjj/pull/117#issuecomment-3110844786
