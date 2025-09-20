@@ -9,8 +9,8 @@ subtitlecomposer.overrideAttrs (
       domain = "invent.kde.org";
       owner = "multimedia";
       repo = "subtitlecomposer";
-      rev = "a6fe3b9970a495a75be47a32ec4c42e4b7f80334";
-      hash = "sha256-ndYmlWFvZhOMMJ5PGJXrzdeaolsrjsqTTEvLDnJiJzc=";
+      rev = "0043f4434886c5aabe99705d40bd7f633b8b73e7";
+      hash = "sha256-AxkHX3/1Bghtpty/03/n1a+ujSLco+6lZdbBVfzDdsI=";
     };
   }
 )
