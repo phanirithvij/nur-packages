@@ -31,7 +31,6 @@ updateFlakePkg() {
 # TODO for loop over dir
 # need to track branch as a marker somewhere in the file ig
 updateFlakePkg DeterminateSystems/nix-src/flake-schemas pkgs/flakePkgs/nix-schema.nix
-updateFlakePkg hakoerber/git-repo-manager
 updateFlakePkg viperML/hover-rs
 updateFlakePkg NotAShelf/nvf
 updateFlakePkg uncenter/nixpkgs-track
