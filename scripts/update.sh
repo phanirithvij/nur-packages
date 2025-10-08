@@ -39,6 +39,7 @@ updateFlakePkg ghostty-org/ghostty
 updateFlakePkg e-tho/bzmenu
 updateFlakePkg utdemir/nix-tree
 updateFlakePkg Fuwn/yae
+updateFlakePkg nix-output-monitor
 
 # unstablePkgs
 
