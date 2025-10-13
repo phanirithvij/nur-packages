@@ -13,13 +13,13 @@ let
 in
 stdenv.mkDerivation (finalAttrs: {
   pname = "rsshub";
-  version = "0-unstable-2025-10-06";
+  version = "0-unstable-2025-10-13";
 
   src = fetchFromGitHub {
     owner = "DIYgod";
     repo = "RSSHub";
-    rev = "2c46b2ad1c21162dd44fa84b3aab275877d18df5";
-    hash = "sha256-oZh3cbUj/vK9wrq+5LCpiB1B/4Lk3MCe6AChL0N/DqM=";
+    rev = "aa6140d23ffbbc2892e7de360a9253adffab9c79";
+    hash = "sha256-fwrnIgd9P9/KLIwXixWc38juPau9dCayMzr880pD7AM=";
   };
 
   patches = [
