@@ -11,6 +11,7 @@
 
 {
   pkgs ? import <nixpkgs> { },
+  system ? builtins.currentSystem,
 }:
 
 with builtins;
@@ -50,7 +51,7 @@ let
 
   outputsOf = p: map (o: p.${o}) p.outputs;
 
-  nurAttrs = import ./default.nix { inherit pkgs; };
+  nurAttrs = (import ./default.nix).legacyPackages.${system};
 
   nurPkgs = flattenPkgs (
     listToAttrs (

@@ -2,6 +2,9 @@
 # case where you don't want to add the whole NUR namespace to your
 # configuration.
 
+{
+  system ? builtins.currentSystem,
+}:
 _self: super:
 let
   isReserved = n: n == "lib" || n == "overlays" || n == "modules";
@@ -9,8 +12,7 @@ let
     name = n;
     value = v;
   };
-  nurAttrs = import ./default.nix { pkgs = super; };
-
+  nurAttrs = (import ./default.nix).legacyPackages.${system};
 in
 builtins.listToAttrs (
   map (n: nameValuePair n nurAttrs.${n}) (
