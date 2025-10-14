@@ -7,7 +7,8 @@
 #     nix-build -A mypackage
 
 {
-  nixpkgs ? <nixpkgs>,
+  sources ? import ./npins,
+  nixpkgs ? sources.nixpkgs,
   pkgs ? import nixpkgs { },
   system ? builtins.currentSystem,
 }:

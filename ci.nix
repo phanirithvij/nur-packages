@@ -10,7 +10,11 @@
 # which this is possible.
 
 {
-  pkgs ? import <nixpkgs> { },
+  sources ? {
+    nixpkgs = <nixpkgs>;
+  },
+  nixpkgs ? sources.nixpkgs,
+  pkgs ? import nixpkgs { },
 }:
 
 with builtins;
