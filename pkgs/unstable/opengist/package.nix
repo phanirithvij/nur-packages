@@ -19,18 +19,22 @@ let
       name = "${pname}-frontend-${version}-npm-deps";
       hash = "sha256-4ICKVVQMCtMG+Gjz9TZISXirZ22GgQZAMuD2tZCEvxs=";
     };
+    # Remove postcss step because it was removed upstream
+    # see
+    # https://github.com/thomiceli/opengist/commit/f653179cbf435cbba67e6cce51952c3a3a608381#diff-76ed074a9305c04054cdebb9e9aad2d818052b07091de1f20cad0bbac34ffb52L22-R38
+    postBuild = "";
   };
 in
 opengist.overrideAttrs (
   finalAttrs: _: {
     inherit version src frontend;
-    vendorHash = "sha256-4ICKVVQMCtMG+Gjz9TZISXirZ22GgQZAMuD2tZCEvxs=";
+    vendorHash = "sha256-DfKrYyZ7zqtt+GsMvYHI/nhQCFFGoRBCxbD2TaPpijs=";
     ldflags = [
       "-s"
       "-X github.com/thomiceli/opengist/internal/config.OpengistVersion=${finalAttrs.version}"
     ];
     postPatch = ''
-      cp -R ${frontend}/public/{manifest.json,assets} public/
+      cp -R ${frontend}/public/{.vite,assets} public/
     '';
   }
 )
