@@ -40,6 +40,7 @@ updateFlakePkg e-tho/bzmenu
 updateFlakePkg utdemir/nix-tree
 updateFlakePkg Fuwn/yae
 updateFlakePkg maralorn/nix-output-monitor
+updateFlakePkg bachp/git-mirror
 
 # unstablePkgs
 
