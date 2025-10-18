@@ -25,6 +25,7 @@ in
   goagen_1 = callPackage ./pkgs/goagen_1 { };
   qbittorrentui = callPackage ./pkgs/qbittorrentui { };
   bluetuith = callPackage ./pkgs/patched/bluetuith { };
+  bashmount = callPackage ./pkgs/patched/bashmount { };
   starship = callPackage ./pkgs/patched/starship { };
 
   # These are flakes, but
