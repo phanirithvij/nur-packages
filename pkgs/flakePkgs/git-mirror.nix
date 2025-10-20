@@ -2,6 +2,6 @@
   system ? "x86_64-linux",
 }:
 let
-  f = builtins.getFlake "github:bachp/git-mirror/d2b6e2aaf5f16a2468ba83a1bbb9556434f0266c";
+  f = builtins.getFlake "github:bachp/git-mirror/6a86f6a6779ae2265aa33c99b4c1fc48bf899a17";
 in
 f.packages.${system}.default
