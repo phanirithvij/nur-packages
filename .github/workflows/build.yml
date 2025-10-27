@@ -41,6 +41,7 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@main
+    - uses: wimpysworld/nothing-but-nix@main
     - name: Install nix
       uses: cachix/install-nix-action@master
       with:
