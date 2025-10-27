@@ -41,6 +41,7 @@ updateFlakePkg utdemir/nix-tree
 updateFlakePkg Fuwn/yae
 updateFlakePkg maralorn/nix-output-monitor
 updateFlakePkg bachp/git-mirror
+updateFlakePkg samestep/npc
 
 # unstablePkgs
 
