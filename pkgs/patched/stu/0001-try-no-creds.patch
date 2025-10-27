@@ -1,0 +1,26 @@
+From a87a5cbbaf04b9f1a055cc0b3ca3dcce2969a833 Mon Sep 17 00:00:00 2001
+From: phanirithvij <phanirithvij2000@gmail.com>
+Date: Mon, 27 Oct 2025 10:29:26 +0530
+Subject: [PATCH] try no-creds
+
+Signed-off-by: phanirithvij <phanirithvij2000@gmail.com>
+---
+ src/client.rs | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/client.rs b/src/client.rs
+index 221abb5..e4db967 100644
+--- a/src/client.rs
++++ b/src/client.rs
+@@ -95,7 +95,7 @@ impl AwsSdkClient {
+             .or_else(Region::new(default_region_fallback));
+ 
+         let mut config_loader =
+-            aws_config::defaults(BehaviorVersion::latest()).region(region_provider);
++            aws_config::defaults(BehaviorVersion::latest()).no_credentials().region(region_provider);
+         if let Some(url) = &endpoint_url {
+             config_loader = config_loader.endpoint_url(url);
+         }
+-- 
+2.51.0
+

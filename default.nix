@@ -24,8 +24,10 @@ in
   feedpushr = callPackage ./pkgs/feedpushr { };
   goagen_1 = callPackage ./pkgs/goagen_1 { };
   qbittorrentui = callPackage ./pkgs/qbittorrentui { };
-  bluetuith = callPackage ./pkgs/patched/bluetuith { };
+
+  stu = callPackage ./pkgs/patched/stu { };
   bashmount = callPackage ./pkgs/patched/bashmount { };
+  bluetuith = callPackage ./pkgs/patched/bluetuith { };
   starship = callPackage ./pkgs/patched/starship { };
 
   # These are flakes, but
