@@ -14,21 +14,8 @@
 }:
 let
   inherit (pkgs) lib callPackage;
-in
-{
-  # The `lib`, `modules`, and `overlays` names are special
-  lib = import ./lib { inherit pkgs; }; # functions
-  modules = import ./modules; # NixOS modules
-  overlays = import ./overlays; # nixpkgs overlays
 
-  feedpushr = callPackage ./pkgs/feedpushr { };
-  goagen_1 = callPackage ./pkgs/goagen_1 { };
-  qbittorrentui = callPackage ./pkgs/qbittorrentui { };
-
-  stu = callPackage ./pkgs/patched/stu { };
-  bashmount = callPackage ./pkgs/patched/bashmount { };
-  bluetuith = callPackage ./pkgs/patched/bluetuith { };
-  starship = callPackage ./pkgs/patched/starship { };
+  nh = callPackage ./pkgs/patched/nh { inherit (flakePkgs) nix-output-monitor; };
 
   # These are flakes, but
   #   I don't want to pollute my system flake
@@ -45,6 +32,25 @@ in
     // {
       recurseForDerivations = true;
     };
+in
+{
+  # The `lib`, `modules`, and `overlays` names are special
+  lib = import ./lib { inherit pkgs; }; # functions
+  modules = import ./modules; # NixOS modules
+  overlays = import ./overlays; # nixpkgs overlays
+
+  feedpushr = callPackage ./pkgs/feedpushr { };
+  goagen_1 = callPackage ./pkgs/goagen_1 { };
+  qbittorrentui = callPackage ./pkgs/qbittorrentui { };
+
+  # patched pkgs
+  inherit nh;
+  stu = callPackage ./pkgs/patched/stu { };
+  bashmount = callPackage ./pkgs/patched/bashmount { };
+  bluetuith = callPackage ./pkgs/patched/bluetuith { };
+  starship = callPackage ./pkgs/patched/starship { };
+
+  inherit flakePkgs;
 
   # these are already in nixpkgs, and I track their unstable versions
   # to detect any early breakages
