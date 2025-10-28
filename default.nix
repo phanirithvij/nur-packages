@@ -48,7 +48,6 @@ in
   stu = callPackage ./pkgs/patched/stu { };
   bashmount = callPackage ./pkgs/patched/bashmount { };
   bluetuith = callPackage ./pkgs/patched/bluetuith { };
-  starship = callPackage ./pkgs/patched/starship { };
 
   inherit flakePkgs;
 
