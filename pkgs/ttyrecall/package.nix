@@ -29,13 +29,16 @@ let
 in
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "ttyrecall";
-  version = "0.0.1-unstable-2025-04-08";
+  #version = "0.0.1-unstable-2025-04-08"; # main
+  version = "0.0.1";
 
   src = fetchFromGitHub {
     owner = "kxxt";
     repo = "ttyrecall";
-    rev = "3dce604721f56d2b870ee5a64dd5f725af71e560"; # upstream main branch
-    hash = "sha256-paBmi3Od4iXVRT/gE//NfuCXiE2iCYvwj11lXrQIbec=";
+    #rev = "3dce604721f56d2b870ee5a64dd5f725af71e560"; # main
+    #hash = "sha256-paBmi3Od4iXVRT/gE//NfuCXiE2iCYvwj11lXrQIbec="; # main
+    tag = "v${finalAttrs.version}";
+    hash = "sha256-ZFOQuyJJf8HYNvTzXT4YuL2fF6Xk/L6VmPMUIurMRw4="; # 0.0.1
   };
 
   # from fluffychat/vodozemac-wasm.nix nixpkgs
@@ -44,7 +47,8 @@ rustPlatform.buildRustPackage (finalAttrs: {
     paths = [
       (rustPlatform.fetchCargoVendor {
         inherit (finalAttrs) pname version src;
-        hash = "sha256-JXeQSJumOyyqEY0c7ulWVIbiugDtKp8s7mqc5XuQaSg=";
+        #hash = "sha256-JXeQSJumOyyqEY0c7ulWVIbiugDtKp8s7mqc5XuQaSg="; # main
+        hash = "sha256-KhqXB2gSa322YdMgWaITj0ynyrNdhZAH6r1H8h+irqA="; # 0.0.1
       })
       (rustPlatform.fetchCargoVendor {
         inherit (finalAttrs) version src;
