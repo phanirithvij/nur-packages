@@ -7,7 +7,7 @@
 #     nix-build -A mypackage
 
 {
-  sources ? import ./npins,
+  sources ? import ./npins, # TODO move to https://github.com/fricklerhandwerk/flake-inputs or flake-compat
   nixpkgs ? sources.nixpkgs,
   pkgs ? import nixpkgs { },
   system ? builtins.currentSystem,
