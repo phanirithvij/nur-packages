@@ -19,31 +19,47 @@
       ];
       forAllSystems = f: inputs.nixpkgs.lib.genAttrs systems f;
       # https://github.com/nix-community/nur-packages-template/issues/89
-      pkgs = forAllSystems (system: inputs.nixpkgs.legacyPackages."${system}");
-    in
-    {
-      legacyPackages = forAllSystems (
-        system:
+      pkgs' = forAllSystems (system: inputs.nixpkgs.legacyPackages."${system}");
+      getLegacyPkgs =
+        {
+          system,
+          pkgs ? pkgs'.${system},
+        }:
         import ./default.nix {
-          pkgs = pkgs.${system};
+          inherit pkgs;
           inherit (inputs) nixpkgs;
           inherit system;
-        }
-      );
-      packages = forAllSystems (
-        system:
-        (inputs.nixpkgs.lib.filterAttrs (
-          _: v: inputs.nixpkgs.lib.isDerivation v
-        ) self.legacyPackages.${system})
+        };
+      getPackages =
+        {
+          system,
+          lib ? inputs.nixpkgs.lib,
+          legacyPackages ? self.legacyPackages.${system},
+        }:
+        (lib.filterAttrs (_: v: lib.isDerivation v) legacyPackages)
         // {
-          inherit (self.legacyPackages.${system}) unstablePkgs flakePkgs;
+          inherit (legacyPackages) unstablePkgs flakePkgs;
           # inherit ... overlayPkgs;
           # ci.nix reads from default.nix so no need to expose overlayPkgs in flake
-        }
-      );
+        };
+    in
+    {
+      # Allows overriding pkgs, which allows specifying custom nixpkgs config to this instance of pkgs
+      # eg. allowUnfreePredicate in my system flake
+      lib.getNurPkgs =
+        { pkgs, system, ... }:
+        rec {
+          legacyPackages = getLegacyPkgs { inherit pkgs system; };
+          packages = getPackages {
+            inherit system legacyPackages;
+            inherit (pkgs) lib;
+          };
+        };
+      legacyPackages = forAllSystems (system: getLegacyPkgs { inherit system; });
+      packages = forAllSystems (system: getPackages { inherit system; });
       devShells = forAllSystems (system: {
-        default = pkgs.${system}.mkShellNoCC {
-          packages = with pkgs.${system}; [
+        default = pkgs'.${system}.mkShellNoCC {
+          packages = with pkgs'.${system}; [
             nixfmt-rfc-style
             #dprint
             inputs.nix-update.packages.${system}.default
