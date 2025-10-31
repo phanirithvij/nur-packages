@@ -5,12 +5,12 @@
 }:
 let
   pname = "opengist";
-  version = "1.11.1-unstable-2025-10-07";
+  version = "1.11.1-unstable-2025-10-31";
   src = fetchFromGitHub {
     owner = "thomiceli";
     repo = "opengist";
-    rev = "8129906b0218f35c4113d368a7961bd4d1f773cb";
-    hash = "sha256-/aHYfZ56Pv2XCuzqzwpcYw3lyNnxfnfUfBVhwWCEP4c=";
+    rev = "3957dfb3ea27d3ce84b9295f28b46c55b18db7cd";
+    hash = "sha256-rQgaRDN4JAkWqPg551J/M9VokTWqED5IgufY8eZEwt0=";
   };
   frontend = opengist.frontend.overrideAttrs {
     inherit version src;
