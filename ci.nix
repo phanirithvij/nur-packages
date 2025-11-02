@@ -12,9 +12,19 @@
 {
   sources ? {
     nixpkgs = <nixpkgs>;
+    "nixpkgs.lib" = <nixpkgs/lib>;
   },
   nixpkgs ? sources.nixpkgs,
-  pkgs ? import nixpkgs { },
+  lib ? import sources."nixpkgs.lib",
+  pkgs ? import nixpkgs {
+    config.allowUnfreePredicate =
+      pkg:
+      let
+        pname = lib.getName pkg;
+        byName = builtins.elem pname [ "textual-window" ];
+      in
+      if byName then lib.warn "NurPkgs allowing unfree package: ${pname}" true else false;
+  },
 }:
 
 with builtins;

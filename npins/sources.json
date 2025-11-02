@@ -12,6 +12,19 @@
       "revision": "6a08e6bb4e46ff7fcbb53d409b253f6bad8a28ce",
       "url": "https://github.com/nixos/nixpkgs/archive/6a08e6bb4e46ff7fcbb53d409b253f6bad8a28ce.tar.gz",
       "hash": "0ixzzfdyrkm8mhfrgpdmq0bpfk5ypz63qnbxskj5xvfxvdca3ys3"
+    },
+    "nixpkgs.lib": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "e171c13eb1bfa148a2e5ed435768d5e89e235d0f",
+      "url": "https://github.com/nix-community/nixpkgs.lib/archive/e171c13eb1bfa148a2e5ed435768d5e89e235d0f.tar.gz",
+      "hash": "1g88cbd1p4h1id6cyg0l2507y8zc1g25im7xxmsjs4xq9dlqvdir"
     }
   },
   "version": 5
