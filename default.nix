@@ -13,58 +13,61 @@
   system ? builtins.currentSystem,
 }:
 let
-  inherit (pkgs) lib callPackage;
+  inherit (pkgs) lib;
 
-  nh = callPackage ./pkgs/patched/nh { inherit (flakePkgs) nix-output-monitor; };
+  # Should allow deps to be discovered without explicitly passing them around
+  # only scope to self' which is the by-name scope, do not scope to self
+  callPackage = pkgs.newScope (self' // { inherit callPackage; });
 
-  # These are flakes, but
-  #   I don't want to pollute my system flake
-  #   don't want to write a lot of inputs.*.follows to avoid 10000 nixpkgs problem
-  #   don't want to break packages by overriding nixpkgs.follows
-  #   utilise cachix cache + gha to avoid building from source
-  # having them here gives a lot of benefits
-  # only downside is not being able to use homeModules, nixosModules if any, this doesn't apply to most packages
-  flakePkgs =
-    (lib.packagesFromDirectoryRecursive {
-      inherit callPackage;
-      directory = ./pkgs/flakePkgs;
-    })
-    // {
+  pkgsByName = import ./pkgs/by-name { inherit callPackage lib; };
+  self' = pkgsByName;
+
+  self = self' // {
+    # The `lib`, `modules`, and `overlays` names are special
+    lib = lib.extend (_: _: import ./lib { inherit pkgs lib; }); # functions
+    modules = import ./modules; # nixos/hm modules
+    overlays = import ./overlays; # nixpkgs overlays
+
+    # patched pkgs
+    # has some customisations applied to orignal packages
+    # primarily useful to have these rebuilt via gha+cachix
+    # nh = callPackage ./pkgs/patched/nh { inherit (self.flakePkgs) nix-output-monitor; };
+    nh = callPackage ./pkgs/patched/nh { };
+    bashmount = callPackage ./pkgs/patched/bashmount { };
+    bluetuith = callPackage ./pkgs/patched/bluetuith { };
+    pr-tracker = callPackage ./pkgs/patched/pr-tracker { };
+
+    # These are flakes, but
+    #   I don't want to pollute my system flake
+    #   don't want to write a lot of inputs.*.follows to avoid 10000 nixpkgs problem
+    #   don't want to break packages by overriding nixpkgs.follows
+    #   utilise cachix cache + gha to avoid building from source
+    # having them here gives a lot of benefits
+    # only downside is not being able to use homeModules, nixosModules if any, this doesn't apply to most packages
+    flakePkgs =
+      (lib.packagesFromDirectoryRecursive {
+        inherit callPackage;
+        directory = ./pkgs/flakePkgs;
+      })
+      // {
+        recurseForDerivations = true;
+      };
+
+    # these are already in nixpkgs, and I track their unstable versions
+    # to detect any early breakages
+    unstablePkgs =
+      (lib.packagesFromDirectoryRecursive {
+        inherit callPackage;
+        directory = ./pkgs/unstable;
+      })
+      // {
+        recurseForDerivations = true;
+      };
+
+    # overlayPkgs, force overlays to be built in ci
+    overlayPkgs = (import ./overlays/overlayPkgs.nix { inherit system nixpkgs; }) // {
       recurseForDerivations = true;
     };
-in
-{
-  # The `lib`, `modules`, and `overlays` names are special
-  lib = import ./lib { inherit pkgs; }; # functions
-  modules = import ./modules; # NixOS modules
-  overlays = import ./overlays; # nixpkgs overlays
-
-  feedpushr = callPackage ./pkgs/feedpushr { };
-  goagen_1 = callPackage ./pkgs/goagen_1 { };
-  qbittorrentui = callPackage ./pkgs/qbittorrentui { };
-  tvmux = callPackage ./pkgs/tvmux { };
-
-  # patched pkgs
-  inherit nh;
-  stu = callPackage ./pkgs/patched/stu { };
-  bashmount = callPackage ./pkgs/patched/bashmount { };
-  bluetuith = callPackage ./pkgs/patched/bluetuith { };
-
-  inherit flakePkgs;
-
-  # these are already in nixpkgs, and I track their unstable versions
-  # to detect any early breakages
-  unstablePkgs =
-    (lib.packagesFromDirectoryRecursive {
-      inherit callPackage;
-      directory = ./pkgs/unstable;
-    })
-    // {
-      recurseForDerivations = true;
-    };
-
-  # overlayPkgs, force overlays to be built in ci
-  overlayPkgs = (import ./overlays/overlayPkgs.nix { inherit system nixpkgs; }) // {
-    recurseForDerivations = true;
   };
-}
+in
+self
