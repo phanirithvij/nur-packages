@@ -6,15 +6,26 @@
 # commands such as:
 #     nix-build -A mypackage
 
+let
+  flake-inputs = import (fetchTarball {
+    url = "https://github.com/fricklerhandwerk/flake-inputs/tarball/4.1.0";
+    sha256 = "1j57avx2mqjnhrsgq3xl7ih8v7bdhz1kj3min6364f486ys048bm";
+  });
+  inherit (flake-inputs) import-flake;
+in
 {
-  sources ? import ./npins, # TODO move to https://github.com/fricklerhandwerk/flake-inputs or flake-compat
-  nixpkgs ? sources.nixpkgs,
-  pkgs ? import nixpkgs { },
+  flake ? import-flake { src = ./.; },
+  sources ? flake.inputs,
   system ? builtins.currentSystem,
+  nixpkgs ? sources.nixpkgs,
+  pkgs ? import nixpkgs {
+    config = { };
+    overlays = [ ];
+    inherit system;
+  },
+  lib ? import "${nixpkgs}/lib",
 }:
 let
-  inherit (pkgs) lib;
-
   # Should allow deps to be discovered without explicitly passing them around
   # only scope to self' which is the by-name scope, do not scope to self
   callPackage = pkgs.newScope (self' // { inherit callPackage; });

@@ -9,13 +9,19 @@
 # then your CI will be able to build and cache only those packages for
 # which this is possible.
 
+# from ngipkgs Copyright (c) 2023 NGIpkgs contributors
+let
+  flake-inputs = import (fetchTarball {
+    url = "https://github.com/fricklerhandwerk/flake-inputs/tarball/4.1.0";
+    sha256 = "1j57avx2mqjnhrsgq3xl7ih8v7bdhz1kj3min6364f486ys048bm";
+  });
+  inherit (flake-inputs) import-flake;
+in
 {
-  sources ? {
-    nixpkgs = <nixpkgs>;
-    "nixpkgs.lib" = <nixpkgs/lib>;
-  },
+  flake ? import-flake { src = ./.; },
+  sources ? flake.inputs,
+  system ? builtins.currentSystem,
   nixpkgs ? sources.nixpkgs,
-  lib ? import sources."nixpkgs.lib",
   pkgs ? import nixpkgs {
     config.allowUnfreePredicate =
       pkg:
@@ -24,7 +30,10 @@
         byName = builtins.elem pname [ "textual-window" ];
       in
       if byName then lib.warn "NurPkgs allowing unfree package: ${pname}" true else false;
+    overlays = [ ];
+    inherit system;
   },
+  lib ? import "${nixpkgs}/lib",
 }:
 
 with builtins;
