@@ -1,0 +1,35 @@
+From d9ec9b826fe63968700ea6a8414dc20715318e20 Mon Sep 17 00:00:00 2001
+From: phanirithvij <phanirithvij2000@gmail.com>
+Date: Mon, 3 Nov 2025 21:22:08 +0530
+Subject: [PATCH 1/2] fix -Wimplicit-int errors
+
+Signed-off-by: phanirithvij <phanirithvij2000@gmail.com>
+---
+ src/pendulum.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/pendulum.c b/src/pendulum.c
+index c5c24e6..2801213 100644
+--- a/src/pendulum.c
++++ b/src/pendulum.c
+@@ -66,7 +66,7 @@ double tim(struct timeval * t){
+ /* The Code:8 ends here */
+ 
+ /* [[file:../Readme.org::*Drawing][Drawing:1]] */
+-draw(State state,Sys sys,double u){
++int draw(State state,Sys sys,double u){
+ /* Drawing:1 ends here */
+ 
+ /* [[file:../Readme.org::*Drawing][Drawing:2]] */
+@@ -149,7 +149,7 @@ draw(State state,Sys sys,double u){
+ /* Drawing:13 ends here */
+ 
+ /* [[file:../Readme.org::*Physics Simulation][Physics Simulation:1]] */
+-physics(State * state,Sys sys,double dt,double u) {
++int physics(State * state,Sys sys,double dt,double u) {
+ /* Physics Simulation:1 ends here */
+ 
+ /* [[file:../Readme.org::*Physics Simulation][Physics Simulation:2]] */
+-- 
+2.51.0
+

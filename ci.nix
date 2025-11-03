@@ -27,7 +27,10 @@ in
       pkg:
       let
         pname = lib.getName pkg;
-        byName = builtins.elem pname [ "textual-window" ];
+        byName = builtins.elem pname [
+          "textual-window"
+          "pendulum"
+        ];
       in
       if byName then lib.warn "NurPkgs allowing unfree package: ${pname}" true else false;
     overlays = [ ];

@@ -1,0 +1,31 @@
+From f4c0e1a5c665fb5a89e860fe426369537fd50262 Mon Sep 17 00:00:00 2001
+From: phanirithvij <phanirithvij2000@gmail.com>
+Date: Mon, 3 Nov 2025 21:40:58 +0530
+Subject: [PATCH 2/2] allow control.c from args
+
+Signed-off-by: phanirithvij <phanirithvij2000@gmail.com>
+---
+ src/pendulum.c | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/src/pendulum.c b/src/pendulum.c
+index 2801213..8c5bff7 100644
+--- a/src/pendulum.c
++++ b/src/pendulum.c
+@@ -246,7 +246,12 @@ int main(int c, char **v){
+     exit(EXIT_FAILURE);
+   }
+ 
+-  char source_file[10] = "control.c";
++  if (c < 2) {
++    fprintf(stderr, "Usage: %s <control.c>\n", v[0]);
++    fprintf(stderr, "See example/control.c in package share directory\n");
++    return 1;
++  }
++  char *source_file = v[1];
+ 
+   /* Add watch */
+   int control_watch = inotify_add_watch( fd, source_file, IN_MODIFY);
+-- 
+2.51.0
+
