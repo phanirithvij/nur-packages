@@ -3,7 +3,7 @@
   fetchpatch2,
 }:
 let
-  f = builtins.getFlake "github:maralorn/nix-output-monitor/07169b3894ab7cb1ee01d766145ab03bf2dc7a69";
+  f = builtins.getFlake "github:maralorn/nix-output-monitor/698e6f3afdc9d68dd65d84df7b030499dbfaf84b";
 in
 f.packages.${system}.default.overrideAttrs (_: {
   patches = [
