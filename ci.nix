@@ -22,8 +22,8 @@ in
   sources ? flake.inputs,
   system ? builtins.currentSystem,
   nixpkgs ? sources.nixpkgs,
-  pkgs ? import nixpkgs {
-    config.allowUnfreePredicate =
+  config ? {
+    allowUnfreePredicate =
       pkg:
       let
         pname = lib.getName pkg;
@@ -33,6 +33,9 @@ in
         ];
       in
       if byName then lib.warn "NurPkgs allowing unfree package: ${pname}" true else false;
+  }, # allows overriding via cli, --arg config
+  pkgs ? import nixpkgs {
+    inherit config;
     overlays = [ ];
     inherit system;
   },

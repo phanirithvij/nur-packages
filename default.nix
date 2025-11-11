@@ -18,8 +18,9 @@ in
   sources ? flake.inputs,
   system ? builtins.currentSystem,
   nixpkgs ? sources.nixpkgs,
+  config ? { }, # allows --arg config from cli
   pkgs ? import nixpkgs {
-    config = { };
+    inherit config;
     overlays = [ ];
     inherit system;
   },
