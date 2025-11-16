@@ -20,6 +20,14 @@ python3.pkgs.buildPythonPackage rec {
     uv-build
   ];
 
+  # copied from nemorosa/package.nix
+  # `build-system` requirements are seemingly not covered by pythonRelaxDeps
+  postPatch = ''
+    sed -i 's/requires = \["uv_build.*"\]/requires = ["uv_build"]/' pyproject.toml
+  '';
+
+  #pythonRelaxDeps = true;
+
   pythonImportsCheck = [
     "ezpubsub"
   ];
