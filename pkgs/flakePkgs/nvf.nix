@@ -1,7 +1,7 @@
 # https://github.com/NotAShelf/nvf/blob/main/configuration.nix
 { pkgs, ... }:
 let
-  nvf = builtins.getFlake "github:NotAShelf/nvf/25aafc84f57973ed7f17528b60490a99ee539163";
+  nvf = builtins.getFlake "github:NotAShelf/nvf/913dd0dd417b695e811b708319dd87df61366f39";
 in
 (nvf.lib.neovimConfiguration {
   inherit pkgs;
@@ -21,7 +21,7 @@ in
           enableTreesitter = true;
 
           nix.enable = true;
-          nix.format.type = "nixfmt";
+          nix.format.type = [ "nixfmt" ];
           markdown.enable = true;
           markdown.extensions.render-markdown-nvim.enable = true;
           bash.enable = true;
