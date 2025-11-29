@@ -2,6 +2,6 @@
   system ? "x86_64-linux",
 }:
 let
-  f = builtins.getFlake "github:Fuwn/yae/8720549ffd8f69832f5c0d7e6686bf115437f242";
+  f = builtins.getFlake "github:Fuwn/yae/ee1e583a3c2584880ee666043ffe1a176bbd88b4";
 in
 f.packages.${system}.default
