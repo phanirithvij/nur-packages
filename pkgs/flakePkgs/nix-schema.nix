@@ -1,12 +1,12 @@
 # upd-all.sh manages the hash
 # https://github.com/gvolpe/nix-config/blob/3d2744a4d663d30f1b0b4014917f8d51b006f053/lib/overlays.nix#L87
 {
-  system ? "x86_64-linux",
+  stdenv,
 }:
 let
   flake = builtins.getFlake "github:DeterminateSystems/nix-src/271926aa5997c3120c8ef0962ce1c7f29fee1a05";
   # TODO, withAWS = false;
-  pkg = flake.packages.${system}.nix;
+  pkg = flake.packages.${stdenv.hostPlatform.system}.nix;
 in
 pkg.overrideAttrs (o: {
   doCheck = false;
