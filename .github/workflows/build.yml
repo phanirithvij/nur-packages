@@ -20,26 +20,63 @@ jobs:
           - nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/nixpkgs-unstable.tar.gz
           - nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/nixos-unstable.tar.gz
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@main
+    - uses: actions/checkout@main
+    # must be done before installing nix
     - uses: wimpysworld/nothing-but-nix@main
-    - name: Install nix
-      uses: cachix/install-nix-action@master
+    - uses: cachix/install-nix-action@master
       with:
         nix_path: "${{ matrix.nixPath }}"
+        github_access_token: ${{ secrets.GITHUB_TOKEN }}
         extra_nix_config: |
           experimental-features = nix-command flakes
-          access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-    - name: Show nixpkgs version
-      run: nix-instantiate --eval -E '(import <nixpkgs> {}).lib.version'
-    - name: Setup cachix
-      uses: cachix/cachix-action@master
+    - run: nix-instantiate --eval -E '(import <nixpkgs> {}).lib.version'
+    - uses: cachix/cachix-action@master
       # Don't replace <YOUR_CACHIX_NAME> here!
       if: ${{ matrix.cachixName != '<YOUR_CACHIX_NAME>' }}
       with:
         name: ${{ matrix.cachixName }}
         signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+    # TODO check if this is working by making the ghcr private
+    - name: setup netrc for oranc
+      run: |
+        sudo tee /etc/nix/netrc > /dev/null <<EOF
+        machine 127.0.0.1
+            login ${{ github.repository_owner }}
+            password ${{ secrets.GH_PAT_TOKEN }}
+        EOF
+        echo "netrc-file = /etc/nix/netrc" | sudo tee -a /etc/nix/nix.conf >/dev/null
+        sudo systemctl restart nix-daemon.service
+    # not required if using the fast oranc docker setup
+    # but can't live without nothing-but-nix
+    # and nothing-but-nix removes docker (yeah you can change the cleave level to allow docker but I need the full cut)
+    # so nothing-but-nix > oranc via docker
+    # ideally removing docker should not impact the running docker service
+    # but ip resolution fails after a while
+    - name: install and run oranc
+      run: |
+        # ideally will get substituted, what oranc-action does inside
+        # if it fails to substitute, then oranc-action likely will too
+        nix build github:linyinfeng/oranc/main \
+          --extra-substituters "https://linyinfeng.cachix.org" \
+          --extra-trusted-public-keys "linyinfeng.cachix.org-1:sPYQXcNrnCf7Vr7T0YmjXz5dMZ7aOKG3EqLja0xr9MM="
+        ./result/bin/oranc server --listen "127.0.0.1:9999" &
+    - uses: linyinfeng/oranc-action@main
+      with:
+        repositoryPart1: ${{ github.repository_owner }}
+        repositoryPart2: ${{ secrets.OCI_REPOSITORY_PART2 }}
+        orancServerType: "url"
+        orancServerUrl: "http://127.0.0.1:9999"
+        # can't use this because we remove docker with nothing-but-nix
+        # orancServerContainer: "${{ job.services.oranc.id }}"
+        initialize: "true"
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.GH_PAT_TOKEN }}
+        signingKey: ${{ secrets.NIX_SIGNING_KEY }}
+        #orancCliExtraArgs: "--excluded-signing-key-pattern '%5E$' --already-signed"
     - name: Build nix packages
       run: nix shell -L -f '<nixpkgs>' nix-build-uncached -c nix-build-uncached ci.nix -A cacheOutputs
