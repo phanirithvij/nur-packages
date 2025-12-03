@@ -20,11 +20,14 @@ in
   nixpkgs ? sources.nixpkgs,
   config ? { }, # allows --arg config from cli
   pkgs ? import nixpkgs {
-    inherit config;
-    overlays = [ ];
-    inherit system;
+    inherit
+      config
+      overlays
+      system
+      ;
   },
   lib ? import "${nixpkgs}/lib",
+  overlays ? [ ],
 }:
 let
   # Should allow deps to be discovered without explicitly passing them around

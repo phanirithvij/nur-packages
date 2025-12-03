@@ -35,11 +35,14 @@ in
       if byName then lib.warn "NurPkgs allowing unfree package: ${pname}" true else false;
   }, # allows overriding via cli, --arg config
   pkgs ? import nixpkgs {
-    inherit config;
-    overlays = [ ];
-    inherit system;
+    inherit
+      config
+      overlays
+      system
+      ;
   },
   lib ? import "${nixpkgs}/lib",
+  overlays ? [ ],
 }:
 
 with builtins;
