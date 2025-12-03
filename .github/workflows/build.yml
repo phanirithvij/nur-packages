@@ -20,17 +20,31 @@ jobs:
           - nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/nixpkgs-unstable.tar.gz
           - nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/nixos-unstable.tar.gz
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    services:
+      oranc:
+        image: ghcr.io/linyinfeng/oranc
     steps:
     - name: Checkout repository
       uses: actions/checkout@main
-    - uses: wimpysworld/nothing-but-nix@main
+    - name: remember docker service ip # requires docker, which nothing-but-nix removes
+      run: |
+        CONTAINER_IP="$(
+          docker inspect \
+            --format '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' \
+            ${{ job.services.oranc.id }}
+        )"
+        echo "CONTAINER_IP=${CONTAINER_IP}" >> $GITHUB_ENV
+    #- uses: wimpysworld/nothing-but-nix@main # must be done before installing nix
     - name: Install nix
       uses: cachix/install-nix-action@master
       with:
         nix_path: "${{ matrix.nixPath }}"
+        github_access_token: ${{ secrets.GITHUB_TOKEN }}
         extra_nix_config: |
           experimental-features = nix-command flakes
-          access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
     - name: Show nixpkgs version
       run: nix-instantiate --eval -E '(import <nixpkgs> {}).lib.version'
     - name: Setup cachix
@@ -41,5 +55,28 @@ jobs:
         name: ${{ matrix.cachixName }}
         signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+    - name: setup netrc for oranc
+      run: |
+        sudo tee /etc/nix/netrc > /dev/null <<EOF
+        machine http://${CONTAINER_IP}
+            login ${{ github.repository_owner }}
+            password ${{ secrets.GH_PAT_TOKEN }}
+        EOF
+        echo "netrc-file = /etc/nix/netrc" | sudo tee -a /etc/nix/nix.conf >/dev/null
+        sudo systemctl restart nix-daemon.service
+    - name: Setup oranc
+      uses: linyinfeng/oranc-action@main
+      with:
+        repositoryPart1: ${{ github.repository_owner }}
+        repositoryPart2: ${{ secrets.OCI_REPOSITORY_PART2 }}
+        orancServerType: "url"
+        orancServerUrl: "http://${{ env.CONTAINER_IP }}"
+        # can't use this because we remove docker with nothing-but-nix
+        # orancServerContainer: "${{ job.services.oranc.id }}"
+        initialize: "true"
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.GH_PAT_TOKEN }}
+        signingKey: ${{ secrets.NIX_SIGNING_KEY }}
+        orancCliExtraArgs: "--excluded-signing-key-pattern '%5E$' --already-signed"
     - name: Build nix packages
       run: nix shell -L -f '<nixpkgs>' nix-build-uncached -c nix-build-uncached ci.nix -A cacheOutputs
