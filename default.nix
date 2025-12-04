@@ -16,9 +16,10 @@ in
 {
   flake ? import-flake { src = ./.; },
   sources ? flake.inputs,
-  system ? builtins.currentSystem,
   nixpkgs ? sources.nixpkgs,
   config ? { }, # allows --arg config from cli
+  overlays ? [ ],
+  system ? builtins.currentSystem,
   pkgs ? import nixpkgs {
     inherit
       config
@@ -27,7 +28,6 @@ in
       ;
   },
   lib ? import "${nixpkgs}/lib",
-  overlays ? [ ],
 }:
 let
   # Should allow deps to be discovered without explicitly passing them around
@@ -82,6 +82,14 @@ let
     # overlayPkgs, force overlays to be built in ci
     overlayPkgs = (import ./overlays/overlayPkgs.nix { inherit system nixpkgs; }) // {
       recurseForDerivations = true;
+    };
+
+    devShells.default = pkgs.mkShellNoCC {
+      packages = with pkgs; [
+        nixfmt-rfc-style
+        #dprint
+        sources.nix-update.packages.${system}.default
+      ];
     };
   };
 in

@@ -38,7 +38,7 @@
         }:
         (lib.filterAttrs (_: v: lib.isDerivation v) legacyPackages)
         // {
-          inherit (legacyPackages) unstablePkgs flakePkgs;
+          inherit (legacyPackages) unstablePkgs flakePkgs devShells;
           # inherit ... overlayPkgs;
           # ci.nix reads from default.nix so no need to expose overlayPkgs in flake
         };
@@ -57,14 +57,6 @@
         };
       legacyPackages = forAllSystems (system: getLegacyPkgs { inherit system; });
       packages = forAllSystems (system: getPackages { inherit system; });
-      devShells = forAllSystems (system: {
-        default = pkgs'.${system}.mkShellNoCC {
-          packages = with pkgs'.${system}; [
-            nixfmt-rfc-style
-            #dprint
-            inputs.nix-update.packages.${system}.default
-          ];
-        };
-      });
+      devShells = forAllSystems (system: self.packages.${system}.devShells);
     };
 }
