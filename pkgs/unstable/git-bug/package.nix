@@ -10,14 +10,14 @@ git-bug.override {
       args
       // rec {
         pname = "git-bug";
-        version = "0.10.1-unstable-2025-08-30";
+        version = "0.10.1-unstable-2025-12-08";
         src = fetchFromGitHub {
           owner = "git-bug";
           repo = "git-bug";
-          rev = "9427c459ab325d37653453b0c19529ed6b1af61a";
-          hash = "sha256-CfsRncRl2PDDGZgQt0r+TyH8GEIDldsEl6PGP7umk2A=";
+          rev = "cf47635eba59e8d6ec70bedbb3dc6cf97af45233";
+          hash = "sha256-66jNM5309wjGHS0llqSnwmzUFeRXKWmkgBfg5bGL/DI=";
         };
-        vendorHash = "sha256-fPS+IJ9XjJEmglmJmUMXm5zldsCZD9rMMJ7jZSJUFOI=";
+        vendorHash = "sha256-n/95OQVHqibb2dm04KyR5mPlSWqDlb0nAW5J/zASf3g=";
         ldflags = [
           "-s"
           "-X github.com/MichaelMure/git-bug/commands.GitCommit=${version}"
