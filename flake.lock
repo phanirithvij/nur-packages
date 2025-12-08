@@ -1,5 +1,43 @@
 {
   "nodes": {
+    "devshell": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1764011051,
+        "narHash": "sha256-M7SZyPZiqZUR/EiiBJnmyUbOi5oE/03tCeFrTiUZchI=",
+        "owner": "numtide",
+        "repo": "devshell",
+        "rev": "17ed8d9744ebe70424659b0ef74ad6d41fc87071",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "ref": "main",
+        "repo": "devshell",
+        "type": "github"
+      }
+    },
+    "devshell-lib": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1756280941,
+        "narHash": "sha256-QJrcAvSUaFU5Lns/D3px1oEIiANNmVp9o1hLlMQuG/w=",
+        "owner": "phanirithvij",
+        "repo": "nix-shell-templates",
+        "rev": "1b798f537fb8ff6b7c331371f80924bc0a6564f1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "phanirithvij",
+        "ref": "main",
+        "repo": "nix-shell-templates",
+        "type": "github"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
@@ -61,6 +99,8 @@
     },
     "root": {
       "inputs": {
+        "devshell": "devshell",
+        "devshell-lib": "devshell-lib",
         "nix-update": "nix-update",
         "nixpkgs": "nixpkgs"
       }

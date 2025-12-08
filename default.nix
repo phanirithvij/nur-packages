@@ -84,13 +84,24 @@ let
       recurseForDerivations = true;
     };
 
-    devShells.default = pkgs.mkShellNoCC {
-      packages = with pkgs; [
-        nixfmt-rfc-style
-        #dprint
-        sources.nix-update.packages.${system}.default
-      ];
-    };
+    devShells.default =
+      (import (sources.devshell-lib + "/lib/devshells.nix") {
+        name = "nur";
+        inherit pkgs;
+        enableTreefmt = false;
+        tools = with pkgs; [
+          # dprint # TODO enableTreefmt
+          nixfmt-rfc-style
+          sources.nix-update.packages.${system}.default
+        ];
+        packages = [ ]; # these don't show up in menu
+        extraCommands = [ ]; # should be in the format list of attrs devshell expects
+        devshell = import sources.devshell { nixpkgs = pkgs; };
+      }).shell.overrideAttrs # devshell is a `derivation` which has no overrideAttrs (it is an stdenv.mkdrv thing)
+        (o: {
+          name = "nur";
+          shellHook = o.shellHook;
+        });
   };
 in
 self

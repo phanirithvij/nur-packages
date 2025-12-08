@@ -2,8 +2,18 @@
   description = "My personal NUR repository";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nix-update.url = "github:Mic92/nix-update";
-    nix-update.inputs.nixpkgs.follows = "nixpkgs";
+    nix-update = {
+      url = "github:Mic92/nix-update";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    devshell = {
+      url = "github:numtide/devshell/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    devshell-lib = {
+      url = "github:phanirithvij/nix-shell-templates/main";
+      flake = false;
+    };
   };
   outputs =
     {
