@@ -43,6 +43,7 @@ updateFlakePkg maralorn/nix-output-monitor
 updateFlakePkg bachp/git-mirror
 updateFlakePkg samestep/npc
 updateFlakePkg linyinfeng/oranc
+updateFlakePkg cyrinux/push2talk
 
 # unstablePkgs
 
