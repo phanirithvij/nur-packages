@@ -10,13 +10,13 @@
 }:
 rustPlatform.buildRustPackage {
   pname = "lazyjj";
-  version = "0.6.1-unstable-2025-12-07";
+  version = "0.6.1-unstable-2025-12-08";
 
   src = fetchFromGitHub {
     owner = "Cretezy";
     repo = "lazyjj";
-    rev = "83f60ce3a25452d5ea0610d74b931ac4645382d6";
-    hash = "sha256-PDno4+NNkISzouJ+FCKjC5OJwrg/fnMkUkRAqelAer0=";
+    rev = "ca3236814ce38efc013d64e3bccd02f1866a7bd2";
+    hash = "sha256-zIQh/5Hq6a/KbxyMKq7SBketCoAFX1JHX+e212aasZY=";
   };
 
   cargoHash = "sha256-mRq8Cu9LP4JJbBUEs6iyUX5OP31QLFnPgFYdsCVpdDk=";

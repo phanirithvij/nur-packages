@@ -1,7 +1,7 @@
 {
-  description = "My personal NUR repository";
+  description = "phanirithvij's personal NUR repository";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-update = {
       url = "github:Mic92/nix-update";
       inputs.nixpkgs.follows = "nixpkgs";
