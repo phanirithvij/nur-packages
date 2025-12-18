@@ -56,5 +56,5 @@ eval "$script"
 
 # overlayPkgs
 
-nix-update --version=branch overlayPkgs.git-bug
-nix-update --version=branch overlayPkgs.navi
+#nix-update --version=branch overlayPkgs.git-bug
+#nix-update --version=branch overlayPkgs.navi
