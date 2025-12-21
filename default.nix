@@ -51,6 +51,7 @@ let
     bashmount = callPackage ./pkgs/patched/bashmount { };
     bluetuith = callPackage ./pkgs/patched/bluetuith { };
     pr-tracker = callPackage ./pkgs/patched/pr-tracker { };
+    gitbatch = callPackage ./pkgs/patched/gitbatch { };
 
     # These are flakes, but
     #   I don't want to pollute my system flake
