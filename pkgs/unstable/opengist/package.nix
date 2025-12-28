@@ -5,19 +5,19 @@
 }:
 let
   pname = "opengist";
-  version = "1.11.1-unstable-2025-10-31";
+  version = "1.11.1-unstable-2025-12-28";
   src = fetchFromGitHub {
     owner = "thomiceli";
     repo = "opengist";
-    rev = "3957dfb3ea27d3ce84b9295f28b46c55b18db7cd";
-    hash = "sha256-rQgaRDN4JAkWqPg551J/M9VokTWqED5IgufY8eZEwt0=";
+    rev = "7b4dab143bf94ca0467ad16702e15ff5cb949b44";
+    hash = "sha256-uLkDrYgSd2Gcl2+Yfh932G8K13DLly4FOtZ5l6DyyQM=";
   };
   frontend = opengist.frontend.overrideAttrs {
     inherit version src;
     npmDeps = fetchNpmDeps {
       inherit src;
       name = "${pname}-frontend-${version}-npm-deps";
-      hash = "sha256-4ICKVVQMCtMG+Gjz9TZISXirZ22GgQZAMuD2tZCEvxs=";
+      hash = "sha256-EZseT0HZo1i/hZ3JVVMQweAJFv6UFXxUGjqxFjWEoUE=";
     };
     # Remove postcss step because it was removed upstream
     # see
@@ -28,7 +28,7 @@ in
 opengist.overrideAttrs (
   finalAttrs: _: {
     inherit version src frontend;
-    vendorHash = "sha256-DfKrYyZ7zqtt+GsMvYHI/nhQCFFGoRBCxbD2TaPpijs=";
+    vendorHash = "sha256-6OvMPGeeXcDpGegGU0Ul/niXM/8MNOKH9aU5uDJf2R8=";
     ldflags = [
       "-s"
       "-X github.com/thomiceli/opengist/internal/config.OpengistVersion=${finalAttrs.version}"

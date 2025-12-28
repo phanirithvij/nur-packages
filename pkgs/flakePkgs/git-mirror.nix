@@ -2,7 +2,7 @@
   stdenv,
 }:
 let
-  f = builtins.getFlake "github:bachp/git-mirror/570cc0a3c34ff7e36e876b24f5b3c61a256ec71b";
+  f = builtins.getFlake "github:bachp/git-mirror/5c2cbc3c5eb0e8e11a7c8390745b8ffa10a72528";
 in
 if stdenv.hostPlatform.system != "x86_64-linux" then
   null
