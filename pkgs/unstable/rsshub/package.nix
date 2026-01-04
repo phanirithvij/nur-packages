@@ -1,25 +1,26 @@
 {
   lib,
-  fetchFromGitHub,
   fetchpatch,
+  fetchFromGitHub,
   makeBinaryWrapper,
+
+  pnpm,
   nodejs,
-  pnpm_9,
-  replaceVars,
+  fetchPnpmDeps,
+  pnpmConfigHook,
+
   stdenv,
+  replaceVars,
 }:
-let
-  pnpm = pnpm_9;
-in
 stdenv.mkDerivation (finalAttrs: {
   pname = "rsshub";
-  version = "0-unstable-2025-12-27";
+  version = "0-unstable-2026-01-04";
 
   src = fetchFromGitHub {
     owner = "DIYgod";
     repo = "RSSHub";
-    rev = "99639882ce2d59070453cc6b0e85ba6c8915eceb";
-    hash = "sha256-+T6kwqGinhThhOcZS/x61/7M6zZrkzS4xcRXy3KQ1mE=";
+    rev = "ffb226c32c5eeba89f3071768093c481da348cd7";
+    hash = "sha256-V2pP6o3Wiy6fqH1AoeQXaQo/fXCj6ZiGoZQjjENvwbA=";
   };
 
   patches = [
@@ -33,16 +34,17 @@ stdenv.mkDerivation (finalAttrs: {
     })
   ];
 
-  pnpmDeps = pnpm.fetchDeps {
+  pnpmDeps = fetchPnpmDeps {
     inherit (finalAttrs) pname version src;
-    hash = "sha256-kPttBpJXNUlaIcb7xl6nzJAfirqX3Vm2pCwoNFN7iNk=";
+    hash = "sha256-SUxKm+o/cRiVtmEcfiEFJbhUjDzpEEs5MY6nxYgd87E=";
     fetcherVersion = 2;
   };
 
   nativeBuildInputs = [
-    makeBinaryWrapper
+    pnpm
     nodejs
-    pnpm.configHook
+    pnpmConfigHook
+    makeBinaryWrapper
   ];
 
   buildPhase = ''
@@ -54,7 +56,7 @@ stdenv.mkDerivation (finalAttrs: {
   installPhase = ''
     runHook preInstall
     mkdir -p $out/bin $out/lib/rsshub
-    cp -r lib node_modules assets api package.json tsconfig.json $out/lib/rsshub
+    cp -r lib node_modules assets package.json tsconfig.json $out/lib/rsshub
     runHook postInstall
   '';
 
@@ -83,6 +85,5 @@ stdenv.mkDerivation (finalAttrs: {
     maintainers = with lib.maintainers; [ Guanran928 ];
     mainProgram = "rsshub";
     platforms = lib.platforms.all;
-    broken = true;
   };
 })

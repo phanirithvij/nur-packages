@@ -1,18 +1,30 @@
+From bdf183bbd00ae7c2d33bafb17da68ceac71cbadd Mon Sep 17 00:00:00 2001
+From: phanirithvij <phanirithvij2000@gmail.com>
+Date: Sun, 4 Jan 2026 16:06:13 +0530
+Subject: [PATCH 2/2] fix network call
+
+Signed-off-by: phanirithvij <phanirithvij2000@gmail.com>
+---
+ scripts/workflow/build-routes.ts | 3 +++
+ 1 file changed, 3 insertions(+)
+
 diff --git a/scripts/workflow/build-routes.ts b/scripts/workflow/build-routes.ts
-index 9807cfc..b9dcfb9 100644
+index a9cb72b21..9446fe077 100644
 --- a/scripts/workflow/build-routes.ts
 +++ b/scripts/workflow/build-routes.ts
-@@ -4,6 +4,7 @@ import { parse } from 'tldts';
+@@ -1,5 +1,6 @@
  import fs from 'node:fs';
  import path from 'node:path';
- import toSource from 'tosource';
 +import { exit } from 'node:process';
-
- import { getCurrentPath } from '../../lib/utils/helpers';
- const __dirname = getCurrentPath(import.meta.url);
-@@ -73,3 +74,5 @@ fs.writeFileSync(path.join(__dirname, '../../assets/build/radar-rules.js'), `(${
- fs.writeFileSync(path.join(__dirname, '../../assets/build/maintainers.json'), JSON.stringify(maintainers, null, 2));
- fs.writeFileSync(path.join(__dirname, '../../assets/build/routes.json'), JSON.stringify(namespaces, null, 2));
- fs.writeFileSync(path.join(__dirname, '../../assets/build/routes.js'), `export default ${JSON.stringify(namespaces, null, 2)}`.replaceAll(/"module": "(.*)"\n/g, `"module": $1\n`));
+ 
+ import { parse } from 'tldts';
+ import toSource from 'tosource';
+@@ -113,3 +114,5 @@ if (isWorkerBuild) {
+     fs.writeFileSync(path.join(__dirname, '../../assets/build/routes.js'), `export default ${JSON.stringify(namespaces, null, 2)}`.replaceAll(/"module": "(.*)"\n/g, `"module": $1\n`));
+     fs.writeFileSync(path.join(__dirname, '../../assets/build/route-paths.ts'), routePathsType);
+ }
 +
 +exit(0);
+-- 
+2.51.2
+

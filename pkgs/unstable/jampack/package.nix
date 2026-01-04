@@ -1,14 +1,14 @@
 {
   lib,
   stdenv,
-  fetchFromGitHub,
   makeWrapper,
+  fetchFromGitHub,
+
+  pnpm,
   nodejs,
-  pnpm_9,
+  fetchPnpmDeps,
+  pnpmConfigHook,
 }:
-let
-  pnpm = pnpm_9;
-in
 stdenv.mkDerivation rec {
   pname = "jampack";
   version = "0-unstable-2025-09-10";
@@ -19,16 +19,23 @@ stdenv.mkDerivation rec {
     rev = "733bbed01c2c95821e77cb2d31f74ea26e9ac0cb";
     hash = "sha256-AtFO6k/VVzixhlV2yWF9zkHIXXl7U2F9H31r5Vk3pJ8=";
   };
+  patches = [ ./0001-pnpm-update-lock.patch ];
 
-  pnpmDeps = pnpm.fetchDeps {
-    inherit pname version src;
-    hash = "sha256-8RDRuutPGldFf9CYmVByG28dVyOoASmtDvlBs13DJPw=";
+  pnpmDeps = fetchPnpmDeps {
+    inherit
+      pname
+      version
+      src
+      patches
+      ;
+    hash = "sha256-c/SeiLZv2am0+oSdwx+KE/nXe6PsMlalrs51Z3HV3mA=";
     fetcherVersion = 2;
   };
 
   nativeBuildInputs = [
+    pnpm
     nodejs
-    pnpm.configHook
+    pnpmConfigHook
     makeWrapper
   ];
 
@@ -60,5 +67,6 @@ stdenv.mkDerivation rec {
     homepage = "https://github.com/divriots/jampack";
     license = lib.licenses.mit;
     mainProgram = "jampack";
+    maintainers = with lib.maintainers; [ phanirithvij ];
   };
 }
