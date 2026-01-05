@@ -76,7 +76,8 @@ jobs:
         initialize: "true"
         username: ${{ github.repository_owner }}
         password: ${{ secrets.GH_PAT_TOKEN }}
+        # it is private key
         signingKey: ${{ secrets.NIX_SIGNING_KEY }}
-        #orancCliExtraArgs: "--excluded-signing-key-pattern '%5E$' --already-signed"
+        orancCliExtraArgs: "--excluded-signing-key-pattern '%5E$' --already-signed"
     - name: Build nix packages
       run: nix shell -L -f '<nixpkgs>' nix-build-uncached -c nix-build-uncached ci.nix -A cacheOutputs
