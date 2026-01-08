@@ -2,6 +2,6 @@
   stdenv,
 }:
 let
-  f = builtins.getFlake "github:utdemir/nix-tree/cfea64db14c5f5a7d9ad7f4e92a255bafa766845";
+  f = builtins.getFlake "github:utdemir/nix-tree/4baa2a0f808bbb229a1ef4a35882d763a2b6add4";
 in
 f.packages.${stdenv.hostPlatform.system}.default

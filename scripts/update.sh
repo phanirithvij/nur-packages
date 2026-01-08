@@ -32,7 +32,7 @@ updateFlakePkg() {
 # need to track branch as a marker somewhere in the file ig
 updateFlakePkg DeterminateSystems/nix-src/flake-schemas pkgs/flakePkgs/nix-schema.nix
 updateFlakePkg viperML/hover-rs
-updateFlakePkg NotAShelf/nvf/v0.8 # Temporarily move to 0.8 for NotAShelf/nvf#1172
+updateFlakePkg NotAShelf/nvf
 updateFlakePkg uncenter/nixpkgs-track
 updateFlakePkg euank/yaml2nix
 updateFlakePkg ghostty-org/ghostty
