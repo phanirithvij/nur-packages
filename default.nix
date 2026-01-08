@@ -53,6 +53,12 @@ let
     pr-tracker = callPackage ./pkgs/patched/pr-tracker { };
     gitbatch = callPackage ./pkgs/patched/gitbatch { };
 
+    # cached packages
+    # push em to cachix/oranc binary caches
+    # ideally: some belong to patched pkgs
+    hplip = callPackage ./pkgs/cached/hplip.nix { };
+    linux-firmware-iron-zstd = callPackage ./pkgs/cached/linux-firmware-iron.nix { };
+
     # These are flakes, but
     #   I don't want to pollute my system flake
     #   don't want to write a lot of inputs.*.follows to avoid 10000 nixpkgs problem
