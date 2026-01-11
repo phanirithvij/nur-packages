@@ -44,7 +44,7 @@ in
         treesitter.context.enable = true;
         telescope.enable = true;
         git.enable = true;
-        minimap.codewindow.enable = true;
+        minimap.codewindow.enable = false; # https://github.com/NotAShelf/nvf/issues/1312#issuecomment-3719470693
         terminal = {
           toggleterm = {
             enable = true;
