@@ -98,7 +98,7 @@ let
         enableTreefmt = false;
         tools = with pkgs; [
           # dprint # TODO enableTreefmt
-          nixfmt-rfc-style
+          nixfmt
           sources.nix-update.packages.${system}.default
         ];
         packages = [ ]; # these don't show up in menu
