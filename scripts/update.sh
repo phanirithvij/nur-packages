@@ -30,20 +30,21 @@ updateFlakePkg() {
 
 # TODO for loop over dir
 # need to track branch as a marker somewhere in the file ig
-updateFlakePkg DeterminateSystems/nix-src/flake-schemas pkgs/flakePkgs/nix-schema.nix
-updateFlakePkg viperML/hover-rs
-updateFlakePkg NotAShelf/nvf
-updateFlakePkg uncenter/nixpkgs-track
-updateFlakePkg euank/yaml2nix
-updateFlakePkg ghostty-org/ghostty
-updateFlakePkg e-tho/bzmenu
-updateFlakePkg utdemir/nix-tree
 updateFlakePkg Fuwn/yae
-updateFlakePkg maralorn/nix-output-monitor
-updateFlakePkg bachp/git-mirror
+updateFlakePkg e-tho/bzmenu
 updateFlakePkg samestep/npc
+updateFlakePkg NotAShelf/nvf
+updateFlakePkg euank/yaml2nix
+updateFlakePkg viperML/hover-rs
+updateFlakePkg utdemir/nix-tree
 updateFlakePkg linyinfeng/oranc
+updateFlakePkg bachp/git-mirror
 updateFlakePkg cyrinux/push2talk
+updateFlakePkg ghostty-org/ghostty
+updateFlakePkg uncenter/nixpkgs-track
+updateFlakePkg numtide/system-manager
+updateFlakePkg maralorn/nix-output-monitor
+updateFlakePkg DeterminateSystems/nix-src/flake-schemas pkgs/flakePkgs/nix-schema.nix
 
 # unstablePkgs
 

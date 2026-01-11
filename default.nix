@@ -56,8 +56,10 @@ let
     # cached packages
     # push em to cachix/oranc binary caches
     # ideally: some belong to patched pkgs
+    # btw no need to use these inside system config, they are mainly for ci.nix
     hplip = callPackage ./pkgs/cached/hplip.nix { };
     linux-firmware-iron-zstd = callPackage ./pkgs/cached/linux-firmware-iron.nix { };
+    nvidia-settings = callPackage ./pkgs/cached/nvidia-settings.nix { };
 
     # These are flakes, but
     #   I don't want to pollute my system flake
