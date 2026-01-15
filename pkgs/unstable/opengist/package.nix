@@ -9,8 +9,8 @@ let
   src = fetchFromGitHub {
     owner = "thomiceli";
     repo = "opengist";
-    rev = "7b4dab143bf94ca0467ad16702e15ff5cb949b44";
-    hash = "sha256-uLkDrYgSd2Gcl2+Yfh932G8K13DLly4FOtZ5l6DyyQM=";
+    rev = "22376d6cd3d2dce420b6ca7f35ad1b2c8cb33785";
+    hash = "sha256-INjI98YKPoIgDefmMovDhQ1i6ZRrUfZqY3mjsEBojsw=";
   };
   frontend = opengist.frontend.overrideAttrs {
     inherit version src;

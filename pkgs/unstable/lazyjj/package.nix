@@ -10,16 +10,16 @@
 }:
 rustPlatform.buildRustPackage {
   pname = "lazyjj";
-  version = "0.6.1-unstable-2025-12-26";
+  version = "0.6.1-unstable-2026-01-13";
 
   src = fetchFromGitHub {
     owner = "Cretezy";
     repo = "lazyjj";
-    rev = "c9f641c617b34ddd28413383f8d3e182ecd3b43c";
-    hash = "sha256-5zI7i0ORmsnxRvoJJeScAYCfJg5ZNbNxadob/9xca0c=";
+    rev = "cc4053c23d67fd7f11456e98c7a34d2f0a98485e";
+    hash = "sha256-IGe12tjkpaaPHJmVHVdXfVcWyBDIUjMGeWMTxqlti2c=";
   };
 
-  cargoHash = "sha256-mRq8Cu9LP4JJbBUEs6iyUX5OP31QLFnPgFYdsCVpdDk=";
+  cargoHash = "sha256-Wk35/xekhwR9KJIdsOhSdkmuPy5O/uvPYaiN+9gdcWU=";
 
   cargoPatches = [
     # TODO patch should be in nixpkgs, will not be merged upstream

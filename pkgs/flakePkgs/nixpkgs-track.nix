@@ -2,7 +2,7 @@
   stdenv,
 }:
 let
-  f = builtins.getFlake "github:uncenter/nixpkgs-track/44937e8126698f70549510e8ee311e6a5fcb4f8c";
+  f = builtins.getFlake "github:uncenter/nixpkgs-track/bb00d9aa5e574bd747ee352c9b3df3ad92ea1a2a";
 in
 f.packages.${stdenv.hostPlatform.system}.default.overrideAttrs (_: {
   pname = "nixpkgs-track";
