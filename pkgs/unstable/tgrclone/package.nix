@@ -2,16 +2,16 @@
 rclone.overrideAttrs (
   f: _: {
     pname = "rclone";
-    version = "1.72.2-unstable-2026-01-30";
+    version = "1.73.1-unstable-2026-02-04";
     doInstallCheck = false;
     patches = [ ]; # no patches
     src = fetchFromGitHub {
       owner = "tgdrive";
       repo = "rclone";
-      rev = "02442931db5b3a18275a7cbd096cb7b930caf6f2";
-      hash = "sha256-7RCSk6cDE1hiIZca5poLV4+V2Gbm4z5ZA+Epw4v+3SE=";
+      rev = "cf4e39c6703245dc66b5bfc0cc30821f95d2434f";
+      hash = "sha256-xGSMpQahCkzWKaQtM/MPZw5tCM1ZqNe9IMEnMjkn4i4=";
     };
-    vendorHash = "sha256-tNeL43WGWeX88vXJwQzxubUPIyejl3PPHXLc8oNeno4=";
+    vendorHash = "sha256-LomeLlk0d/HTL0NKmbd083u7BHsy4FmAah9IzvmtO2s=";
     ldFlags = [
       "-s"
       "-X github.com/rclone/rclone/fs.Version=${f.version}"
