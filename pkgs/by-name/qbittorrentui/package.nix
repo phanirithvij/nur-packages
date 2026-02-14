@@ -5,7 +5,7 @@
   panwid,
 }:
 
-python3.pkgs.buildPythonApplication rec {
+python3.pkgs.buildPythonApplication {
   pname = "qbittorrentui";
   version = "0.3.9-unstable-2026-02-01";
   pyproject = true;

@@ -16,6 +16,14 @@ python3.pkgs.buildPythonPackage rec {
     hash = "sha256-0tdWf22nDiFNZChmH8ibvfsVUONJ0p4KqmUlnr99EbE=";
   };
 
+  # recursively replace display_common with display.common
+  preBuild = ''
+    find . -type f -name "*.py" \
+      -exec sed -i 's/urwid.display_common/urwid.display.common/g' {} +
+    find . -type f -name "*.py" \
+      -exec sed -i 's/urwid.escape/urwid.display.escape/g' {} +
+  '';
+
   build-system = [
     python3.pkgs.setuptools
     python3.pkgs.wheel
