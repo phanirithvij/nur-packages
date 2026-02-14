@@ -30,7 +30,6 @@ updateFlakePkg() {
 
 # TODO for loop over dir
 # need to track branch as a marker somewhere in the file ig
-updateFlakePkg Fuwn/yae
 updateFlakePkg e-tho/bzmenu
 updateFlakePkg samestep/npc
 updateFlakePkg NotAShelf/nvf
