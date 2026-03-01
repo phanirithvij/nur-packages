@@ -1,7 +1,7 @@
 # https://github.com/NotAShelf/nvf/blob/main/configuration.nix
 { pkgs, ... }:
 let
-  nvf = builtins.getFlake "github:NotAShelf/nvf/d07d8f62f03a313cfcf55feb3797e4cbda8d08a5";
+  nvf = builtins.getFlake "github:phanirithvij/nvf/0e47bce8e9a628f2a949a00118cd1315a8bfa3a8";
 in
 (nvf.lib.neovimConfiguration {
   inherit pkgs;
@@ -26,6 +26,7 @@ in
           markdown.extensions.render-markdown-nvim.enable = true;
           bash.enable = true;
           css.enable = true;
+          elm.enable = true;
           html.enable = true;
           ts.enable = true;
           go.enable = true;
