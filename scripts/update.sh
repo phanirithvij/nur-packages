@@ -32,8 +32,7 @@ updateFlakePkg() {
 # need to track branch as a marker somewhere in the file ig
 updateFlakePkg e-tho/bzmenu
 updateFlakePkg samestep/npc
-updateFlakePkg phanirithvij/nvf/elm-lang
-#updateFlakePkg NotAShelf/nvf
+updateFlakePkg NotAShelf/nvf
 updateFlakePkg euank/yaml2nix
 updateFlakePkg viperML/hover-rs
 updateFlakePkg utdemir/nix-tree
