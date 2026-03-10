@@ -110,6 +110,7 @@ let
         (o: {
           name = "nur";
           shellHook = o.shellHook;
+          allowSubstitutes = false; # for now don't care about caching the devshell
         });
   };
 in
