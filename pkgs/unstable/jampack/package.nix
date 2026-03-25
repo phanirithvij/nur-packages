@@ -11,13 +11,13 @@
 }:
 stdenv.mkDerivation rec {
   pname = "jampack";
-  version = "0-unstable-2025-09-10";
+  version = "0-unstable-2026-03-18";
 
   src = fetchFromGitHub {
     owner = "divriots";
     repo = "jampack";
-    rev = "733bbed01c2c95821e77cb2d31f74ea26e9ac0cb";
-    hash = "sha256-AtFO6k/VVzixhlV2yWF9zkHIXXl7U2F9H31r5Vk3pJ8=";
+    rev = "6b5410035f96b3f2bd34ba6067f68c6d461fa5a6";
+    hash = "sha256-4gahwjYQCTPl5uBpRXi7gnA6fW/OYu5danTszeDb2SQ=";
   };
   patches = [ ./0001-pnpm-update-lock.patch ];
 
