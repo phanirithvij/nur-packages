@@ -137,5 +137,6 @@ rustPlatform.buildRustPackage (finalAttrs: {
     maintainers = with lib.maintainers; [ phanirithvij ];
     platforms = lib.platforms.linux;
     mainProgram = "ttyrecall";
+    broken = true; # no matching package named rustc-literal-escaper found
   };
 })
