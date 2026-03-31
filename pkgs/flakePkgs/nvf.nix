@@ -1,7 +1,7 @@
 # https://github.com/NotAShelf/nvf/blob/main/configuration.nix
 { pkgs, ... }:
 let
-  nvf = builtins.getFlake "github:NotAShelf/nvf/d847d401bea4dcb1478d02a61a3209fa8512f71d";
+  nvf = builtins.getFlake "github:NotAShelf/nvf/b4d6539e7e9948aaba5efd7a67a63672d1fa80ef";
 in
 (nvf.lib.neovimConfiguration {
   inherit pkgs;
