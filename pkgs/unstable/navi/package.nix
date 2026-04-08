@@ -7,12 +7,12 @@ navi.overrideAttrs (
   old:
   let
     pname = "navi";
-    version = "2.24.0-unstable-2026-03-14";
+    version = "2.25.0-unstable-2026-04-03";
     src = fetchFromGitHub {
       owner = "denisidoro";
       repo = "navi";
-      rev = "b4ce885253df0b262332538a5561b458fe5dd3a2";
-      hash = "sha256-sjlZDiK7b1UEdgJHPgtbU8oTP2z+Kn6Uk/+DSjLCGFs=";
+      rev = "f1463e9e7ba5b87cc2d32511fab47317c2fbe58c";
+      hash = "sha256-E/GYAmyrXmOSFHvR/8FIBIlget87uwT2xl8/AvfXvfQ=";
     };
   in
   {

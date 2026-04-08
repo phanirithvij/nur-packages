@@ -4,13 +4,13 @@
 }:
 git-bug.overrideAttrs (prevAttrs: {
   pname = "git-bug";
-  version = "0.10.1-unstable-2026-03-25";
+  version = "0.10.1-unstable-2026-04-07";
   src = fetchFromGitHub {
     owner = "git-bug";
     repo = "git-bug";
-    rev = "9b06f224354f3cf745ad6bf6620c1b04ca51077f";
-    hash = "sha256-5zzBBkO0KCJkBHF8njk145W2fp00SJtYCvVUrvAxSIU=";
+    rev = "251a67a8b2145381b4c0552d25727e10cacc8628";
+    hash = "sha256-uwbuawdxg0Rugd8nIi2/PKIYb0TDQebC4AJMmgHvzrg=";
   };
-  vendorHash = "sha256-N09CuyfXpyOeOe0kg4G0GtH3b1PH2R8K2RJiF4ZAtCM=";
+  vendorHash = "sha256-cvzwDKo8vT0afmgJrlRiS6pwmobbOyoHgoIHTiuU898=";
   ldflags = (prevAttrs.ldflags or [ ]) ++ [ "-s" ];
 })

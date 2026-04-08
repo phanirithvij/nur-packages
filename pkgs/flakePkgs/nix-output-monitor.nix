@@ -3,7 +3,7 @@
   stdenv,
 }:
 let
-  f = builtins.getFlake "github:maralorn/nix-output-monitor/c04626d8e34c5444989aee6225f165456b130133";
+  f = builtins.getFlake "github:maralorn/nix-output-monitor/8f8e7caf3c5a440683b12b99f93926966da312a5";
 in
 f.packages.${stdenv.hostPlatform.system}.default.overrideAttrs (_: {
   patches = [
