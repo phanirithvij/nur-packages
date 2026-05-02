@@ -15,7 +15,7 @@ tcount.overrideAttrs (
     cargoDeps = oldAttrs.cargoDeps.overrideAttrs (
       lib.const {
         inherit (finalAttrs) src;
-        outputHash = "sha256-aUBGG/BD2ys2O50MuFlOOH4J+s0SfnuVAkYS9E4bQzA=";
+        outputHash = "sha256-JcoDLOGHP55UBOQnWYcPdhjR/bOIEkcFlZ9x0xSORLk=";
         outputHashMode = "recursive";
       }
     );
