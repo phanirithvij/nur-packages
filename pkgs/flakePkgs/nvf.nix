@@ -45,7 +45,10 @@ in
         treesitter.context.enable = true;
         telescope.enable = true;
         git.enable = true;
-        minimap.codewindow.enable = false; # https://github.com/NotAShelf/nvf/issues/1312#issuecomment-3719470693
+        minimap = {
+          # https://github.com/NotAShelf/nvf/issues/1312#issuecomment-3719470693
+          codewindow.enable = false;
+        };
         terminal = {
           toggleterm = {
             enable = true;
@@ -54,6 +57,13 @@ in
         };
         comments = {
           comment-nvim.enable = true;
+        };
+        binds = {
+          whichKey.enable = true;
+        };
+        maps.normal."<leader>bf" = {
+          action = "<cmd>Telescope current_buffer_fuzzy_find<CR>";
+          desc = "Fuzzy find in current buffer";
         };
       };
     })
