@@ -35,7 +35,6 @@ updateFlakePkg samestep/npc
 updateFlakePkg NotAShelf/nvf
 updateFlakePkg euank/yaml2nix
 updateFlakePkg viperML/hover-rs
-updateFlakePkg utdemir/nix-tree
 updateFlakePkg linyinfeng/oranc
 updateFlakePkg bachp/git-mirror
 updateFlakePkg cyrinux/push2talk
