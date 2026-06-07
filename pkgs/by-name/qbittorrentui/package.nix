@@ -7,14 +7,14 @@
 
 python3.pkgs.buildPythonApplication {
   pname = "qbittorrentui";
-  version = "0.3.9-unstable-2026-05-01";
+  version = "0.3.9-unstable-2026-05-30";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "rmartin16";
     repo = "qbittorrentui";
-    rev = "8045693e8516918d76454d914b739c44540f51a2";
-    hash = "sha256-AOtBqwYHmbiTS/BiOGHYCUKpMsf/nFAPu2H7afGy2LE=";
+    rev = "fafba3d3e708603a5f49447be63680737df5bbeb";
+    hash = "sha256-ULgQyG7HpcSfcTO6lDWa8BXfiBhIPU+fWQcXGmuf1ps=";
   };
 
   build-system = [
@@ -27,6 +27,7 @@ python3.pkgs.buildPythonApplication {
     qbittorrent-api
     urwid
     panwid
+    platformdirs
   ];
 
   optional-dependencies = with python3.pkgs; {

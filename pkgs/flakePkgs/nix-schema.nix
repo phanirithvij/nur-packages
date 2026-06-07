@@ -4,7 +4,7 @@
   stdenv,
 }:
 let
-  flake = builtins.getFlake "github:DeterminateSystems/nix-src/271926aa5997c3120c8ef0962ce1c7f29fee1a05";
+  flake = builtins.getFlake "github:DeterminateSystems/nix-src/0efc31ddccfb9670eda169c215595cd65b666962";
   # TODO, withAWS = false;
   pkg = flake.packages.${stdenv.hostPlatform.system}.nix;
 in
