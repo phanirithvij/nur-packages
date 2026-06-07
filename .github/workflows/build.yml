@@ -80,4 +80,4 @@ jobs:
         signingKey: ${{ secrets.NIX_SIGNING_KEY }}
         orancCliExtraArgs: "--excluded-signing-key-pattern '%5E$' --already-signed"
     - name: Build nix packages
-      run: nix shell -L -f '<nixpkgs>' nix-build-uncached -c nix-build-uncached ci.nix -A cacheOutputs
+      run: nix shell -L -f '<nixpkgs>' nix-eval-jobs nix-fast-build -c nix-fast-build --file ci.nix -A cacheOutputsAttrs --skip-cached

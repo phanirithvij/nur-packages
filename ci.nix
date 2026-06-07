@@ -97,4 +97,8 @@ rec {
 
   buildOutputs = concatMap outputsOf buildPkgs;
   cacheOutputs = concatMap outputsOf cachePkgs;
+
+  cacheOutputsAttrs = builtins.listToAttrs (
+    map (p: nameValuePair "${p.name}-${p.outputName}" p) cacheOutputs
+  );
 }
