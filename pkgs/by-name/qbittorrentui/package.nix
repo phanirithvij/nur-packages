@@ -7,7 +7,7 @@
 
 python3.pkgs.buildPythonApplication {
   pname = "qbittorrentui";
-  version = "0.3.9-unstable-2026-05-30";
+  version = "0.3.10-unstable-2026-05-30";
   pyproject = true;
 
   src = fetchFromGitHub {

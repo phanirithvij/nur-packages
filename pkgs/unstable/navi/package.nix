@@ -7,7 +7,7 @@ navi.overrideAttrs (
   old:
   let
     pname = "navi";
-    version = "2.25.0-unstable-2026-04-13";
+    version = "2.25.0-beta1-unstable-2026-04-13";
     src = fetchFromGitHub {
       owner = "denisidoro";
       repo = "navi";
