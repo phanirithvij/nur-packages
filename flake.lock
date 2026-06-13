@@ -38,41 +38,19 @@
         "type": "github"
       }
     },
-    "flake-parts": {
-      "inputs": {
-        "nixpkgs-lib": [
-          "nix-update",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1778716662,
-        "narHash": "sha256-m1Yf0wZ8j1OHjTc2UwHwyQRSnNeSgLJOd7q5Y45hzi4=",
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "rev": "f7c1a2d347e4c52d5fb8d10cb4d94b5884e546fb",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "type": "github"
-      }
-    },
     "nix-update": {
       "inputs": {
-        "flake-parts": "flake-parts",
         "nixpkgs": [
           "nixpkgs"
         ],
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1780812918,
-        "narHash": "sha256-L+NQqb8QpjO04i8G0eWlg+o4df0LU7T0+r16UdWZAmk=",
+        "lastModified": 1781165408,
+        "narHash": "sha256-rINE5p/+OiJXrLm+gcFlr/x2OcDw0wwp/WVaty1weW4=",
         "owner": "Mic92",
         "repo": "nix-update",
-        "rev": "0495e323628691f43419493c7131b874fbf31596",
+        "rev": "507189e32cbce32e354ad0ff62210ccc15f48915",
         "type": "github"
       },
       "original": {
@@ -83,11 +61,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1780899778,
-        "narHash": "sha256-TLZi+etYKFkw9x6TdBqQrCXVDNKFQMkmj0nAmUc9/gw=",
+        "lastModified": 1781244656,
+        "narHash": "sha256-yyS7XRzgRY2ZlDbcPF4S+ZInDdC1qa6++AB3m8AfTrs=",
         "owner": "phanirithvij",
         "repo": "nixpkgs",
-        "rev": "68a5c7f33978a272d3caf648517cfa08e7eea00b",
+        "rev": "83366d7ebe9a62f8339f9499754c9d27709cd3e2",
         "type": "github"
       },
       "original": {
