@@ -5,16 +5,16 @@
 }:
 viddy.overrideAttrs (
   finalAttrs: oldAttrs: {
-    version = "1.3.0-unstable-2024-12-23";
+    version = "1.3.1-unstable-2026-06-14";
     src = fetchFromGitHub {
       owner = "sachaos";
       repo = "viddy";
-      rev = "ad1f0fede51814634e6ab1ba84911c09b42953d2";
-      hash = "sha256-uHI55dwAK9gGfONrJW6tUnyi/PhLYVk22TfQJBCYKzo=";
+      rev = "eee2ff2c104b16c242b3190ba2bc65bb031580dc";
+      hash = "sha256-RyPG8OAg3i9N2Fq5Hij48wMvfQuTNmJFpatvB3HbXKg=";
     };
     cargoDeps = rustPlatform.fetchCargoVendor {
       inherit (finalAttrs) src;
-      hash = "sha256-Bp3t/fjaFeouIoKlRvQPVDlc46Ggitfx6HUXE+RZN0A=";
+      hash = "sha256-P+TtxV2kuHeBHr8GQeJ0VWPkjimfcAtBUFt0z79ML6A=";
     };
   }
 )
