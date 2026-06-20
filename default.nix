@@ -112,6 +112,8 @@ let
           shellHook = o.shellHook;
           allowSubstitutes = false; # for now don't care about caching the devshell
         });
+
+    inherit pkgs;
   };
 in
 self
