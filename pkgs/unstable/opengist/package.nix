@@ -5,19 +5,21 @@
 }:
 let
   pname = "opengist";
-  version = "1.13.1-unstable-2026-06-19";
+  version = "1.13.1-unstable-2026-06-27";
   src = fetchFromGitHub {
     owner = "thomiceli";
     repo = "opengist";
-    rev = "cac21689cf1a523d4b67b78feb02996d589667bc";
-    hash = "sha256-RyhSYy0cjRDJrSGZcKUsr5qzEBVknDRAQXXwIUGdYcc=";
+    rev = "cc03c1e91041859f69ea403b921b15fb90f27272";
+    hash = "sha256-3S8FYhUGKMiRBfbn4F+S6NETOrGdlehsgzpQGpG5c0A=";
   };
+  # TODO,BUG: ./scripts/update.sh for this package causes frontend.npmDeps.hash to be set in goModules.vendorHash
+  # And the goModules.vendorHash is not being computed
   frontend = opengist.frontend.overrideAttrs {
     inherit version src;
     npmDeps = fetchNpmDeps {
       inherit src;
       name = "opengist-frontend-${version}-npm-deps";
-      hash = "sha256-Ci25S0kgT5C46xTzNTs0kn8QEvYqJuj/yU33Ymfci68=";
+      hash = "sha256-6W5MRFFMpYphSf5Uj2XMF0wL9f/AhDbGIZ6u17rb2R8=";
     };
     # Remove postcss step because it was removed upstream
     # see
