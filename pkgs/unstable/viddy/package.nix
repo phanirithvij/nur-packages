@@ -16,5 +16,9 @@ viddy.overrideAttrs (
       inherit (finalAttrs) src;
       hash = "sha256-P+TtxV2kuHeBHr8GQeJ0VWPkjimfcAtBUFt0z79ML6A=";
     };
+    preBuild = (oldAttrs.preBuild or "") + ''
+      substituteInPlace Cargo.toml \
+        --replace-fail "version = \"${oldAttrs.version}\"" "version = \"${finalAttrs.version}\""
+    '';
   }
 )
