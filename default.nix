@@ -59,6 +59,7 @@ let
     # btw no need to use these inside system config, they are mainly for ci.nix
     hplip = callPackage ./pkgs/cached/hplip.nix { };
     linux-firmware-iron-zstd = callPackage ./pkgs/cached/linux-firmware-iron.nix { };
+    linux-firmware-nixus-zstd = callPackage ./pkgs/cached/linux-firmware-nixus.nix { };
     nvidia-settings = callPackage ./pkgs/cached/nvidia-settings.nix { };
 
     # These are flakes, but
