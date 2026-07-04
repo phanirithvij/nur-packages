@@ -1,15 +1,27 @@
 {
   stdenv,
+  fetchFromGitLab,
   linux-firmware,
   compressFirmwareZstd,
 }:
+let
+  linux-firmware' = linux-firmware.overrideAttrs (oldAttrs: rec {
+    version = "20260519";
+    src = fetchFromGitLab {
+      owner = "kernel-firmware";
+      repo = "linux-firmware";
+      tag = version;
+      hash = "sha256-vyrnHNnyNko7m/fZ3fXgLvvasYyJ/pzs5be/Ele+6vY=";
+    };
+  });
+in
 stdenv.mkDerivation {
   phases = [
     "unpackPhase"
     "installPhase"
   ];
   name = "linux-firmware-filtered-nixus";
-  src = compressFirmwareZstd linux-firmware; # can get this from official nixos cache
+  src = compressFirmwareZstd linux-firmware';
   installPhase = ''
     runHook preInstall
     mkdir -p $out/lib/firmware
