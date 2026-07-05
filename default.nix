@@ -50,6 +50,7 @@ let
     nh = callPackage ./pkgs/patched/nh { };
     bashmount = callPackage ./pkgs/patched/bashmount { };
     bluetuith = callPackage ./pkgs/patched/bluetuith { };
+    keepassxc = callPackage ./pkgs/patched/keepassxc { };
     pr-tracker = callPackage ./pkgs/patched/pr-tracker { };
     gitbatch = callPackage ./pkgs/patched/gitbatch { };
 
