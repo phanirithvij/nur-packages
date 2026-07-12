@@ -2,6 +2,6 @@
   stdenv,
 }:
 let
-  f = builtins.getFlake "github:numtide/system-manager/96f724be6f1411286e8ad0202e3e624c10116a6d";
+  f = builtins.getFlake "github:numtide/system-manager/48d47346e0c6ad05b6c869ea92649c47723d1cfc";
 in
 f.packages.${stdenv.hostPlatform.system}.default

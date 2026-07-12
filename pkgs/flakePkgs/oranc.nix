@@ -2,6 +2,6 @@
   stdenv,
 }:
 let
-  f = builtins.getFlake "github:linyinfeng/oranc/9f11894b28234a286bb580fe89c2654161799469";
+  f = builtins.getFlake "github:linyinfeng/oranc/c6f3a0a84edb99538ae8fa52ce94821cbe2f654c";
 in
 f.packages.${stdenv.hostPlatform.system}.default
