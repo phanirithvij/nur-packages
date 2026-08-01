@@ -61,10 +61,15 @@ in
         binds = {
           whichKey.enable = true;
         };
-        maps.normal."<leader>bf" = {
-          action = "<cmd>Telescope current_buffer_fuzzy_find<CR>";
-          desc = "Fuzzy find in current buffer";
-        };
+        keymaps = [
+          {
+            key = "<leader>bf";
+            mode = "n";
+            silent = true;
+            action = "<cmd>Telescope current_buffer_fuzzy_find<CR>";
+            desc = "Fuzzy find in current buffer";
+          }
+        ];
       };
     })
   ];
