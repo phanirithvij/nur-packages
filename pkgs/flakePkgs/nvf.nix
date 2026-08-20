@@ -45,10 +45,6 @@ in
         treesitter.context.enable = true;
         telescope.enable = true;
         git.enable = true;
-        minimap = {
-          # https://github.com/NotAShelf/nvf/issues/1312#issuecomment-3719470693
-          codewindow.enable = false;
-        };
         terminal = {
           toggleterm = {
             enable = true;
