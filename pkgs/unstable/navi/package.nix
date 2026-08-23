@@ -23,11 +23,12 @@ navi.overrideAttrs (
       hash = "sha256-CXUggMacJPArHYLvDDz8+Fef/eeL+TXRMqg/vybuD5c=";
     };
 
-    #checkFlags = [ "--skip=common::terminal::tests::test_width" ];
-    #checkFlags doesn't work, fails with `error: unexpected argument '--skip' found`
-    postPatch = (old.postPatch or "") + ''
-      substituteInPlace src/common/terminal.rs \
-        --replace-warn 'fn test_width(' '#[ignore] fn test_width('
-    '';
+    patches = [
+      ./fix-test-args.patch
+    ];
+
+    checkFlags = [
+      "--skip=common::terminal::tests::test_width"
+    ];
   }
 )
