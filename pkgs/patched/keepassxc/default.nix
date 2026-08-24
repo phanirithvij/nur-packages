@@ -4,5 +4,6 @@ keepassxc.overrideAttrs (oldAttrs: {
   # closed the PR because it was the wrong approach for everyone, but for me its great, allows autoopen and freedesktop secrets
   patches = (oldAttrs.patches or [ ]) ++ [
     ./0001-fdosecrets-allow-inactive-tabs-to-be-considered.patch
+    ./0002-fdosecrets-resolve-alias-object-paths-in-dispatch.patch
   ];
 })
