@@ -1,0 +1,31 @@
+From 59608ee81df1516ca9018de59d93bd49b049e052 Mon Sep 17 00:00:00 2001
+From: phanirithvij <phanirithvij2000@gmail.com>
+Date: Sun, 23 Aug 2026 22:43:28 +0530
+Subject: [PATCH] fix: prevent clap from panicking on test harness arguments
+
+Co-Authored-By: emma31-dev <emmanuelfidel07@gmail.com>
+Signed-off-by: phanirithvij <phanirithvij2000@gmail.com>
+---
+ src/config/cli.rs | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/src/config/cli.rs b/src/config/cli.rs
+index c6f86f9..cf3d660 100644
+--- a/src/config/cli.rs
++++ b/src/config/cli.rs
+@@ -90,7 +90,11 @@ pub(super) struct ClapConfig {
+ 
+ impl ClapConfig {
+     pub fn new() -> Self {
+-        Self::parse()
++        if cfg!(test) {
++            Self::parse_from(vec!["navi"])
++        } else {
++            Self::parse()
++        }
+     }
+ }
+ 
+-- 
+2.55.0
+

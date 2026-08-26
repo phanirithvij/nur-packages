@@ -24,7 +24,7 @@ navi.overrideAttrs (
     };
 
     patches = [
-      ./fix-test-args.patch
+      ./0001-fix-prevent-clap-from-panicking-on-test-harness-argu.patch
     ];
 
     checkFlags = [
