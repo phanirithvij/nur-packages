@@ -36,7 +36,6 @@ updateFlakePkg NotAShelf/nvf
 updateFlakePkg euank/yaml2nix
 updateFlakePkg viperML/hover-rs
 updateFlakePkg linyinfeng/oranc
-updateFlakePkg bachp/git-mirror
 updateFlakePkg cyrinux/push2talk
 updateFlakePkg ghostty-org/ghostty
 updateFlakePkg uncenter/nixpkgs-track
