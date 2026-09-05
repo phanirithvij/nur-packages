@@ -4,13 +4,13 @@
 }:
 subtitlecomposer.overrideAttrs (
   _: _: {
-    version = "0.8.2-unstable-2026-08-26";
+    version = "0.8.2-unstable-2026-09-05";
     src = fetchFromGitLab {
       domain = "invent.kde.org";
       owner = "multimedia";
       repo = "subtitlecomposer";
-      rev = "553f377ae6ea59df4c1c142a64fa41a6d79fd812";
-      hash = "sha256-usV/sIXBsam416lY0lmRybQitBRrEsQ0X0d47ONHZyE=";
+      rev = "6cd5f4784081c0293f2d166c9dd90a61d15a866d";
+      hash = "sha256-iWpvsQH3dNTc42xV8Q5xsFnDwcAuXAwJS99sKbGuDfg=";
     };
   }
 )

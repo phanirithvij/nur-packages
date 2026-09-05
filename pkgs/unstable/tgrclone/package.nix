@@ -5,18 +5,18 @@
 rclone.overrideAttrs (
   f: _: {
     pname = "rclone";
-    version = "1.73.1-unstable-2026-05-22";
+    version = "1.73.1-unstable-2026-09-02";
     src =
       (fetchFromGitHub {
         owner = "tgdrive";
         repo = "rclone";
-        rev = "f748ef6452d44a988de8cc8192bbc23b26c881a5";
-        hash = "sha256-ispIoUkbXuKzduE+Yk2VY/CNDU5/7igPluVVc74q3/8=";
+        rev = "0408e9479c981b6ebd5561db1a439657dadb9dd0";
+        hash = "sha256-lUnq7zFsLlfJamoJ/by2rjkmEaiKanw2TezKhPnrV7E=";
       })
       // {
         tag = "faketag-to-allow-eval";
       };
-    vendorHash = "sha256-COylZ9NTKQMMeh8dZNO4rOSmONboHRSIDuR/2FfsJuM=";
+    vendorHash = "sha256-PxKjyuEIi0umBr23kif1cB4Ok3G3akRLGECCosk34sE=";
     doInstallCheck = false;
     ldflags = [
       "-s"
