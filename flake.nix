@@ -30,7 +30,17 @@
       ];
       forAllSystems = f: inputs.nixpkgs.lib.genAttrs systems f;
       # https://github.com/nix-community/nur-packages-template/issues/89
-      pkgs' = forAllSystems (system: inputs.nixpkgs.legacyPackages."${system}");
+      # TODO flake-file or denful to avoid a flake.nix
+      pkgs' = forAllSystems (
+        system:
+        import inputs.nixpkgs {
+          config = {
+            allowUnfree = true;
+          };
+          inherit system;
+          overlays = [ ];
+        }
+      );
       getLegacyPkgs =
         {
           system,
