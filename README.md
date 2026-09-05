@@ -6,6 +6,12 @@
 
 See https://repology.org/maintainer/phanirithvij2000@gmail.com
 
+### TO build them
+
+```
+nix shell -L -f '<nixpkgs>' nix-eval-jobs nix-fast-build -c nix-fast-build --flake .#packages.x86_64-linux --remote admin@nixus
+```
+
 ### NOTES
 
 - To use the derivations in this repo in your setup, copy and adapt, please
