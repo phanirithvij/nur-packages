@@ -29,6 +29,7 @@ in
           elm.enable = true;
           html.enable = true;
           typescript.enable = true;
+          rust.enable = true;
           go.enable = true;
           lua.enable = true;
           zig.enable = true;
