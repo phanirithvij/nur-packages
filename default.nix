@@ -53,7 +53,6 @@ let
     keepassxc = callPackage ./pkgs/patched/keepassxc { };
     pr-tracker = callPackage ./pkgs/patched/pr-tracker { };
     gitbatch = callPackage ./pkgs/patched/gitbatch { };
-    lazygit = callPackage ./pkgs/patched/lazygit { };
 
     # cached packages
     # push em to cachix/oranc binary caches
