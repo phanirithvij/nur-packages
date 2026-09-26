@@ -46,8 +46,8 @@ let
     # patched pkgs
     # has some customisations applied to orignal packages
     # primarily useful to have these rebuilt via gha+cachix
-    # nh = callPackage ./pkgs/patched/nh { inherit (self.flakePkgs) nix-output-monitor; };
-    nh = callPackage ./pkgs/patched/nh { };
+    nh = callPackage ./pkgs/patched/nh { inherit (self.flakePkgs) nix-output-monitor; };
+    # nh = callPackage ./pkgs/patched/nh { };
     bashmount = callPackage ./pkgs/patched/bashmount { };
     bluetuith = callPackage ./pkgs/patched/bluetuith { };
     keepassxc = callPackage ./pkgs/patched/keepassxc { };
