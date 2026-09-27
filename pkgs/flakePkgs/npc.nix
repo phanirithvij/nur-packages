@@ -2,6 +2,6 @@
   stdenv,
 }:
 let
-  f = builtins.getFlake "github:samestep/npc/e1a32e952def47f91f380ef2d2456aa8f36f4c3b";
+  f = builtins.getFlake "github:samestep/npc/47f804a34b120f74b8dc7293240150bf4bfd7047";
 in
 f.packages.${stdenv.hostPlatform.system}.default

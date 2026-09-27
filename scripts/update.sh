@@ -34,7 +34,6 @@ updateFlakePkg e-tho/bzmenu
 updateFlakePkg samestep/npc
 updateFlakePkg NotAShelf/nvf
 updateFlakePkg euank/yaml2nix
-updateFlakePkg viperML/hover-rs
 updateFlakePkg linyinfeng/oranc
 updateFlakePkg cyrinux/push2talk
 updateFlakePkg ghostty-org/ghostty
