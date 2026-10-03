@@ -60,51 +60,8 @@ let
       ];
 
       preBuild = ''
-        # Copy and patch vliv.h locally to avoid read-only store path issues
+        # Copy vliv.h locally (already patched via applyPatches)
         cp ${vlivSrc}/src/vliv.h .
-        chmod +w vliv.h
-        sed -i 's/^HMODULE languageInst;/extern HMODULE languageInst;/' vliv.h 2>/dev/null || true
-        sed -i 's/typedef BOOL (\*ACCEPTF)(const unsigned char\* buffer, unsigned int size);/struct Image;\ntypedef BOOL (*ACCEPTF)(const unsigned char* buffer, long unsigned int size);/' vliv.h 2>/dev/null || true
-      '';
-
-      postPatch = ''
-        # Fix includes
-        sed -i 's/<debug.h>/"debug.h"/' debug.c 2>/dev/null || true
-        sed -i 's/<lyapunov.h>/"lyapunov.h"/' lyapunov.c 2>/dev/null || true
-        sed -i 's/<newton.h>/"newton.h"/' newton.c 2>/dev/null || true
-
-        # GCC 14 requires math.h for log, fabs, pow
-        sed -i '1i #include <math.h>' lyapunov.c newton.c 2>/dev/null || true
-
-        # Fix prototypes
-        sed -i 's/buffer, unsigned int size/buffer, long unsigned int size/' debug.c lyapunov.c newton.c 2>/dev/null || true
-
-        # Convert MSVC makefile syntax to MinGW syntax
-        if [ -f "${makefile}" ]; then
-          sed -i 's/CC  = cl/CC = ${stdenv.cc.targetPrefix}cc/' "${makefile}"
-          sed -i 's/LD  = link//' "${makefile}"
-          sed -i 's/\/Ox/-O2/g' "${makefile}"
-          sed -i 's/\/nologo \/W3/-Wall/g' "${makefile}"
-          sed -i 's/\/D/-D/g' "${makefile}"
-          sed -i 's/\/I/-I/g' "${makefile}"
-          sed -i 's/\/c/-c/g' "${makefile}"
-          sed -i 's/\.obj/.o/g' "${makefile}"
-          sed -i 's/$(LD) \/dll \/out:\(.*\.dll\) .*\.o/$(CC) -shared -o \1 *.o/g' "${makefile}"
-          sed -i 's/del /rm -f /g' "${makefile}"
-
-          # Fix lyapunov and newton syslibs
-          sed -i 's/wininet\.lib/-lwininet/g' "${makefile}"
-          sed -i 's/user32\.lib/-luser32/g' "${makefile}"
-          sed -i 's/gdi32\.lib/-lgdi32/g' "${makefile}"
-          sed -i 's/kernel32\.lib/-lkernel32/g' "${makefile}"
-          sed -i 's/comctl32\.lib/-lcomctl32/g' "${makefile}"
-          sed -i 's/comdlg32\.lib/-lcomdlg32/g' "${makefile}"
-          sed -i 's/shlwapi\.lib/-lshlwapi/g' "${makefile}"
-          sed -i 's/shell32\.lib/-lshell32/g' "${makefile}"
-          sed -i 's/advapi32\.lib/-ladvapi32/g' "${makefile}"
-          sed -i 's/version\.lib/-lversion/g' "${makefile}"
-          sed -i 's/strsafe\.lib//g' "${makefile}"
-        fi
       '';
       postBuild = ''
         mkdir -p $out/lib

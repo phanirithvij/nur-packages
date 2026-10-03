@@ -58,85 +58,9 @@ stdenv.mkDerivation (finalAttrs: {
       tag = "v${finalAttrs.version}";
       hash = "sha256-wmhOhs4Z7L85l3L3xZI5fHXSvMwFOLM+U0xn1RB9esI=";
     };
+    patches = [ ./vliv-2.7.1-mingw.patch ];
   };
   sourceRoot = "${finalAttrs.src.name}/src";
-
-  postPatch = ''
-        # Replace MSVC makefile with MinGW one
-        cat > makefile <<'EOF'
-    DEBUG = -O2
-    VERSION = 2.7
-    VERSIONSHORT = 270
-
-    CFLAGS = -Wall $(DEBUG) -D_CRT_SECURE_NO_DEPRECATE -DWIN32 -DWINDOWS -I.
-    LDFLAGS = $(LDDEBUG) -mwindows -Wl,--major-image-version,2 -Wl,--minor-image-version,7
-
-    SYSLIBS = -lwininet -luser32 -lgdi32 -lkernel32 -lcomctl32 -lcomdlg32 -lshlwapi \
-              -lshell32 -ladvapi32 -lversion -lmsimg32 -lwinmm
-
-    OBJECTS = vliv.o urlctrl.o dialogs.o handlers.o bitmap.o recent.o window.o tilemgr.o rawinput.o
-
-    all: vliv.exe
-
-    %.o: %.c
-    	$(CC) $(CFLAGS) -c $< -o $@
-
-    vliv-res.o: resources/vliv.rc
-    	$(RC) -i $< -o $@
-
-    vliv.exe: $(OBJECTS) vliv-res.o
-    	$(CC) -o $@ $(OBJECTS) vliv-res.o $(LDFLAGS) $(SYSLIBS)
-
-    languages: fra.dll
-
-    fra.dll: resources/fra.rc
-    	$(RC) -i $< -o fra.o
-    	$(CC) -shared -o $@ fra.o -Wl,--subsystem,windows
-
-    clean:
-    	rm -f *.o *.exe *.dll *.res *~
-    EOF
-
-        # Force hard tabs for makefile rules just in case
-        sed -i 's/^  *$(CC)/\t$(CC)/' makefile
-        sed -i 's/^  *$(RC)/\t$(RC)/' makefile
-        sed -i 's/^  *rm /\trm /' makefile
-
-        # Fix multiple definition of languageInst for GCC >= 10
-        sed -i 's/^HMODULE languageInst;/extern HMODULE languageInst;/' vliv.h
-        sed -i '/static TCHAR \*SubFileTypeNames\[4\];/a HMODULE languageInst;' vliv.c
-
-        # Fix multiple definition of bPrint and abortDialog
-        sed -i 's/^HWND abortDialog;/extern HWND abortDialog;/' dialogs.h
-        sed -i 's/^BOOL bPrint;/extern BOOL bPrint;/' dialogs.h
-        sed -i '/#include <dialogs.h>/a HWND abortDialog;\nBOOL bPrint;' dialogs.c
-
-        # Fix prototype in vliv.h for 64-bit size
-        sed -i 's/typedef BOOL (\*ACCEPTF)(const unsigned char\* buffer, unsigned int size);/struct Image;\ntypedef BOOL (*ACCEPTF)(const unsigned char* buffer, long unsigned int size);/' vliv.h
-
-        # Fix case-sensitive DLL loading
-        sed -i 's/"ownd.dll"/"Ownd.dll"/' vliv.c
-
-        # Fix MinGW missing strcat_s
-        sed -i 's/strcat_s(szValue, sizeof(szValue), "o");/strcat(szValue, "o");/' dialogs.c
-
-        # Fix static declaration errors for GCC 14
-        sed -i 's/static void ScrollWithOffset/void ScrollWithOffset/' vliv.c
-        sed -i 's/static void LoadTile/void LoadTile/' vliv.c
-
-        # Fix prototype in handlers.c for 64-bit size
-        sed -i 's/unsigned int size/long unsigned int size/g' handlers.c
-
-        # Fix windres comma requirements in vliv.rc
-        sed -i 's/MENUITEM "Clear Recent File List"       ID_TOOLS_CLEAR/MENUITEM "Clear Recent File List",      ID_TOOLS_CLEAR/' resources/vliv.rc
-        sed -i 's/MENUITEM "Fullscreen\\tEnter"            ID_TOOLS_FULLSCREEN/MENUITEM "Fullscreen\\tEnter",           ID_TOOLS_FULLSCREEN/' resources/vliv.rc
-        sed -i 's/MENUITEM "Register..."                  ID_TOOLS_REGISTER/MENUITEM "Register...",                 ID_TOOLS_REGISTER/' resources/vliv.rc
-        sed -i 's/MENUITEM "Export Current View as BMP..." ID_TOOLS_EXPORTBMP/MENUITEM "Export Current View as BMP...", ID_TOOLS_EXPORTBMP/' resources/vliv.rc
-        sed -i 's/MENUITEM "Copy Current View to Clipboard\\tCtrl+C" ID_TOOLS_CLIPBOARD/MENUITEM "Copy Current View to Clipboard\\tCtrl+C", ID_TOOLS_CLIPBOARD/' resources/vliv.rc
-
-        # Fix case-sensitive resource paths
-        sed -i 's/"myinfo2.ico"/"MyInfo2.ico"/' resources/vliv.rc
-  '';
 
   dontInstall = true;
   postBuild = ''
