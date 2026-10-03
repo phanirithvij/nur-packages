@@ -30,6 +30,13 @@ let
     let
       name = if pname == "internal" then "vliv" else pname;
       makefile = if pname == "wic" then "wichandler.mak" else "${pname}.mak";
+      myLibwebp = pkgsCross.mingwW64.libwebp.override {
+        gifSupport = false;
+        tiffSupport = false;
+        pngSupport = false;
+        jpegSupport = false;
+      };
+      myLibtiff = pkgsCross.mingwW64.libtiff.override { libwebp = myLibwebp; };
     in
     stdenv.mkDerivation (finalAttrs: {
       pname = "vliv-plugin-${name}";
@@ -49,8 +56,20 @@ let
         "VLIVDIR=${vlivSrc}/src"
         "STBDIR=${pkgsCross.mingwW64.stb}/include/stb"
         "EXRDIR=${pkgsCross.mingwW64.tinyexr}"
+        "EXTRA_CFLAGS=-I${myLibwebp}/include -I${myLibtiff.dev}/include -I${pkgsCross.mingwW64.libjpeg.dev}/include -I${pkgsCross.mingwW64.zlib.dev}/include -I${pkgsCross.mingwW64.libpng.dev}/include"
       ];
-      postBuild = "cp ${name}.dll $out";
+      postBuild = ''
+        mkdir -p $out/lib
+        cp ${name}.dll $out/lib/
+      '';
+
+      buildInputs = with pkgsCross.mingwW64; [
+        myLibtiff
+        zlib
+        libjpeg
+        libpng
+        myLibwebp
+      ];
 
       dontInstall = true;
       dontStrip = true;
@@ -75,12 +94,12 @@ let
   ];
   externalPlugins = [
     "avi" # done
-    "deepzoom"
-    "exr" # done
-    "jpeg2000"
+    # "deepzoom" # disabled due to upstream C syntax errors in dzhandler.c
+    # "exr" # done (disabled due to missing exr_reader.hh in tinyexr)
+    # "jpeg2000" # disabled due to missing jasper support for MinGW
     "qoi" # done
     "stb" # done
-    "wic"
+    # "wic" # disabled because it hardcodes a Windows C:\ path for the SDK
 
     # but lives in external repo
     "internal" # produces vliv.dll
@@ -120,10 +139,10 @@ let
       dontUnpack = true;
       dontBuild = true;
       installPhase = ''
+        mkdir -p $out/lib
         for i in ''${propagatedBuildInputs[@]}; do
-          echo $i
+          cp -r $i/lib/*.dll $out/lib/ 2>/dev/null || true
         done
-        touch $out
       '';
     };
 in
