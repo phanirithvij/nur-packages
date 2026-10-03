@@ -100,7 +100,7 @@ let
   externalPlugins = [
     "avi" # done
     # "deepzoom" # disabled due to upstream C syntax errors in dzhandler.c
-    # "exr" # done (disabled due to missing exr_reader.hh in tinyexr)
+    "exr" # done (disabled due to missing exr_reader.hh in tinyexr)
     # "jpeg2000" # disabled due to missing jasper support for MinGW
     "qoi" # done
     "stb" # done
