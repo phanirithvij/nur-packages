@@ -47,7 +47,7 @@
           pkgs ? pkgs'.${system},
         }:
         import ./default.nix {
-          inherit pkgs;
+          pkgs' = pkgs;
           inherit (inputs) nixpkgs;
           inherit system;
         };
