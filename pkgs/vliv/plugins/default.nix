@@ -55,7 +55,7 @@ let
         "CXX=${stdenv.cc.targetPrefix}c++"
         "VLIVDIR=."
         "STBDIR=${pkgsCross.mingwW64.stb}/include/stb"
-        "EXRDIR=${pkgsCross.mingwW64.tinyexr}"
+        # "EXRDIR=${pkgsCross.mingwW64.tinyexr}"
         "EXTRA_CFLAGS=-I${myLibwebp}/include -I${myLibtiff.dev}/include -I${pkgsCross.mingwW64.libjpeg.dev}/include -I${pkgsCross.mingwW64.zlib.dev}/include -I${pkgsCross.mingwW64.libpng.dev}/include"
       ];
 
