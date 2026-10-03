@@ -20,13 +20,12 @@ in
   config ? { }, # allows --arg config from cli
   overlays ? [ ],
   system ? builtins.currentSystem,
-  pkgs ? import nixpkgs {
-    inherit
-      config
-      overlays
-      system
-      ;
-  },
+  pkgs' ? import nixpkgs { },
+  pkgs ? import (pkgs'.applyPatches {
+    name = "nixpkgs-patched";
+    src = nixpkgs;
+    patches = [ ./tinyexr-nixpkgs.patch ];
+  }) { inherit config overlays system; },
   lib ? import "${nixpkgs}/lib",
 }:
 let

@@ -14,7 +14,7 @@ let
       owner = "delhoume";
       repo = "vlivplugins";
       rev = "refs/heads/main";
-      hash = "sha256-GQnRI1xAgpCLTpjCk2S8aA9BxBw58nsl89pqBdSjdps=";
+      hash = "sha256-u/FUj0o8P8n2LugKS5ExKmO+cSzaOK1+5oq+fwqrPCU=";
     };
     # TODO modify all plugins makefiles
     patches = [ ./plugins-mingw-mods.patch ];

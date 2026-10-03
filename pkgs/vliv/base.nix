@@ -9,10 +9,10 @@
   debug ? false, # not needed if providing withPlugins?
   vliv, # self
 
-# TODO base derivation
-# then default package is minimal, which is internal plugin + source plugins except debug
-# full package is all plugins including debug
-# any other combination use withPlugins
+  # TODO base derivation
+  # then default package is minimal, which is internal plugin + source plugins except debug
+  # full package is all plugins including debug
+  # any other combination use withPlugins
 }:
 # TODO goal
 # build from source, but how to build win32 binary on linux or macos, cross mingw?
@@ -80,7 +80,8 @@ stdenv.mkDerivation (finalAttrs: {
 
   passthru = {
     inherit (finalAttrs) version;
-  } // pluginAttrs;
+  }
+  // pluginAttrs;
 
   meta = {
     description = "The Very Large Image Viewer";
