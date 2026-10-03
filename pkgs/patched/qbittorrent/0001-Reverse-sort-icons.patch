@@ -1,0 +1,98 @@
+From 59d9457acf236eb959aac315ad20b506208e02d6 Mon Sep 17 00:00:00 2001
+From: phanirithvij <phanirithvij2000@gmail.com>
+Date: Fri, 2 Oct 2026 17:04:19 +0530
+Subject: [PATCH] Reverse sort icons
+
+Signed-off-by: phanirithvij <phanirithvij2000@gmail.com>
+---
+ src/gui/uithememanager.cpp | 49 ++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 47 insertions(+), 2 deletions(-)
+
+diff --git a/src/gui/uithememanager.cpp b/src/gui/uithememanager.cpp
+index a987fa894..62625e41a 100644
+--- a/src/gui/uithememanager.cpp
++++ b/src/gui/uithememanager.cpp
+@@ -33,9 +33,12 @@
+ #include <QApplication>
+ #include <QPalette>
+ #include <QPixmapCache>
++#include <QProxyStyle>
+ #include <QResource>
+ #include <QStyle>
++#include <QStyleFactory>
+ #include <QStyleHints>
++#include <QStyleOptionHeader>
+ 
+ #include "base/logger.h"
+ #include "base/path.h"
+@@ -78,6 +81,37 @@ void UIThemeManager::initInstance()
+         m_instance = new UIThemeManager;
+ }
+ 
++namespace
++{
++    class SortIndicatorProxyStyle final : public QProxyStyle
++    {
++    public:
++        using QProxyStyle::QProxyStyle;
++
++        void drawPrimitive(PrimitiveElement element, const QStyleOption *option, QPainter *painter, const QWidget *widget = nullptr) const override
++        {
++            if (element == QStyle::PE_IndicatorHeaderArrow)
++            {
++                if (const auto *headerOption = qstyleoption_cast<const QStyleOptionHeader *>(option))
++                {
++                    QStyleOptionHeader modifiedOption = *headerOption;
++                    if (modifiedOption.sortIndicator == QStyleOptionHeader::SortUp)
++                    {
++                        modifiedOption.sortIndicator = QStyleOptionHeader::SortDown;
++                    }
++                    else if (modifiedOption.sortIndicator == QStyleOptionHeader::SortDown)
++                    {
++                        modifiedOption.sortIndicator = QStyleOptionHeader::SortUp;
++                    }
++                    QProxyStyle::drawPrimitive(element, &modifiedOption, painter, widget);
++                    return;
++                }
++            }
++            QProxyStyle::drawPrimitive(element, option, painter, widget);
++        }
++    };
++}
++
+ UIThemeManager::UIThemeManager()
+     : m_useCustomTheme {Preferences::instance()->useCustomUITheme()}
+ #ifdef QBT_HAS_COLORSCHEME_OPTION
+@@ -94,8 +128,19 @@ UIThemeManager::UIThemeManager()
+ 
+     if (const QString styleName = Preferences::instance()->getStyle(); styleName.compare(u"system", Qt::CaseInsensitive) != 0)
+     {
+-        if (!QApplication::setStyle(styleName))
++        if (QStyle *style = QStyleFactory::create(styleName))
++        {
++            QApplication::setStyle(new SortIndicatorProxyStyle(style));
++        }
++        else
++        {
+             LogMsg(tr("Set app style failed. Unknown style: \"%1\"").arg(styleName), Log::WARNING);
++            QApplication::setStyle(new SortIndicatorProxyStyle(QApplication::style()->name()));
++        }
++    }
++    else
++    {
++        QApplication::setStyle(new SortIndicatorProxyStyle(QApplication::style()->name()));
+     }
+ 
+ #ifdef QBT_HAS_COLORSCHEME_OPTION
+@@ -191,7 +236,7 @@ void UIThemeManager::onColorSchemeChanged()
+     emit themeChanged();
+ 
+     // workaround to refresh styled controls once color scheme is changed
+-    QApplication::setStyle(QApplication::style()->name());
++    QApplication::setStyle(new SortIndicatorProxyStyle(QApplication::style()->name()));
+ }
+ 
+ QIcon UIThemeManager::getIcon(const QString &iconId, [[maybe_unused]] const QString &fallback, const ColorMode colorMode) const
+-- 
+2.55.0
+
