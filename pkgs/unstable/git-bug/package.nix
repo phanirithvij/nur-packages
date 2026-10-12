@@ -9,14 +9,14 @@
 git-bug.overrideAttrs (
   finalAttrs: prevAttrs: {
     pname = "git-bug";
-    version = "0.11.0-unstable-2026-09-26";
+    version = "0.11.0-unstable-2026-10-12";
     src = fetchFromGitHub {
       owner = "git-bug";
       repo = "git-bug";
-      rev = "8cebc504825ea3168099b002bf1a832c48f0458a";
-      hash = "sha256-B8WSMCiyO2aqFfbmJOGJWFQB6zEyzX9wbaxBLTtNMk0=";
+      rev = "cf2678d691295205e1e18a5c35bc6112ef54070b";
+      hash = "sha256-wwgJK2KYCUQr+8WXdD6KlkuM8mL7WxoOSA5A0FZouS8=";
     };
-    vendorHash = "sha256-TwAgpdlitF3O68wA+jyagifrLSRG7WCCZvJ1XJjP/pI=";
+    vendorHash = "sha256-/zjrvT7BBCQYZLAxLmARfsvTjwsxHi7SpqXgbSavrNw=";
     ldflags = (prevAttrs.ldflags or [ ]) ++ [ "-s" ];
     pnpmRoot = "webui";
 
@@ -29,7 +29,7 @@ git-bug.overrideAttrs (
         ;
       pnpm = pnpm_11;
       fetcherVersion = 4;
-      hash = "sha256-K7AH/1ZY8qoN1nMVa0gsY7KDEzjHv4dliMhrLhxtnP8=";
+      hash = "sha256-uEAGhMnkU+h/mBlDZ43IGDQpxkX0ssHHVeGChfVYDLo=";
     };
 
     nativeBuildInputs = (prevAttrs.nativeBuildInputs or [ ]) ++ [
