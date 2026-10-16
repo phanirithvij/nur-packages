@@ -9,14 +9,14 @@
 git-bug.overrideAttrs (
   finalAttrs: prevAttrs: {
     pname = "git-bug";
-    version = "0.11.0-unstable-2026-10-12";
+    version = "0.11.0-unstable-2026-10-15";
     src = fetchFromGitHub {
       owner = "git-bug";
       repo = "git-bug";
-      rev = "cf2678d691295205e1e18a5c35bc6112ef54070b";
-      hash = "sha256-wwgJK2KYCUQr+8WXdD6KlkuM8mL7WxoOSA5A0FZouS8=";
+      rev = "b7241c4adfeb4ce5de558e2bfb32a03593d35bda";
+      hash = "sha256-8LRkTBexx1WEAWSX9j603iwsQuu7JVKQxaEFOOCpgtw=";
     };
-    vendorHash = "sha256-/zjrvT7BBCQYZLAxLmARfsvTjwsxHi7SpqXgbSavrNw=";
+    vendorHash = "sha256-FzuhtG4BcX2UWX1vSVrBpt4KTsiXYZuIA9fVf8Y4xtc=";
     ldflags = (prevAttrs.ldflags or [ ]) ++ [ "-s" ];
     pnpmRoot = "webui";
 
