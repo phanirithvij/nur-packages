@@ -1,10 +1,8 @@
 {
   git-bug,
   fetchFromGitHub,
-  pnpm_11,
-  pnpmConfigHook,
+  pnpm_10,
   fetchPnpmDeps,
-  nodejs,
 }:
 git-bug.overrideAttrs (
   finalAttrs: prevAttrs: {
@@ -18,40 +16,22 @@ git-bug.overrideAttrs (
     };
     vendorHash = "sha256-FzuhtG4BcX2UWX1vSVrBpt4KTsiXYZuIA9fVf8Y4xtc=";
     ldflags = (prevAttrs.ldflags or [ ]) ++ [ "-s" ];
-    pnpmRoot = "webui";
 
-    pnpmDeps = fetchPnpmDeps {
-      sourceRoot = "source/webui";
-      inherit (finalAttrs)
-        pname
-        version
-        src
-        ;
-      pnpm = pnpm_11;
-      fetcherVersion = 4;
-      hash = "sha256-uEAGhMnkU+h/mBlDZ43IGDQpxkX0ssHHVeGChfVYDLo=";
-    };
-
-    nativeBuildInputs = (prevAttrs.nativeBuildInputs or [ ]) ++ [
-      pnpm_11
-      pnpmConfigHook
-      nodejs
-    ];
-
-    # Don't run pnpm in this phase - filter out pnpmConfigHook
-    # Also don't run preBuild of parent drv
-    passthru.overrideModAttrs = oldAttrs: {
-      nativeBuildInputs = builtins.filter (drv: drv != pnpmConfigHook) (
-        oldAttrs.nativeBuildInputs or [ ]
-      );
-      preBuild = git-bug.goModules.preBuild or "";
-    };
-
-    preBuild = ''
-      pushd webui
-      pnpm build
-      rm -rf node_modules
-      popd
-    '';
+    webui = git-bug.webui.overrideAttrs (
+      _: _: {
+        inherit (finalAttrs) src version;
+        pnpmDeps = fetchPnpmDeps {
+          sourceRoot = "source/webui";
+          inherit (finalAttrs)
+            pname
+            version
+            src
+            ;
+          pnpm = pnpm_10;
+          fetcherVersion = 4;
+          hash = "sha256-j5HhRnz1tl7aOg/KQFnH8B5Ie87OcQwn5BfTG9/JIm4=";
+        };
+      }
+    );
   }
 )
