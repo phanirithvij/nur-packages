@@ -5,7 +5,7 @@
 rclone.overrideAttrs (
   f: _: {
     pname = "rclone";
-    version = "1.75.4-unstable-2026-10-14";
+    version = "1.75.4-unstable-2026-10-20";
     src =
       (fetchFromGitHub {
         owner = "tgdrive";
@@ -14,7 +14,7 @@ rclone.overrideAttrs (
         hash = "sha256-lUnq7zFsLlfJamoJ/by2rjkmEaiKanw2TezKhPnrV7E=";
       })
       // {
-        tag = "ddd4d031cbf5c0eefec31e51b7f1906e35a4acd0";
+        tag = "4539ab2ae0bb00c8eda61b93d9a5c637c58a7a0e";
       };
     vendorHash = "sha256-PxKjyuEIi0umBr23kif1cB4Ok3G3akRLGECCosk34sE=";
     doInstallCheck = false;

@@ -7,14 +7,14 @@
 
 python3.pkgs.buildPythonApplication {
   pname = "qbittorrentui";
-  version = "0.3.11-unstable-2026-09-09";
+  version = "0.3.11-unstable-2026-11-01";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "rmartin16";
     repo = "qbittorrentui";
-    rev = "0ea2d4402ea489795b4080e676796d85d0584f55";
-    hash = "sha256-VXOHmoKq2Gk4LXTpGXNPRBCtWPKWC8sN4f7fT/sz8gg=";
+    rev = "3fa8313e4bd96b359556959d2b530d185be0c6f4";
+    hash = "sha256-wOdGDGQ0ZdIDoBjjkK6PF81F4Ur/JY9DXT3NR1rA93U=";
   };
 
   build-system = [

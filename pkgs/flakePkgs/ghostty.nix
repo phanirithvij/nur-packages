@@ -2,6 +2,6 @@
   stdenv,
 }:
 let
-  f = builtins.getFlake "github:ghostty-org/ghostty/b3dc3d794513c11633e7c3347935693957744e83";
+  f = builtins.getFlake "github:ghostty-org/ghostty/4747d7ff427480f75736dc207d14251b8eabd3c9";
 in
 f.packages.${stdenv.hostPlatform.system}.default
