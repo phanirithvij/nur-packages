@@ -25,7 +25,6 @@ python3.pkgs.buildPythonApplication {
   dependencies = with python3.pkgs; [
     blinker
     qbittorrent-api
-    urwid
     panwid
     platformdirs
   ];

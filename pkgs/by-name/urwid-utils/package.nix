@@ -3,8 +3,24 @@
   python3,
   fetchFromGitHub,
 }:
+let
+  python = python3.override {
+    self = python;
+    packageOverrides = self: super: {
+      urwid = super.urwid.overrideAttrs ({
+        version = "3.0.5";
+        src = fetchFromGitHub {
+          owner = "urwid";
+          repo = "urwid";
+          tag = "3.0.5";
+          hash = "sha256-9ajcpyQTSASz8A4eM78vPjL+9Rk07Q30JmIrSx0Crpo=";
+        };
+      });
+    };
+  };
+in
 
-python3.pkgs.buildPythonPackage rec {
+python.pkgs.buildPythonPackage (finalAttrs: {
   pname = "urwid-utils";
   version = "0.1.3.dev0";
   pyproject = true;
@@ -12,7 +28,7 @@ python3.pkgs.buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "tonycpsu";
     repo = "urwid_utils";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-0tdWf22nDiFNZChmH8ibvfsVUONJ0p4KqmUlnr99EbE=";
   };
 
@@ -25,11 +41,11 @@ python3.pkgs.buildPythonPackage rec {
   '';
 
   build-system = [
-    python3.pkgs.setuptools
-    python3.pkgs.wheel
+    python.pkgs.setuptools
+    python.pkgs.wheel
   ];
 
-  dependencies = [ python3.pkgs.urwid ];
+  dependencies = [ python.pkgs.urwid ];
 
   pythonImportsCheck = [
     "urwid_utils"
@@ -40,4 +56,4 @@ python3.pkgs.buildPythonPackage rec {
     homepage = "https://github.com/tonycpsu/urwid_utils";
     license = lib.licenses.mit;
   };
-}
+})

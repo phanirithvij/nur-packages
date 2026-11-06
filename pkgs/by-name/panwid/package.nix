@@ -7,7 +7,24 @@
   orderedattrdict,
 }:
 
-python3.pkgs.buildPythonPackage rec {
+let
+  python = python3.override {
+    self = python;
+    packageOverrides = self: super: {
+      urwid = super.urwid.overrideAttrs ({
+        version = "3.0.5";
+        src = fetchFromGitHub {
+          owner = "urwid";
+          repo = "urwid";
+          tag = "3.0.5";
+          hash = "sha256-9ajcpyQTSASz8A4eM78vPjL+9Rk07Q30JmIrSx0Crpo=";
+        };
+      });
+    };
+  };
+in
+
+python.pkgs.buildPythonPackage {
   pname = "panwid";
   version = "0.3.5-unstable-2022-01-04";
   pyproject = true;
@@ -19,15 +36,14 @@ python3.pkgs.buildPythonPackage rec {
     hash = "sha256-bksH8nKexiZZLGu0Og8wwAXeZR1wAtpxt1JXqTieJAo=";
   };
 
-  build-system = [
-    python3.pkgs.setuptools
-    python3.pkgs.wheel
+  build-system = with python.pkgs; [
+    setuptools
+    wheel
   ];
 
   pythonRelaxDeps = [ "urwid-utils" ];
 
-  dependencies = with python3.pkgs; [
-    urwid
+  dependencies = with python.pkgs; [
     urwid-readline
     six
     raccoon
