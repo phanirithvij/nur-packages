@@ -7,12 +7,12 @@
 git-bug.overrideAttrs (
   finalAttrs: prevAttrs: {
     pname = "git-bug";
-    version = "0.11.0-unstable-2026-11-05";
+    version = "0.12.0-unstable-2026-11-14";
     src = fetchFromGitHub {
       owner = "git-bug";
       repo = "git-bug";
-      rev = "4ea4534b3a2ef956aa385eb98bb5646df180a5f3";
-      hash = "sha256-hSDCeoowjwMcacYj0hAsKedLpbrfvIzawfZx9MvXAZY=";
+      rev = "0abc9497f954a1ed4d5a5ebc8b88f262fc4983cf";
+      hash = "sha256-HyzpvFW24K9gA5Ayd7/i/b8CPwauauOMhc1L9VxdPSg=";
     };
     vendorHash = "sha256-5wvgJOph8vTohvfxskpoPK98LuQi9CzN7jDgDATC6Mg=";
     ldflags = (prevAttrs.ldflags or [ ]) ++ [ "-s" ];
@@ -29,7 +29,7 @@ git-bug.overrideAttrs (
             ;
           pnpm = pnpm_10;
           fetcherVersion = 5;
-          hash = "sha256-DNy1PkBiHUN5y993uNv/dNTDAStPX0Fzavg2Lxb8QBQ=";
+          hash = "sha256-bGi3N7niqG2OvfN/KhAg5H9XxiLhXbYmC/CBWK3pkP4=";
         };
       }
     );

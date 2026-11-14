@@ -2,6 +2,6 @@
   stdenv,
 }:
 let
-  f = builtins.getFlake "github:e-tho/bzmenu/a76a90bf908419e2ab1f8009b29e4cd59483ced4";
+  f = builtins.getFlake "github:e-tho/bzmenu/11fd549193e359205bad558294be8afe4806bcbe";
 in
 f.packages.${stdenv.hostPlatform.system}.default

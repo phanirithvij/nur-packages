@@ -44,6 +44,9 @@ updateFlakePkg DeterminateSystems/nix-src/flake-schemas pkgs/flakePkgs/nix-schem
 
 # unstablePkgs
 
+nix-update --version=branch unstablePkgs.opengist --subpackage frontend
+nix-update --version=branch unstablePkgs.git-bug --subpackage webui
+
 script=$(nix eval --impure --json --expr \
         "builtins.attrNames (import ./default.nix { }).unstablePkgs" |
         jq '.[]' -r |
